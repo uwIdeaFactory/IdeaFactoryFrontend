@@ -1,2 +1,0 @@
-# Frontend
-`npm run dev`
