@@ -1,2 +1,2 @@
-# IdeaFactoryFrontend
-Frontend
+# Frontend
+`npm run dev`
