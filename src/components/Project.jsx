@@ -10,9 +10,6 @@ function Project(props) {
       </Card>
     </Col>
 
-    // <div>
-    //   {props.value}
-    // </div>
   );
 }
 
