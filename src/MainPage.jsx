@@ -13,7 +13,7 @@ const MainPage = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    axios.get() // api here!!!
+    axios.get("http://localhost:3000/projects") // api here!!!
       .then(res => res.data)
       .then(setProjects);
   }, []);
@@ -74,6 +74,9 @@ const MainPage = () => {
             return (
               <Project
                 key={value._id}
+                pname={value.pname}
+                preview={value.preview}
+                owner={value.uid}
               />
             );
           })}
