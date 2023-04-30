@@ -9,9 +9,9 @@ import {
 import MainPage from './MainPage.jsx';
 import UserProfile from './UserProfile.jsx';
 import ProjectUploadPage from './ProjectUploadPage.jsx';
-import SignIn from './components/auth/SignIn.jsx'
-import SignUp from './components/auth/SignUp.jsx'
-import AuthDetails from './components/auth/AuthDetails.jsx'
+import SignIn from './auth/SignIn.jsx'
+import SignUp from './auth/SignUp.jsx'
+import AuthDetails from './auth/AuthDetails.jsx'
 
 const router = createBrowserRouter([
   {
