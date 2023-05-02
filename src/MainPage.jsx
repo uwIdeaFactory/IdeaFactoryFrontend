@@ -13,7 +13,7 @@ const MainPage = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/projects") // api here!!!
+    axios.get("http://localhost:3000/projects")
       .then(res => res.data)
       .then(setProjects);
   }, []);

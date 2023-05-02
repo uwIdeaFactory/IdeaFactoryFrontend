@@ -49,33 +49,6 @@ const ProjectUploadPage = () => {
           <Breadcrumb.Item>Project</Breadcrumb.Item>
           <Breadcrumb.Item>Upload</Breadcrumb.Item>
           </Breadcrumb>
-      {/* <TextArea placeholder="Title" autoSize />
-            <div
-              style={{
-                margin: '24px 0',
-              }}
-            />
-            <TextArea
-              placeholder="Brief"
-              autoSize={{
-                minRows: 2,
-                maxRows: 6,
-              }}
-            />
-            <div
-              style={{
-                margin: '24px 0',
-              }}
-            />
-            <TextArea
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-              placeholder="Description"
-              autoSize={{
-                minRows: 3,
-                maxRows: 5,
-              }}
-      /> */}
         <ProjectUploadForm></ProjectUploadForm>
       </Content>
       <Footer

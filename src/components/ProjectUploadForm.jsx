@@ -1,32 +1,58 @@
-import { Button, Form, Input, message, Space } from 'antd';
+import { Button, Form, Input, message } from 'antd';
 import { useState } from 'react';
-
+import axios from 'axios';
 const { TextArea } = Input;
 
-const onFinish = (values) => {
-  console.log('Success:', values);
-};
-const onFinishFailed = (errorInfo) => {
-  console.log('Failed:', errorInfo);
-};
-
 const ProjectUploadForm = () => {
-  const [value, setValue] = useState('');
   const [form] = Form.useForm();
+
   const onFinish = () => {
-    message.success('Submit success!');
+    console.log(form.getFieldValue('title'))
+    // let result = {
+    //   pname: form.getFieldValue('pname'), 
+    //   preview: form.getFieldValue('preview'),
+    //   detail: form.getFieldValue('detail')
+    // }
+    // console.log(result)
+
+    let result = axios.post(
+      'http://localhost:3000/post', {
+        pname: form.getFieldValue('pname'), 
+        preview: form.getFieldValue('preview'),
+        detail: form.getFieldValue('detail'),
+        owner: "test owner",
+        location: "test location"
+      }, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+    )
+    // .then (() => {
+    //   message.success('Submit success!');
+    // })
+    // .catch (() => {
+    //   onFinishFailed()
+    // })
   };
+
   const onFinishFailed = () => {
     message.error('Submit failed!');
   };
-  const onFill = () => {
-    form.setFieldsValue({
-      url: 'https://taobao.com/',
-    });
-  };
+
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+    // let result = await axios.post(
+    //   'http://localhost:3000/projects', 
+
+    // )
+    console.log(form.getFieldValue('title'))
+  }
+
   return (
   <Form
-    name="basic"
+    form={form}
+    name="form"
     labelCol={{
       span: 8,
     }}
@@ -45,7 +71,7 @@ const ProjectUploadForm = () => {
   >
     <Form.Item
       label="Title"
-      name="project title"
+      name="pname"
       rules={[
         {
           required: true,
@@ -58,7 +84,7 @@ const ProjectUploadForm = () => {
 
     <Form.Item
       label="Brief"
-      name="brief description"
+      name="preview"
       rules={[
         {
           required: true,
@@ -77,7 +103,7 @@ const ProjectUploadForm = () => {
 
     <Form.Item
       label="Description"
-      name="detailed description"
+      name="detail"
       rules={[
         {
           required: true,

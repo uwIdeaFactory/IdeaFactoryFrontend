@@ -12,7 +12,7 @@ import ProjectUploadPage from './ProjectUploadPage.jsx';
 import SignIn from './auth/SignIn.jsx'
 import SignUp from './auth/SignUp.jsx'
 import AuthDetails from './auth/AuthDetails.jsx'
-
+import FormTesting from './components/FormTesting.jsx';
 const router = createBrowserRouter([
   {
     path: "/landing",
@@ -41,7 +41,11 @@ const router = createBrowserRouter([
   {
     path: "/authDetails",
     element: <AuthDetails />,
-  }
+  },
+  {
+    path: "/test",
+    element: <FormTesting />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
