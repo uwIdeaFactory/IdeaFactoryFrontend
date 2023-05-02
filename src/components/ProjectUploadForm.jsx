@@ -1,13 +1,13 @@
 import { Button, Form, Input, message } from 'antd';
 import { useState } from 'react';
 import axios from 'axios';
+
 const { TextArea } = Input;
 
 const ProjectUploadForm = () => {
   const [form] = Form.useForm();
 
   const onFinish = () => {
-    console.log(form.getFieldValue('title'))
     // let result = {
     //   pname: form.getFieldValue('pname'), 
     //   preview: form.getFieldValue('preview'),
@@ -15,39 +15,23 @@ const ProjectUploadForm = () => {
     // }
     // console.log(result)
 
-    let result = axios.post(
+    axios.post(
       'http://localhost:3000/post', {
         pname: form.getFieldValue('pname'), 
         preview: form.getFieldValue('preview'),
         detail: form.getFieldValue('detail'),
         owner: "test owner",
         location: "test location"
-      }, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
       }
     )
-    // .then (() => {
-    //   message.success('Submit success!');
-    // })
-    // .catch (() => {
-    //   onFinishFailed()
-    // })
+    .then (() => {
+      message.success('Submit success!');
+    })
+    .catch (() => {
+      message.error('Submit failed!');
+    })
   };
 
-  const onFinishFailed = () => {
-    message.error('Submit failed!');
-  };
-
-  const handleOnSubmit = async (e) => {
-    e.preventDefault();
-    // let result = await axios.post(
-    //   'http://localhost:3000/projects', 
-
-    // )
-    console.log(form.getFieldValue('title'))
-  }
 
   return (
   <Form
