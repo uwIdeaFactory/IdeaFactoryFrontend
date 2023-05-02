@@ -20,7 +20,7 @@ const ProjectUploadForm = () => {
     // }
     // console.log(result)
 
-    let result = axios.post(
+    axios.post(
       'http://localhost:3000/post', {
         pname: form.getFieldValue('pname'), 
         preview: form.getFieldValue('preview'),
