@@ -142,11 +142,11 @@ const SignIn = () => {
 
             <div className="w-100 text-center mt-2">
                 Don't have an account?
-                <Link to="/signUp">
-                    <Button>
-                        Sign Up
-                    </Button>
-                </Link>
+                {/* <Link to="/signUp"> */}
+                <Button>
+                    Sign Up
+                </Button>
+                {/* </Link> */}
             </div>
         </div>
 
