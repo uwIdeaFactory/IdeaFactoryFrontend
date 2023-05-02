@@ -7,6 +7,11 @@ const { TextArea } = Input;
 const ProjectUploadForm = () => {
   const [form] = Form.useForm();
 
+
+  const onFinishFailed = () => {
+    message.error('Submit failed!');
+  };
+  
   const onFinish = () => {
     // let result = {
     //   pname: form.getFieldValue('pname'), 
@@ -15,7 +20,7 @@ const ProjectUploadForm = () => {
     // }
     // console.log(result)
 
-    axios.post(
+    let result = axios.post(
       'http://localhost:3000/post', {
         pname: form.getFieldValue('pname'), 
         preview: form.getFieldValue('preview'),
@@ -28,7 +33,7 @@ const ProjectUploadForm = () => {
       message.success('Submit success!');
     })
     .catch (() => {
-      message.error('Submit failed!');
+      onFinishFailed()
     })
   };
 
