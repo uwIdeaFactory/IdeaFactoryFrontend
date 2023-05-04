@@ -37,7 +37,7 @@
 * Allan Ji: Created user SignIn and SignOut pages and build interaction with Google Firebase using Firebase v9, and adjust UI using ant design
 * Allan Ji: Wrote jest using React testing framework and implemented tests for frontend
 * Yansong Liu, Dicheng Wu: Working on config file, implement api for getting specific project, bebug the issue of backend not receiving json
-* 
+* Bohan Wu: Implemented basic backend functionalities for database interactions and Jest tests for the implemented functions
 * 
 
 
@@ -46,6 +46,6 @@
 * Allan Ji: Research about AWS service to store user files and images
 * Yansong Liu, Dicheng Wu: Use cloudflare R2 to store files and image information and connect to the project, Implement api for filtering  
   projects based on tag and user input
-* 
+* Bohan Wu: implement majority of backend database interaction functionalities, including GET requests for searching and POST requests
 * 
 * All members: Integrate project functionalities and prepare for the alpha release
