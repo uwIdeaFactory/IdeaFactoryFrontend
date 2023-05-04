@@ -38,6 +38,7 @@
 * Allan Ji: Wrote jest using React testing framework and implemented tests for frontend
 * Yansong Liu, Dicheng Wu: Working on config file, implement api for getting specific project, bebug the issue of backend not receiving json
 * Bohan Wu: Implemented basic backend functionalities for database interactions and Jest tests for the implemented functions
+* Caleb Huang: Integrated frontend and backend test to CI circleci.
 * Zhengrui Sun: Implement frontend hooks to allow interaction with backend. 
 
 
@@ -47,5 +48,5 @@
 * Yansong Liu, Dicheng Wu: Use cloudflare R2 to store files and image information and connect to the project, Implement api for filtering  
   projects based on tag and user input
 * Bohan Wu: implement majority of backend database interaction functionalities, including GET requests for searching and POST requests
-* 
+* Caleb Huang, Zhengrui Sun: connect the rest frontend backend interface and start refining bugs and styles.
 * All members: Integrate project functionalities and prepare for the alpha release
