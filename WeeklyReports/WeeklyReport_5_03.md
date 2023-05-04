@@ -13,16 +13,14 @@
 * Finish creating the the frontend UI for HomePage, project overview, and project upload page
 * Install and implemented tests for both the frontend and backend
 * Connect the project to the CircleCI
-* TODO: backend progress
-* 
+* Finish api for creating project
+* Finish api for getting a specific project
 
 
 ### Plans and goals for the next week
 * Implement Frontend UI for User Profile page
-* Use AMS service to store files and image information and connect to the project
-* 
-* 
-* 
+* Use cloudflare R2 to store files and image information and connect to the project
+* Implement api for filtering projects based on tag and user input
 * Integrate the project functionalities and prepare for the alpha release
 
 
@@ -38,16 +36,16 @@
 ### Progress and Issues
 * Allan Ji: Created user SignIn and SignOut pages and build interaction with Google Firebase using Firebase v9, and adjust UI using ant design
 * Allan Ji: Wrote jest using React testing framework and implemented tests for frontend
-* 
-* 
+* Yansong Liu, Dicheng Wu: Working on config file, implement api for getting specific project, bebug the issue of backend not receiving json
 * 
 * 
 
 
 ### Plans and goals for the next week
 * Allan Ji: Create user profile page and connect with the backend
-* Allan Ji: Research about AMS service to store user files and images
-* 
+* Allan Ji: Research about AWS service to store user files and images
+* Yansong Liu, Dicheng Wu: Use cloudflare R2 to store files and image information and connect to the project, Implement api for filtering  
+  projects based on tag and user input
 * 
 * 
 * All members: Integrate project functionalities and prepare for the alpha release
