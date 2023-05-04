@@ -29,7 +29,7 @@
 * Allan Ji: Implement the UI design of user login and signup
 * Allan Ji: Connect user authentication with Firebase
 * Bohan Wu, Caleb Huang: Implement basic functionalities for database interactions (fetch requests for different requirements etc.).
-* Zhengrui Sun: Implement the user interface for user profile page and project upload page
+* Zhengrui Sun: Implement react hooks with backend, allow posting projects and displaying all projects. 
 * Yansong Liu, Dicheng Wu: finish writing api for posting and start to work on searching api
 
 
@@ -38,7 +38,7 @@
 * Allan Ji: Wrote jest using React testing framework and implemented tests for frontend
 * Yansong Liu, Dicheng Wu: Working on config file, implement api for getting specific project, bebug the issue of backend not receiving json
 * Bohan Wu: Implemented basic backend functionalities for database interactions and Jest tests for the implemented functions
-* 
+* Zhengrui Sun: Implement frontend hooks to allow interaction with backend. 
 
 
 ### Plans and goals for the next week
