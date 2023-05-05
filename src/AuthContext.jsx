@@ -6,7 +6,8 @@ import {
     GoogleAuthProvider,
     signInWithRedirect,
     signInWithPopup,
-    signOut
+    signOut,
+    getAuth
 } from "firebase/auth";
 import { useContext, useEffect, useState } from "react";
 import { auth } from './firebase';
@@ -52,17 +53,34 @@ export function AuthProvider({ children }) {
     }
 
     function signup(email, password) {
-        return createUserWithEmailAndPassword(auth, email, password);
+        return createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in
+                console.log(userCredential)
+                // const user = userCredential.user;
+                // Redirect to the sign in page
+                window.location.href = "/signIn"
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log("Error signing up")
+                console.log(errorCode, errorMessage)
+            });
     }
 
     function googleLogin() {
-        const googleAuthProvider = new GoogleAuthProvider();
-        googleAuthProvider.setCustomParameters({
-            prompt: 'select_account'
-        });
+        // const googleAuthProvider = new GoogleAuthProvider();
+        // googleAuthProvider.setCustomParameters({
+        //     prompt: 'select_account'
+        // });
         // log in with redirect
         // return signInWithRedirect(auth, googleAuthProvider);
-        return signInWithPopup(auth, googleAuthProvider);
+
+
+
+        const provider = new GoogleAuthProvider();
+        const GoogleAuth = getAuth();
+        return signInWithRedirect(GoogleAuth, provider);
     }
 
     function signout() {

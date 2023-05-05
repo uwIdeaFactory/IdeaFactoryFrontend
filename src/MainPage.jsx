@@ -6,41 +6,14 @@ import { Pagination } from 'antd';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged, signOut } from 'firebase/auth'
-// import { getAuth } from "firebase/auth";
-import { auth } from './firebase';
-import AuthDetails from './auth/AuthDetails';
 import { useAuth } from './AuthContext';
 
 const { Header, Content, Footer } = Layout;
 const { Search } = Input;
 
-
-
 const MainPage = () => {
   const [projects, setProjects] = useState([]);
   const { user, login } = useAuth()
-  // const [authUser, setAuthUser] = useState(null)
-  // useEffect(() => {
-  //   const listen = onAuthStateChanged(auth, (user) => {
-  //     if (user) {
-  //       // User is signed in, see docs for a list of available properties
-  //       // https://firebase.google.com/docs/reference/js/firebase.User
-  //       setAuthUser(user)
-
-  //     } else {
-  //       // User is signed out
-  //       setAuthUser(null)
-  //     }
-  //   });
-  //   // console.log(authUser)
-
-  //   return () => {
-  //     // Unsubscribe auth listener on unmount
-  //     listen()
-  //     // handleRedirectResult()
-  //   }
-  // }, [])
-
 
   useEffect(() => {
     console.log(user)
