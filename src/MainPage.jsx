@@ -1,7 +1,6 @@
-import { Breadcrumb, Layout, Menu, theme, Input, Button } from 'antd';
+import { Breadcrumb, Layout, Menu, theme, Input, Button, Row } from 'antd';
 import { ProfileOutlined, UploadOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom'
-import ProjectRow from './components/ProjectRow';
 import Project from './components/Project';
 import { Pagination } from 'antd';
 import axios from 'axios';
@@ -13,7 +12,7 @@ const MainPage = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/projects")
+    axios.get("http://localhost:3000/projects") // api here!!!
       .then(res => res.data)
       .then(setProjects);
   }, []);
@@ -21,9 +20,19 @@ const MainPage = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
+  const projectGroups = [];
+  for (let i = 0; i < projects.length; i += 3) {
+    projectGroups.push(projects.slice(i, i + 3));
+  }
+
+  const onChangePage = (pageNumber) => {
+
+  }
+
+  // const renderProject
   return (
     <Layout className="layout">
-
       <Header>
         <div className="logo"></div>
         <Menu
@@ -37,7 +46,8 @@ const MainPage = () => {
               label: `nav ${key}`,
             };
           })}
-        />
+        >
+        </Menu>
         <Search placeholder='Search' allowClear onSearch={onSearch} style={{ width: 200 }}/>
         <NavLink to={"/userProfile"}>
           <Button type="primary" icon={<ProfileOutlined />} size={20}>
@@ -45,10 +55,10 @@ const MainPage = () => {
           </Button>
         </NavLink>
         <NavLink to={"/projectUpload"}>
-              <Button type="primary" icon={<UploadOutlined />} size={20}>
-                Upload
-              </Button>
-            </NavLink>
+          <Button type="primary" icon={<UploadOutlined />} size={20}>
+            Upload
+          </Button>
+        </NavLink>
       </Header>
       <Content
         style={{
@@ -60,9 +70,6 @@ const MainPage = () => {
             margin: '16px 0',
           }}
         >
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
         </Breadcrumb>
         <div
           className="site-layout-content"
@@ -70,17 +77,27 @@ const MainPage = () => {
             background: colorBgContainer,
           }}
         >
-          {projects.map((value) => {
+          {projectGroups.map((group, index) => {
             return (
-              <Project
-                key={value._id}
-                pname={value.pname}
-                preview={value.preview}
-                owner={value.uid}
-              />
-            );
+              <Row 
+                gutter={16} 
+                key={index}
+                style={{
+                margin: '16px 0',
+              }}>
+                {group.map((value) => {
+                  return (
+                    <Project 
+                    key={value._id}
+                    pname={value.pname}
+                    preview={value.preview}
+                    owner={value.uid}
+                    />
+                  )
+                })}
+              </Row>
+            )
           })}
-
           <Pagination
             style={{
               textAlign: 'center',

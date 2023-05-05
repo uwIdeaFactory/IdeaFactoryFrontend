@@ -1,13 +1,12 @@
-import { Input, Button } from 'antd';
-import { useState } from 'react';
+import { Button } from 'antd';
 import { ProfileOutlined, HomeOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom'
 import { Breadcrumb, Layout, Menu } from 'antd';
 import ProjectUploadForm from './components/ProjectUploadForm';
+
 const { Header, Content, Footer } = Layout;
-const { TextArea } = Input;
+
 const ProjectUploadPage = () => {
-  const [value, setValue] = useState('');
   return (
     <Layout className="layout">
       <Header>
