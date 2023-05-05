@@ -14,6 +14,7 @@ import SignUp from './auth/SignUp.jsx'
 import AuthDetails from './auth/AuthDetails.jsx'
 import FormTesting from './components/FormTesting.jsx';
 import { AuthProvider } from './AuthContext.jsx'
+import ProjectPage from './ProjectPage.jsx';
 const router = createBrowserRouter([
   {
     path: "/userProfile",
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
   {
     path: "/test",
     element: <FormTesting />,
+  },
+  {
+    path: "/projects/:pid",
+    element: <ProjectPage />
   },
 ]);
 
