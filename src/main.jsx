@@ -15,10 +15,6 @@ import AuthDetails from './auth/AuthDetails.jsx'
 import FormTesting from './components/FormTesting.jsx';
 const router = createBrowserRouter([
   {
-    path: "/landing",
-    element: <MainPage />,
-  },
-  {
     path: "/userProfile",
     element: <UserProfile></UserProfile>
   },
