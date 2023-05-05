@@ -13,6 +13,7 @@ import SignIn from './auth/SignIn.jsx'
 import SignUp from './auth/SignUp.jsx'
 import AuthDetails from './auth/AuthDetails.jsx'
 import FormTesting from './components/FormTesting.jsx';
+import { AuthProvider } from './AuthContext.jsx'
 const router = createBrowserRouter([
   {
     path: "/userProfile",
@@ -45,5 +46,8 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
+  <AuthProvider>
+    <RouterProvider router={router} />
+  </AuthProvider>
+
 );

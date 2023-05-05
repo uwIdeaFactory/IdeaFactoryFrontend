@@ -5,13 +5,45 @@ import Project from './components/Project';
 import { Pagination } from 'antd';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { onAuthStateChanged, signOut } from 'firebase/auth'
+// import { getAuth } from "firebase/auth";
+import { auth } from './firebase';
+import AuthDetails from './auth/AuthDetails';
+import { useAuth } from './AuthContext';
+
 const { Header, Content, Footer } = Layout;
 const { Search } = Input;
 
+
+
 const MainPage = () => {
   const [projects, setProjects] = useState([]);
+  const { user, login } = useAuth()
+  // const [authUser, setAuthUser] = useState(null)
+  // useEffect(() => {
+  //   const listen = onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       // User is signed in, see docs for a list of available properties
+  //       // https://firebase.google.com/docs/reference/js/firebase.User
+  //       setAuthUser(user)
+
+  //     } else {
+  //       // User is signed out
+  //       setAuthUser(null)
+  //     }
+  //   });
+  //   // console.log(authUser)
+
+  //   return () => {
+  //     // Unsubscribe auth listener on unmount
+  //     listen()
+  //     // handleRedirectResult()
+  //   }
+  // }, [])
+
 
   useEffect(() => {
+    console.log(user)
     axios.get("http://localhost:3000/projects") // api here!!!
       .then(res => res.data)
       .then(setProjects);
@@ -39,7 +71,7 @@ const MainPage = () => {
           theme="dark"
           mode="horizontal"
           defaultSelectedKeys={['2']}
-          items= {new Array(3).fill(null).map((_, index) => {
+          items={new Array(3).fill(null).map((_, index) => {
             const key = index + 1;
             return {
               key,
@@ -48,7 +80,7 @@ const MainPage = () => {
           })}
         >
         </Menu>
-        <Search placeholder='Search' allowClear onSearch={onSearch} style={{ width: 200 }}/>
+        <Search placeholder='Search' allowClear onSearch={onSearch} style={{ width: 200 }} />
         <NavLink to={"/userProfile"}>
           <Button type="primary" icon={<ProfileOutlined />} size={20}>
             Profile
@@ -79,19 +111,19 @@ const MainPage = () => {
         >
           {projectGroups.map((group, index) => {
             return (
-              <Row 
-                gutter={16} 
+              <Row
+                gutter={16}
                 key={index}
                 style={{
-                margin: '16px 0',
-              }}>
+                  margin: '16px 0',
+                }}>
                 {group.map((value) => {
                   return (
-                    <Project 
-                    key={value._id}
-                    pname={value.pname}
-                    preview={value.preview}
-                    owner={value.uid}
+                    <Project
+                      key={value._id}
+                      pname={value.pname}
+                      preview={value.preview}
+                      owner={value.uid}
                     />
                   )
                 })}
@@ -101,8 +133,8 @@ const MainPage = () => {
           <Pagination
             style={{
               textAlign: 'center',
-           }}
-          defaultCurrent={6} total={500} />
+            }}
+            defaultCurrent={6} total={500} />
         </div>
 
       </Content>
@@ -112,6 +144,9 @@ const MainPage = () => {
         }}
       >
         Ant Design ©2023 Created by Ant UED
+        {/* {authUser.email} */}
+        {/* {AuthDetails.authUser} */}
+        {/* <AuthDetails></AuthDetails> */}
       </Footer>
     </Layout>
   );

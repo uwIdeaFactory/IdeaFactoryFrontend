@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import { auth } from '../firebase'
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import { Link } from "react-router-dom";
+import { NavLink } from 'react-router-dom'
 // import { Form, Button, Card, Alert } from 'react-bootstrap'
-import { getAuth, signInWithRedirect } from "firebase/auth";
-import { GoogleAuthProvider } from "firebase/auth";
-import { Button, Checkbox, Form, Input } from 'antd';
+import { signInWithEmailAndPassword, getAuth, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
+import { Button, message, Form, Input } from 'antd';
+import { useAuth } from '../AuthContext';
 
 
 const SignIn = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const { user, login } = useAuth()
 
     const provider = new GoogleAuthProvider();
 
@@ -27,21 +27,33 @@ const SignIn = () => {
         // Save the email and password
         // e.preventDefault();
 
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in
-                console.log(userCredential)
-                // const user = userCredential.user;
-                // ...
+        // signInWithEmailAndPassword(auth, email, password)
+        //     .then((userCredential) => {
+        //         // Signed in
+        //         console.log(userCredential)
+        //         // const user = userCredential.user;
+        //         // ...
 
-                // Redirect to the main page
-                window.location.href = "/authDetails"
-            }).catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log("Error signing in")
-                console.log(errorCode, errorMessage)
-            });
+        //         // Redirect to the main page
+        //         message.success('LogIn Success as ' + userCredential.user.email);
+        //         // Wait for 1 second
+        //         setTimeout(() => {
+        //             window.location.href = "/"
+        //         }, 1000);
+        //         // window.location.href = "/authDetails"
+        //     }).catch((error) => {
+        //         const errorCode = error.code;
+        //         const errorMessage = error.message;
+        //         console.log(errorCode, errorMessage)
+        //         if (errorCode === "auth/wrong-password") {
+        //             message.error('Wrong password');
+        //         }
+        //         else if (errorCode === "auth/user-not-found") {
+        //             message.error('User not found');
+        //         }
+        //     });
+
+        login(email, password)
 
     }
     return (
@@ -142,11 +154,11 @@ const SignIn = () => {
 
             <div className="w-100 text-center mt-2">
                 Don't have an account?
-                {/* <Link to="/signUp"> */}
-                <Button>
+                {/* <NavLink to="/signUp"> */}
+                <Button borderRadiusLG='80'>
                     Sign Up
                 </Button>
-                {/* </Link> */}
+                {/* </NavLink> */}
             </div>
         </div>
 
