@@ -13,6 +13,8 @@ import SignIn from './auth/SignIn.jsx'
 import SignUp from './auth/SignUp.jsx'
 import AuthDetails from './auth/AuthDetails.jsx'
 import FormTesting from './components/FormTesting.jsx';
+import ProjectPage from './ProjectPage.jsx';
+
 const router = createBrowserRouter([
   {
     path: "/landing",
@@ -46,6 +48,10 @@ const router = createBrowserRouter([
     path: "/test",
     element: <FormTesting />,
   },
+  {
+    path: "/projectPage/:pid",
+    element: <ProjectPage />
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
