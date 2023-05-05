@@ -75,12 +75,6 @@ const ProjectPage = () => {
           {
             <ProjectPageBody {...project} />
           }
-
-          <Pagination
-            style={{
-              textAlign: 'center',
-           }}
-          defaultCurrent={6} total={500} />
         </div>
 
       </Content>
