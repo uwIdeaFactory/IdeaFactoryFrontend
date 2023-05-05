@@ -3,12 +3,13 @@ import { ProfileOutlined, HomeOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom'
 import { Breadcrumb, Layout, Menu } from 'antd';
 import ProjectUploadForm from './components/ProjectUploadForm';
+import { useState } from 'react';
 
 const { Header, Content, Footer } = Layout;
 
 const ProjectUploadPage = () => {
   const [value, setValue] = useState('');
-  
+
   return (
     <Layout className="layout">
       <Header>
@@ -17,7 +18,7 @@ const ProjectUploadPage = () => {
           theme="dark"
           mode="horizontal"
           defaultSelectedKeys={['2']}
-          items= {new Array(3).fill(null).map((_, index) => {
+          items={new Array(3).fill(null).map((_, index) => {
             const key = index + 1;
             return {
               key,
@@ -49,7 +50,7 @@ const ProjectUploadPage = () => {
           <Breadcrumb.Item>Home</Breadcrumb.Item>
           <Breadcrumb.Item>Project</Breadcrumb.Item>
           <Breadcrumb.Item>Upload</Breadcrumb.Item>
-          </Breadcrumb>
+        </Breadcrumb>
         <ProjectUploadForm></ProjectUploadForm>
       </Content>
       <Footer
