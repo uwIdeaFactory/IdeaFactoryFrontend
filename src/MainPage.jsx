@@ -94,6 +94,7 @@ const MainPage = () => {
                   return (
                     <Project
                       key={value._id}
+                      pid={value._id}
                       pname={value.pname}
                       preview={value.preview}
                       owner={value.uid}

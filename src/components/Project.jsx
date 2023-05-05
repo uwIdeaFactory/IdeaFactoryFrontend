@@ -5,9 +5,9 @@ function Project(props) {
   // console.log(props.value);
   return (
     <Col span={8}>
-    <Card 
-    title={props.pname} 
-    extra={<a href="/projects/{id}">More</a>} // api needs later 
+    <Card
+    title={props.pname}
+    extra={<a href={`/projects/${props.pid}`}>More</a>} // api needs later
     bordered={true}>
       {props.preview}
       </Card>
