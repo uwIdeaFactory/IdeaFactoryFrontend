@@ -1,10 +1,7 @@
 import { Breadcrumb, Layout, Menu, theme, Input, Button } from 'antd';
-import { ProfileOutlined, UploadOutlined } from '@ant-design/icons';
+import { ProfileOutlined, UploadOutlined, HomeOutlined } from '@ant-design/icons';
 import { NavLink, useParams } from 'react-router-dom'
-import ProjectRow from './components/ProjectRow';
-import Project from './components/Project';
 import ProjectPageBody from './components/ProjectPageBody';
-import { Pagination } from 'antd';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 const { Header, Content, Footer } = Layout;
@@ -47,10 +44,15 @@ const ProjectPage = () => {
           </Button>
         </NavLink>
         <NavLink to={"/projectUpload"}>
-              <Button type="primary" icon={<UploadOutlined />} size={20}>
-                Upload
-              </Button>
-            </NavLink>
+          <Button type="primary" icon={<UploadOutlined />} size={20}>
+            Upload
+          </Button>
+        </NavLink>
+        <NavLink to={"/"}>
+          <Button type="primary" icon={<HomeOutlined />} size={20}>
+            Home
+          </Button>
+        </NavLink>
       </Header>
       <Content
         style={{
