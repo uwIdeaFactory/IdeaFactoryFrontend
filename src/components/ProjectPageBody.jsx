@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Descriptions, Table, Divider, Tag } from "antd";
-const { Column, ColumnGroup } = Table;
+const { Column } = Table;
 
 function ProjectPageBody(props) {
     return (

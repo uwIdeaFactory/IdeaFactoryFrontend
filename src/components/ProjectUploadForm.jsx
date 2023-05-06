@@ -29,20 +29,19 @@ const ProjectUploadForm = () => {
     })
   };
 
-
   return (
     <Form
       form={form}
       name="form"
       labelCol={{
-        span: 8,
+        span: 3,
       }}
       wrapperCol={{
         span: 16,
       }}
-      style={{
-        maxWidth: 600,
-      }}
+      // style={{
+      //   maxWidth: 600,
+      // }}
       initialValues={{
         remember: true,
       }}
@@ -126,7 +125,10 @@ const ProjectUploadForm = () => {
           span: 16,
         }}
       >
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit"
+          style={{
+            textAlign: 'center',
+          }}>
           Upload
         </Button>
       </Form.Item>

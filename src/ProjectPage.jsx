@@ -1,11 +1,11 @@
-import { Breadcrumb, Layout, Menu, theme, Input, Button } from 'antd';
-import { ProfileOutlined, UploadOutlined, HomeOutlined } from '@ant-design/icons';
+import { Breadcrumb, Layout, theme, Button } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 import { NavLink, useParams } from 'react-router-dom'
 import ProjectPageBody from './components/ProjectPageBody';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-const { Header, Content, Footer } = Layout;
-const { Search } = Input;
+import Navigation from './components/Navigation';
+const { Content, Footer } = Layout;
 
 const ProjectPage = () => {
   const { pid } = useParams();
@@ -20,40 +20,11 @@ const ProjectPage = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
   return (
     <Layout className="layout">
+      <Navigation />
 
-      <Header>
-        <div className="logo"></div>
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={['2']}
-          items= {new Array(3).fill(null).map((_, index) => {
-            const key = index + 1;
-            return {
-              key,
-              label: `nav ${key}`,
-            };
-          })}
-        />
-        <Search placeholder='Search' allowClear onSearch={onSearch} style={{ width: 200 }}/>
-        <NavLink to={"/userProfile"}>
-          <Button type="primary" icon={<ProfileOutlined />} size={20}>
-            Profile
-          </Button>
-        </NavLink>
-        <NavLink to={"/projectUpload"}>
-          <Button type="primary" icon={<UploadOutlined />} size={20}>
-            Upload
-          </Button>
-        </NavLink>
-        <NavLink to={"/"}>
-          <Button type="primary" icon={<HomeOutlined />} size={20}>
-            Home
-          </Button>
-        </NavLink>
-      </Header>
       <Content
         style={{
           padding: '0 50px',
@@ -65,8 +36,7 @@ const ProjectPage = () => {
           }}
         >
           <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
+          <Breadcrumb.Item>{project.pname}</Breadcrumb.Item>
         </Breadcrumb>
         <div
           className="site-layout-content"
@@ -74,12 +44,17 @@ const ProjectPage = () => {
             background: colorBgContainer,
           }}
         >
+          <NavLink to={"/projectUpload"}>
+            <Button type="primary" icon={<UploadOutlined />} size={20}>
+              Upload
+            </Button>
+          </NavLink>
           {
             <ProjectPageBody {...project} />
           }
         </div>
-
       </Content>
+
       <Footer
         style={{
           textAlign: 'center',
@@ -90,7 +65,5 @@ const ProjectPage = () => {
     </Layout>
   );
 };
-
-const onSearch = value => alert(value);
 
 export default ProjectPage;

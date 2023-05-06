@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { Breadcrumb, Layout, Menu } from 'antd';
 import ProjectUploadForm from './components/ProjectUploadForm';
 import { useState } from 'react';
+import Navigation from './components/Navigation';
 
 const { Header, Content, Footer } = Layout;
 
@@ -12,31 +13,7 @@ const ProjectUploadPage = () => {
 
   return (
     <Layout className="layout">
-      <Header>
-        <div className="logo"></div>
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={['2']}
-          items={new Array(3).fill(null).map((_, index) => {
-            const key = index + 1;
-            return {
-              key,
-              label: `nav ${key}`,
-            };
-          })}
-        />
-        <NavLink to={"/userProfile"}>
-          <Button type="primary" icon={<ProfileOutlined />} size={20}>
-            Profile
-          </Button>
-        </NavLink>
-        <NavLink to={"/"}>
-          <Button type="primary" icon={<HomeOutlined />} size={20}>
-            Home
-          </Button>
-        </NavLink>
-      </Header>
+      <Navigation></Navigation>
       <Content
         style={{
           padding: '0 50px',
@@ -48,7 +25,6 @@ const ProjectUploadPage = () => {
           }}
         >
           <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>Project</Breadcrumb.Item>
           <Breadcrumb.Item>Upload</Breadcrumb.Item>
         </Breadcrumb>
         <ProjectUploadForm></ProjectUploadForm>

@@ -1,27 +1,26 @@
 import React from 'react'
-import { Breadcrumb, Layout, Menu, theme, Card, Input, Button } from 'antd';
+import { Breadcrumb, Layout, theme, Button } from 'antd';
 import { UploadOutlined, HomeOutlined } from '@ant-design/icons';
-const { Header, Content, Footer } = Layout;
 import { NavLink } from 'react-router-dom'
-
 import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import axios from 'axios';
-import ProjectRow from './components/ProjectRow';
 import UserRelatedProjects from './components/UserRelatedProjects';
 import Skill from './components/Skill';
 import Experience from './components/Experience';
 import BasicInformation from './components/BasicInformation';
+import Navigation from './components/Navigation';
+
+const { Content, Footer } = Layout;
 
 const UserProfile = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     axios.get("http://localhost:3000/user/J2lhMMs3P9UISWlzfhKIYj9xOIA3")
       // .then(res => res.data)
-      .then(res => setUser(res.data));
+      .then(res => res.data)
+      .then(setUser)
   }, []);
 
   const {
@@ -29,31 +28,8 @@ const UserProfile = () => {
   } = theme.useToken();
   return (
     <Layout className="layout">
-      <Header>
-        <div className="logo" />
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={['2']}
-          items={new Array(15).fill(null).map((_, index) => {
-            const key = index + 1;
-            return {
-              key,
-              label: `nav ${key}`,
-            };
-          })}
-        />
-        <NavLink to={"/projectUpload"}>
-          <Button type="primary" icon={<UploadOutlined />} size={20}>
-            Upload
-          </Button>
-        </NavLink>
-        <NavLink to={"/"}>
-          <Button type="primary" icon={<HomeOutlined />} size={20}>
-            Home
-          </Button>
-        </NavLink>
-      </Header>
+      <Navigation></Navigation>
+
       <Content
         style={{
           padding: '0 50px',
@@ -65,18 +41,17 @@ const UserProfile = () => {
           }}
         >
           <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>User Profile</Breadcrumb.Item>
+          <Breadcrumb.Item>{user.username}'s Profile</Breadcrumb.Item>
         </Breadcrumb>
-        <BasicInformation>
-          username: {userInfo.username}
-          contact: {user.contact}
-          location: {user.location}
-          bio: {user.bio}
+        <BasicInformation 
+          {...user}
+        >
         </BasicInformation>
         <Experience></Experience>
         <Skill></Skill>
         <UserRelatedProjects></UserRelatedProjects>
       </Content>
+
       <Footer
         style={{
           textAlign: 'center',

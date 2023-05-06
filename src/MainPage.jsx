@@ -1,5 +1,5 @@
 import { Breadcrumb, Layout, Menu, theme, Input, Button, Row } from 'antd';
-import { ProfileOutlined, UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom'
 import Project from './components/Project';
 import { Pagination } from 'antd';
@@ -7,9 +7,10 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { useAuth } from './AuthContext';
+import Navigation from './components/Navigation';
 
-const { Header, Content, Footer } = Layout;
-const { Search } = Input;
+
+const { Content, Footer } = Layout;
 
 const MainPage = () => {
   const [projects, setProjects] = useState([]);
@@ -30,41 +31,10 @@ const MainPage = () => {
   for (let i = 0; i < projects.length; i += 3) {
     projectGroups.push(projects.slice(i, i + 3));
   }
-
-  const onChangePage = (pageNumber) => {
-
-  }
-
-  // const renderProject
+  
   return (
     <Layout className="layout">
-      <Header>
-        <div className="logo"></div>
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={['2']}
-          items={new Array(3).fill(null).map((_, index) => {
-            const key = index + 1;
-            return {
-              key,
-              label: `nav ${key}`,
-            };
-          })}
-        >
-        </Menu>
-        <Search placeholder='Search' allowClear onSearch={onSearch} style={{ width: 200 }} />
-        <NavLink to={"/userProfile"}>
-          <Button type="primary" icon={<ProfileOutlined />} size={20}>
-            Profile
-          </Button>
-        </NavLink>
-        <NavLink to={"/projectUpload"}>
-          <Button type="primary" icon={<UploadOutlined />} size={20}>
-            Upload
-          </Button>
-        </NavLink>
-      </Header>
+      <Navigation />
       <Content
         style={{
           padding: '0 50px',
@@ -75,6 +45,7 @@ const MainPage = () => {
             margin: '16px 0',
           }}
         >
+          <Breadcrumb.Item>Home</Breadcrumb.Item>
         </Breadcrumb>
         <div
           className="site-layout-content"
@@ -82,6 +53,11 @@ const MainPage = () => {
             background: colorBgContainer,
           }}
         >
+          <NavLink to={"/projectUpload"}>
+            <Button type="primary" icon={<UploadOutlined />} size={20}>
+              Upload
+            </Button>
+          </NavLink>
           {projectGroups.map((group, index) => {
             return (
               <Row
@@ -102,7 +78,7 @@ const MainPage = () => {
                   )
                 })}
               </Row>
-            )
+              )
           })}
           <Pagination
             style={{
@@ -110,7 +86,6 @@ const MainPage = () => {
             }}
             defaultCurrent={6} total={500} />
         </div>
-
       </Content>
       <Footer
         style={{
