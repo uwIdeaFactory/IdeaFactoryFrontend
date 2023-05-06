@@ -10,7 +10,7 @@ import { useAuth } from '../AuthContext';
 const SignIn = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { user, login, googleLogin } = useAuth()
+    const { login, googleLogin } = useAuth()
 
     const handleGoogleSignIn = () => {
         googleLogin();

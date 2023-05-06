@@ -68,7 +68,7 @@ const UserProfile = () => {
           <Breadcrumb.Item>User Profile</Breadcrumb.Item>
         </Breadcrumb>
         <BasicInformation>
-          username: {user.username}
+          username: {userInfo.username}
           contact: {user.contact}
           location: {user.location}
           bio: {user.bio}

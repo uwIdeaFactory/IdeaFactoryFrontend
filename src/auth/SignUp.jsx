@@ -9,7 +9,7 @@ import { useAuth } from '../AuthContext';
 const SignUp = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { user, signup } = useAuth()
+    const { signup } = useAuth()
 
     const handleSignUp = (e) => {
         // Save the email and password
