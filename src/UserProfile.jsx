@@ -1,7 +1,5 @@
 import React from 'react'
-import { Breadcrumb, Layout, theme, Button } from 'antd';
-import { UploadOutlined, HomeOutlined } from '@ant-design/icons';
-import { NavLink } from 'react-router-dom'
+import { Breadcrumb, Layout, theme } from 'antd';
 import { useEffect, useState } from 'react'
 import './App.css'
 import axios from 'axios';
@@ -26,6 +24,7 @@ const UserProfile = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  
   return (
     <Layout className="layout">
       <Navigation></Navigation>
@@ -39,9 +38,11 @@ const UserProfile = () => {
           style={{
             margin: '16px 0',
           }}
+          items={[
+            {title: "Home"},
+            {title: user.username + "'s Profile"}
+          ]}
         >
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>{user.username}'s Profile</Breadcrumb.Item>
         </Breadcrumb>
         <BasicInformation 
           {...user}

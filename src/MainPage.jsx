@@ -1,4 +1,4 @@
-import { Breadcrumb, Layout, Menu, theme, Input, Button, Row } from 'antd';
+import { Breadcrumb, Layout, Space, theme, Input, Button, Row, Spin } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom'
 import Project from './components/Project';
@@ -14,13 +14,38 @@ const { Content, Footer } = Layout;
 
 const MainPage = () => {
   const [projects, setProjects] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
   const { user, login } = useAuth()
+  const [numProjects, setNumProjects] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fetchProjects = async (page, pageSize) => {
+    setIsLoading(true);
+    try {
+      const res = await axios.get("http://localhost:3000/projects", {
+        params: {
+          page: page,
+          limit: pageSize
+        }
+      })
+      setProjects(res.data);
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err);
+      setIsLoading(false);
+    }
+  }
 
   useEffect(() => {
-    console.log(user)
-    axios.get("http://localhost:3000/projects") // api here!!!
+    fetchProjects(currentPage);
+  }, []);
+
+  // get counts of projects
+  useEffect(() => {
+    axios.get("http://localhost:3000/projects/count")
       .then(res => res.data)
-      .then(setProjects);
+      .then(setNumProjects);
   }, []);
 
   const {
@@ -30,6 +55,12 @@ const MainPage = () => {
   const projectGroups = [];
   for (let i = 0; i < projects.length; i += 3) {
     projectGroups.push(projects.slice(i, i + 3));
+  }
+
+  const onPageChange = (page, pageSize) => {
+    setCurrentPage(page);
+    setPageSize(pageSize);
+    fetchProjects(page, pageSize);
   }
   
   return (
@@ -44,8 +75,10 @@ const MainPage = () => {
           style={{
             margin: '16px 0',
           }}
+          items={[
+            {title: "Home"}
+          ]}
         >
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
         </Breadcrumb>
         <div
           className="site-layout-content"
@@ -58,33 +91,49 @@ const MainPage = () => {
               Upload
             </Button>
           </NavLink>
-          {projectGroups.map((group, index) => {
-            return (
-              <Row
-                gutter={16}
-                key={index}
+          { isLoading ? (
+            <div>
+              <Spin 
+                size='large' 
                 style={{
-                  margin: '16px 0',
-                }}>
-                {group.map((value) => {
-                  return (
-                    <Project
-                      key={value._id}
-                      pid={value._id}
-                      pname={value.pname}
-                      preview={value.preview}
-                      owner={value.uid}
-                    />
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '100vh'}}
+              />
+            </div>
+          ) : (
+            <div>
+              {projectGroups.map((group, index) => {
+                return (
+                  <Row
+                    gutter={16}
+                    key={index}
+                    style={{
+                      margin: '16px 0',
+                    }}>
+                    {group.map((value) => {
+                      return (
+                        <Project
+                          key={value._id}
+                          pid={value._id}
+                          pname={value.pname}
+                          preview={value.preview}
+                          owner={value.uid}
+                        />
+                      )
+                    })}
+                  </Row>
                   )
-                })}
-              </Row>
-              )
-          })}
+              })}
+            </div>
+          )}
           <Pagination
             style={{
               textAlign: 'center',
             }}
-            defaultCurrent={6} total={500} />
+            defaultCurrent={currentPage} total={numProjects} onChange={onPageChange}
+            />
         </div>
       </Content>
       <Footer

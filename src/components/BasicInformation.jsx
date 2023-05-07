@@ -9,7 +9,7 @@ function BasicInformation (props) {
         <Card title="Username">{props.username}</Card>
       </Col>
       <Col span={15}>
-        <Card title="a">a</Card>
+        <Card title="Summary">{props.summary}</Card>
       </Col>
       </Row>
     </Card>
