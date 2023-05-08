@@ -12,6 +12,7 @@ import {
 import { useContext, useEffect, useState } from "react";
 import { auth } from './firebase';
 import { Button, message, Form, Input } from 'antd';
+import axios from "axios";
 
 const AuthContext = React.createContext();
 
@@ -59,8 +60,13 @@ export function AuthProvider({ children }) {
                 console.log(userCredential)
                 // const user = userCredential.user;
                 // Redirect to the sign in page
-                window.location.href = "/signIn"
-            }).catch((error) => {
+                // window.location.href = "/authDetails"
+
+                axios.post('http://localhost:3000/user/create', {
+                    uid: user.uid,
+                })
+            })
+            .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log("Error signing up")
