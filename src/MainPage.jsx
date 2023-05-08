@@ -1,22 +1,23 @@
-import { Breadcrumb, Layout, Space, theme, Input, Button, Row, Spin } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
-import { NavLink } from 'react-router-dom'
-import Project from './components/Project';
-import { Pagination } from 'antd';
+import { Pagination, Breadcrumb, Layout, Menu, theme, Input, Button, Row, Spin } from 'antd';
+import { UploadOutlined, ProfileOutlined, HomeOutlined, AppstoreOutlined, SearchOutlined } from '@ant-design/icons';
+
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { useAuth } from './AuthContext';
+
 import Navigation from './components/Navigation';
+import Project from './components/Project';
 
-
-const { Content, Footer } = Layout;
+const { Header, Content, Footer } = Layout;
+const { SubMenu } = Menu;
 
 const MainPage = () => {
   const [projects, setProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
-  const { user, login } = useAuth()
+  const { user, login } = useAuth() 
   const [numProjects, setNumProjects] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -65,7 +66,36 @@ const MainPage = () => {
   
   return (
     <Layout className="layout">
-      <Navigation />
+            <Header>
+        <div className="logo"></div>
+        <Menu theme="dark" mode="horizontal">
+          <Menu.Item key="mail" icon={<HomeOutlined />}>
+            <NavLink to={"/"}> Home </NavLink>
+          </Menu.Item>
+          <Menu.Item key="app" icon={<AppstoreOutlined />}>
+            Navigation 2
+          </Menu.Item>
+          <SubMenu key="SubMenu" icon={<AppstoreOutlined />} title="Navigation 3">
+            <Menu.ItemGroup title="Item 1">
+              <Menu.Item key="setting:1">Option 1</Menu.Item>
+              <Menu.Item key="setting:2">Option 2</Menu.Item>
+            </Menu.ItemGroup>
+            <Menu.ItemGroup title="Item 2">
+              <Menu.Item key="setting:3">Option 3</Menu.Item>
+              <Menu.Item key="setting:4">Option 4</Menu.Item>
+            </Menu.ItemGroup>
+          </SubMenu>
+          <Menu.Item key="profile" style={{ position: 'absolute', right: 0 }}>
+            <NavLink to="/userProfile">
+              <Button type="primary" icon={<ProfileOutlined />} size={20}>
+              </Button>
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item key="search" style={{ position: 'absolute', right: 50 }}>
+            <Input placeholder="Search" prefix={<SearchOutlined />} />
+          </Menu.Item>
+        </Menu>
+      </Header>
       <Content
         style={{
           padding: '0 50px',
