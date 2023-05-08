@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { auth } from '../firebase'
+// import { auth } from '../firebase'
 import { NavLink } from 'react-router-dom'
 // import { Form, Button, Card, Alert } from 'react-bootstrap'
-import { signInWithEmailAndPassword, getAuth, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
+// import { signInWithEmailAndPassword, getAuth, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
 import { Button, message, Form, Input } from 'antd';
 import { useAuth } from '../AuthContext';
 
@@ -101,11 +101,11 @@ const SignIn = () => {
 
             <div className="w-100 text-center mt-2">
                 Don't have an account?
-                {/* <NavLink to="/signUp"> */}
-                <Button borderRadiusLG='80'>
-                    Sign Up
-                </Button>
-                {/* </NavLink> */}
+                <NavLink to="/signUp">
+                    <Button borderRadiusLG='80'>
+                        Sign Up
+                    </Button>
+                </NavLink>
             </div>
         </div>
 

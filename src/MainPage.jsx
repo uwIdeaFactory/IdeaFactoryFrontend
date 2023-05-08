@@ -2,7 +2,7 @@ import { Pagination, Breadcrumb, Layout, Menu, theme, Input, Button, Row, Spin }
 import { UploadOutlined, ProfileOutlined, HomeOutlined, AppstoreOutlined, SearchOutlined } from '@ant-design/icons';
 
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { useAuth } from './AuthContext';
@@ -17,7 +17,7 @@ const MainPage = () => {
   const [projects, setProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
-  const { user, login } = useAuth() 
+  const { user, login } = useAuth()
   const [numProjects, setNumProjects] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -63,10 +63,10 @@ const MainPage = () => {
     setPageSize(pageSize);
     fetchProjects(page, pageSize);
   }
-  
+
   return (
     <Layout className="layout">
-            <Header>
+      <Header>
         <div className="logo"></div>
         <Menu theme="dark" mode="horizontal">
           <Menu.Item key="mail" icon={<HomeOutlined />}>
@@ -106,7 +106,7 @@ const MainPage = () => {
             margin: '16px 0',
           }}
           items={[
-            {title: "Home"}
+            { title: "Home" }
           ]}
         >
         </Breadcrumb>
@@ -121,15 +121,16 @@ const MainPage = () => {
               Upload
             </Button>
           </NavLink>
-          { isLoading ? (
+          {isLoading ? (
             <div>
-              <Spin 
-                size='large' 
+              <Spin
+                size='large'
                 style={{
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  height: '100vh'}}
+                  height: '100vh'
+                }}
               />
             </div>
           ) : (
@@ -154,7 +155,7 @@ const MainPage = () => {
                       )
                     })}
                   </Row>
-                  )
+                )
               })}
             </div>
           )}
@@ -163,7 +164,7 @@ const MainPage = () => {
               textAlign: 'center',
             }}
             defaultCurrent={currentPage} total={numProjects} onChange={onPageChange}
-            />
+          />
         </div>
       </Content>
       <Footer
