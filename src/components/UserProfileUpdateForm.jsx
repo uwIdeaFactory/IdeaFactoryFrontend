@@ -88,7 +88,7 @@ const ProjectUploadForm = () => {
           style={{
             textAlign: 'center',
           }}>
-          Upload
+          Update
         </Button>
       </Form.Item>
     </Form>
