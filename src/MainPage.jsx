@@ -1,6 +1,6 @@
 import { Breadcrumb, Layout, Space, theme, Input, Button, Row, Spin } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 import Project from './components/Project';
 import { Pagination } from 'antd';
 import axios from 'axios';
@@ -8,6 +8,12 @@ import { useEffect, useState } from 'react';
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { useAuth } from './AuthContext';
 import Navigation from './components/Navigation';
+import {  Menu} from 'antd';
+import { ProfileOutlined } from '@ant-design/icons';
+import { HomeOutlined, AppstoreOutlined, SearchOutlined } from '@ant-design/icons';
+const { Header } = Layout;
+const { SubMenu } = Menu;
+const { Search } = Input;
 
 
 const { Content, Footer } = Layout;
@@ -20,10 +26,10 @@ const MainPage = () => {
   const [numProjects, setNumProjects] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchProjects = async (page, pageSize) => {
+  const fetchProjects = async (page, pageSize, text) => {
     setIsLoading(true);
     try {
-      const res = await axios.get("http://localhost:3000/projects", {
+      const res = await axios.get("http://localhost:3000/projects/" + text, {
         params: {
           page: page,
           limit: pageSize
@@ -38,7 +44,7 @@ const MainPage = () => {
   }
 
   useEffect(() => {
-    fetchProjects(currentPage);
+    fetchProjects(currentPage, pageSize, "");
   }, []);
 
   // get counts of projects
@@ -60,12 +66,41 @@ const MainPage = () => {
   const onPageChange = (page, pageSize) => {
     setCurrentPage(page);
     setPageSize(pageSize);
-    fetchProjects(page, pageSize);
+    fetchProjects(page, pageSize, "");
   }
   
   return (
     <Layout className="layout">
-      <Navigation />
+      <Header>
+        <div className="logo"></div>
+        <Menu theme="dark" mode="horizontal">
+          <Menu.Item key="mail" icon={<HomeOutlined />}>
+            <NavLink to={"/"}> Home </NavLink>
+          </Menu.Item>
+          <Menu.Item key="app" icon={<AppstoreOutlined />}>
+            Navigation 2
+          </Menu.Item>
+          <SubMenu key="SubMenu" icon={<AppstoreOutlined />} title="Navigation 3">
+            <Menu.ItemGroup title="Item 1">
+              <Menu.Item key="setting:1">Option 1</Menu.Item>
+              <Menu.Item key="setting:2">Option 2</Menu.Item>
+            </Menu.ItemGroup>
+            <Menu.ItemGroup title="Item 2">
+              <Menu.Item key="setting:3">Option 3</Menu.Item>
+              <Menu.Item key="setting:4">Option 4</Menu.Item>
+            </Menu.ItemGroup>
+          </SubMenu>
+          <Menu.Item key="profile" style={{ position: 'absolute', right: 0 }}>
+            <NavLink to="/userProfile">
+              <Button type="primary" icon={<ProfileOutlined />} size={20}>
+              </Button>
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item key="search" style={{ position: 'absolute', right: 50 }}>
+            <Search placeholder='Search' allowClear onSearch={value => {fetchProjects(currentPage, pageSize, value)}} prefix={<SearchOutlined />}/>
+          </Menu.Item>
+        </Menu>
+      </Header>
       <Content
         style={{
           padding: '0 50px',
@@ -149,7 +184,5 @@ const MainPage = () => {
     </Layout>
   );
 };
-
-const onSearch = value => alert(value);
 
 export default MainPage;
