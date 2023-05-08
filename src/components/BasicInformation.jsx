@@ -9,11 +9,11 @@ function BasicInformation (props) {
         <Card title="Username">{props.username}</Card>
       </Col>
       <Col span={15}>
-        <Card title="Summary">{props.summary}</Card>
+        <Card title="Summary">{props.bio}</Card>
       </Col>
       </Row>
     </Card>
   )
 }
- 
+
 export default BasicInformation;

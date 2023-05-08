@@ -27,7 +27,7 @@ const UserProfile = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-  
+
   return (
     <Layout className="layout">
       <Navigation></Navigation>
@@ -47,7 +47,7 @@ const UserProfile = () => {
           ]}
         >
         </Breadcrumb>
-        <BasicInformation 
+        <BasicInformation
           {...user}
         >
         </BasicInformation>

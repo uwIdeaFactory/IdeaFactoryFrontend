@@ -2,10 +2,12 @@ import { Layout, Menu, Input, Button } from 'antd';
 import { ProfileOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom'
 import { HomeOutlined, AppstoreOutlined, SearchOutlined } from '@ant-design/icons';
+import { useAuth } from '../AuthContext';
 const { Header } = Layout;
 const { SubMenu } = Menu;
 
 const Navigation = () => {
+  const { user, login } = useAuth()
   return (
       <Header>
         <div className="logo"></div>
@@ -27,7 +29,7 @@ const Navigation = () => {
             </Menu.ItemGroup>
           </SubMenu>
           <Menu.Item key="profile" style={{ position: 'absolute', right: 0 }}>
-            <NavLink to="/userProfile">
+            <NavLink to={`/userProfile/${user.uid}`}>
               <Button type="primary" icon={<ProfileOutlined />} size={20}>
               </Button>
             </NavLink>
