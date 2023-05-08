@@ -1,19 +1,21 @@
 import { Button, Form, Input, message } from 'antd';
 import axios from 'axios';
+import { useAuth } from '../AuthContext';
 
 const { TextArea } = Input;
 
 const ProjectUploadForm = () => {
   const [form] = Form.useForm();
-
+  const { user, login } = useAuth()
 
   const onFinishFailed = () => {
     message.error('Submit failed!');
   };
 
   const onFinish = () => {
+    console.log('http://localhost:3000/patchBasicInfo/' + user.uid);
     axios.patch(
-      'http://localhost:3000/patchBasicInfo', {
+      'http://localhost:3000/patchBasicInfo/' + user.uid, {
         username: form.getFieldValue('username'),
         summary: form.getFieldValue('summary')
       }
