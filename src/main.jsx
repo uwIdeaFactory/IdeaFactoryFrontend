@@ -9,6 +9,7 @@ import {
 import MainPage from './MainPage.jsx';
 import UserProfile from './UserProfile.jsx';
 import ProjectUploadPage from './ProjectUploadPage.jsx';
+import UserProfileUpdatePage from './UserProfileUpdatePage.jsx';
 import SignIn from './auth/SignIn.jsx'
 import SignUp from './auth/SignUp.jsx'
 import AuthDetails from './auth/AuthDetails.jsx'
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "/projectUpload",
     element: <ProjectUploadPage></ProjectUploadPage>
+  },
+  {
+    path: "/userProfileUpdate",
+    element: <UserProfileUpdatePage></UserProfileUpdatePage>
   },
   {
     path: "/",
