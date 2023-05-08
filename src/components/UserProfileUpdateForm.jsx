@@ -13,7 +13,7 @@ const ProjectUploadForm = () => {
   };
 
   const onFinish = () => {
-    console.log('http://localhost:3000/patchBasicInfo/' + user.uid);
+    // console.log('http://localhost:3000/patchBasicInfo/' + user.uid);
     axios.patch(
       'http://localhost:3000/patchBasicInfo/' + user.uid, {
         username: form.getFieldValue('username'),
