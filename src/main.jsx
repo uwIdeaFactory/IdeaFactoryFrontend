@@ -17,7 +17,7 @@ import { AuthProvider } from './AuthContext.jsx'
 import ProjectPage from './ProjectPage.jsx';
 const router = createBrowserRouter([
   {
-    path: "/userProfile",
+    path: "/userProfile/:uid",
     element: <UserProfile></UserProfile>
   },
   {

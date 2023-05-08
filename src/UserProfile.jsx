@@ -1,6 +1,7 @@
 import React from 'react'
 import { Breadcrumb, Layout, theme } from 'antd';
 import { useEffect, useState } from 'react'
+import { NavLink, useParams } from 'react-router-dom'
 import './App.css'
 import axios from 'axios';
 import UserRelatedProjects from './components/UserRelatedProjects';
@@ -12,10 +13,12 @@ import Navigation from './components/Navigation';
 const { Content, Footer } = Layout;
 
 const UserProfile = () => {
+  const { uid } = useParams();
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    axios.get("http://localhost:3000/user/J2lhMMs3P9UISWlzfhKIYj9xOIA3")
+    // axios.get("http://localhost:3000/user/J2lhMMs3P9UISWlzfhKIYj9xOIA3")
+    axios.get("http://localhost:3000/user/" + uid)
       // .then(res => res.data)
       .then(res => res.data)
       .then(setUser)
@@ -24,7 +27,7 @@ const UserProfile = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-  
+
   return (
     <Layout className="layout">
       <Navigation></Navigation>
@@ -44,7 +47,7 @@ const UserProfile = () => {
           ]}
         >
         </Breadcrumb>
-        <BasicInformation 
+        <BasicInformation
           {...user}
         >
         </BasicInformation>

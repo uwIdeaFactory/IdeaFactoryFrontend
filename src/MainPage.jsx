@@ -17,7 +17,7 @@ const MainPage = () => {
   const [projects, setProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
-  const { user, login } = useAuth() 
+  const { user, login } = useAuth()
   const [numProjects, setNumProjects] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -63,7 +63,7 @@ const MainPage = () => {
     setPageSize(pageSize);
     fetchProjects(page, pageSize);
   }
-  
+
   return (
     <Layout className="layout">
             <Header>
@@ -86,7 +86,7 @@ const MainPage = () => {
             </Menu.ItemGroup>
           </SubMenu>
           <Menu.Item key="profile" style={{ position: 'absolute', right: 0 }}>
-            <NavLink to="/userProfile">
+            <NavLink to={`/userProfile/${user.uid}`}>
               <Button type="primary" icon={<ProfileOutlined />} size={20}>
               </Button>
             </NavLink>
@@ -123,8 +123,8 @@ const MainPage = () => {
           </NavLink>
           { isLoading ? (
             <div>
-              <Spin 
-                size='large' 
+              <Spin
+                size='large'
                 style={{
                   display: 'flex',
                   justifyContent: 'center',
