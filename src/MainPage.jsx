@@ -1,18 +1,22 @@
-import { Pagination, Breadcrumb, Layout, Menu, theme, Input, Button, Row, Spin } from 'antd';
-import { UploadOutlined, ProfileOutlined, HomeOutlined, AppstoreOutlined, SearchOutlined } from '@ant-design/icons';
-
+import { Breadcrumb, Layout, Space, theme, Input, Button, Row, Spin } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+import { NavLink } from 'react-router-dom';
+import Project from './components/Project';
+import { Pagination } from 'antd';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { useAuth } from './AuthContext';
-
 import Navigation from './components/Navigation';
-import Project from './components/Project';
-
-const { Header, Content, Footer } = Layout;
+import {  Menu} from 'antd';
+import { ProfileOutlined } from '@ant-design/icons';
+import { HomeOutlined, AppstoreOutlined, SearchOutlined } from '@ant-design/icons';
+const { Header } = Layout;
 const { SubMenu } = Menu;
+const { Search } = Input;
 
+
+const { Content, Footer } = Layout;
 const MainPage = () => {
   const [projects, setProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,10 +25,10 @@ const MainPage = () => {
   const [numProjects, setNumProjects] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchProjects = async (page, pageSize) => {
+  const fetchProjects = async (page, pageSize, text) => {
     setIsLoading(true);
     try {
-      const res = await axios.get("http://localhost:3000/projects", {
+      const res = await axios.get("http://localhost:3000/projects/" + text, {
         params: {
           page: page,
           limit: pageSize
@@ -39,7 +43,7 @@ const MainPage = () => {
   }
 
   useEffect(() => {
-    fetchProjects(currentPage);
+    fetchProjects(currentPage, pageSize, "");
   }, []);
 
   // get counts of projects
@@ -61,12 +65,12 @@ const MainPage = () => {
   const onPageChange = (page, pageSize) => {
     setCurrentPage(page);
     setPageSize(pageSize);
-    fetchProjects(page, pageSize);
+    fetchProjects(page, pageSize, "");
   }
 
   return (
     <Layout className="layout">
-            <Header>
+      <Header>
         <div className="logo"></div>
         <Menu theme="dark" mode="horizontal">
           <Menu.Item key="mail" icon={<HomeOutlined />}>
@@ -92,7 +96,7 @@ const MainPage = () => {
             </NavLink>
           </Menu.Item>
           <Menu.Item key="search" style={{ position: 'absolute', right: 50 }}>
-            <Input placeholder="Search" prefix={<SearchOutlined />} />
+            <Search placeholder='Search' allowClear onSearch={value => {fetchProjects(currentPage, pageSize, value)}} prefix={<SearchOutlined />}/>
           </Menu.Item>
         </Menu>
       </Header>
@@ -106,7 +110,7 @@ const MainPage = () => {
             margin: '16px 0',
           }}
           items={[
-            {title: "Home"}
+            { title: "Home" }
           ]}
         >
         </Breadcrumb>
@@ -121,7 +125,7 @@ const MainPage = () => {
               Upload
             </Button>
           </NavLink>
-          { isLoading ? (
+          {isLoading ? (
             <div>
               <Spin
                 size='large'
@@ -129,7 +133,8 @@ const MainPage = () => {
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  height: '100vh'}}
+                  height: '100vh'
+                }}
               />
             </div>
           ) : (
@@ -154,7 +159,7 @@ const MainPage = () => {
                       )
                     })}
                   </Row>
-                  )
+                )
               })}
             </div>
           )}
@@ -163,7 +168,7 @@ const MainPage = () => {
               textAlign: 'center',
             }}
             defaultCurrent={currentPage} total={numProjects} onChange={onPageChange}
-            />
+          />
         </div>
       </Content>
       <Footer
@@ -179,7 +184,5 @@ const MainPage = () => {
     </Layout>
   );
 };
-
-const onSearch = value => alert(value);
 
 export default MainPage;
