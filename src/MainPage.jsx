@@ -17,7 +17,6 @@ const { Search } = Input;
 
 
 const { Content, Footer } = Layout;
-
 const MainPage = () => {
   const [projects, setProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -68,7 +67,7 @@ const MainPage = () => {
     setPageSize(pageSize);
     fetchProjects(page, pageSize, "");
   }
-  
+
   return (
     <Layout className="layout">
       <Header>
@@ -111,7 +110,7 @@ const MainPage = () => {
             margin: '16px 0',
           }}
           items={[
-            {title: "Home"}
+            { title: "Home" }
           ]}
         >
         </Breadcrumb>
@@ -126,15 +125,16 @@ const MainPage = () => {
               Upload
             </Button>
           </NavLink>
-          { isLoading ? (
+          {isLoading ? (
             <div>
-              <Spin 
-                size='large' 
+              <Spin
+                size='large'
                 style={{
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  height: '100vh'}}
+                  height: '100vh'
+                }}
               />
             </div>
           ) : (
@@ -159,7 +159,7 @@ const MainPage = () => {
                       )
                     })}
                   </Row>
-                  )
+                )
               })}
             </div>
           )}
@@ -168,7 +168,7 @@ const MainPage = () => {
               textAlign: 'center',
             }}
             defaultCurrent={currentPage} total={numProjects} onChange={onPageChange}
-            />
+          />
         </div>
       </Content>
       <Footer

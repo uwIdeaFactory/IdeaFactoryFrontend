@@ -5,6 +5,8 @@ import { Breadcrumb, Layout, Menu } from 'antd';
 import ProjectUploadForm from './components/ProjectUploadForm';
 import { useState } from 'react';
 import Navigation from './components/Navigation';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 const { Header, Content, Footer } = Layout;
 

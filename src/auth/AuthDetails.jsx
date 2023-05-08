@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { auth } from '../firebase'
-import { onAuthStateChanged, signOut } from 'firebase/auth'
+import { signOut } from 'firebase/auth'
 // import { getAuth, getRedirectResult, GoogleAuthProvider } from "firebase/auth";
 import { useAuth } from '../AuthContext';
 
 
 export const AuthDetails = () => {
-    const { user, login, googleLogin } = useAuth()
+    const { user } = useAuth()
 
     const handleSignOut = () => {
         signOut(auth).then(() => {
@@ -14,7 +14,7 @@ export const AuthDetails = () => {
             console.log("Sign out successful")
             // Redirect to the sign in page
             window.location.href = "/SignIn"
-        }).catch((error) => {
+        }).catch(() => {
             // An error happened.
             console.log("Sign out failed")
         });

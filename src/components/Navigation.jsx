@@ -32,9 +32,9 @@ const Navigation = () => {
               </Button>
             </NavLink>
           </Menu.Item>
-          <Menu.Item key="search" style={{ position: 'absolute', right: 50 }}>
+          {/* <Menu.Item key="search" style={{ position: 'absolute', right: 50 }}>
             <Input placeholder="Search" prefix={<SearchOutlined />} />
-          </Menu.Item>
+          </Menu.Item> */}
         </Menu>
       </Header>
   );
