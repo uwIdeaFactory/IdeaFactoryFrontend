@@ -12,7 +12,7 @@ const ProjectPage = () => {
   const [project, setProject] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/projects/" + pid)
+    axios.get("http://localhost:3000/project/" + pid)
       .then(res => res.data)
       .then(setProject);
   }, []);

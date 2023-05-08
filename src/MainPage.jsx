@@ -1,18 +1,22 @@
-import { Pagination, Breadcrumb, Layout, Menu, theme, Input, Button, Row, Spin } from 'antd';
-import { UploadOutlined, ProfileOutlined, HomeOutlined, AppstoreOutlined, SearchOutlined } from '@ant-design/icons';
-
+import { Breadcrumb, Layout, Space, theme, Input, Button, Row, Spin } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+import { NavLink } from 'react-router-dom';
+import Project from './components/Project';
+import { Pagination } from 'antd';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom'
+import { useEffect, useState } from 'react';
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { useAuth } from './AuthContext';
-
 import Navigation from './components/Navigation';
-import Project from './components/Project';
-
-const { Header, Content, Footer } = Layout;
+import {  Menu} from 'antd';
+import { ProfileOutlined } from '@ant-design/icons';
+import { HomeOutlined, AppstoreOutlined, SearchOutlined } from '@ant-design/icons';
+const { Header } = Layout;
 const { SubMenu } = Menu;
+const { Search } = Input;
 
+
+const { Content, Footer } = Layout;
 const MainPage = () => {
   const [projects, setProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,10 +25,10 @@ const MainPage = () => {
   const [numProjects, setNumProjects] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchProjects = async (page, pageSize) => {
+  const fetchProjects = async (page, pageSize, text) => {
     setIsLoading(true);
     try {
-      const res = await axios.get("http://localhost:3000/projects", {
+      const res = await axios.get("http://localhost:3000/projects/" + text, {
         params: {
           page: page,
           limit: pageSize
@@ -39,7 +43,7 @@ const MainPage = () => {
   }
 
   useEffect(() => {
-    fetchProjects(currentPage);
+    fetchProjects(currentPage, pageSize, "");
   }, []);
 
   // get counts of projects
@@ -61,7 +65,7 @@ const MainPage = () => {
   const onPageChange = (page, pageSize) => {
     setCurrentPage(page);
     setPageSize(pageSize);
-    fetchProjects(page, pageSize);
+    fetchProjects(page, pageSize, "");
   }
 
   return (
@@ -92,7 +96,7 @@ const MainPage = () => {
             </NavLink>
           </Menu.Item>
           <Menu.Item key="search" style={{ position: 'absolute', right: 50 }}>
-            <Input placeholder="Search" prefix={<SearchOutlined />} />
+            <Search placeholder='Search' allowClear onSearch={value => {fetchProjects(currentPage, pageSize, value)}} prefix={<SearchOutlined />}/>
           </Menu.Item>
         </Menu>
       </Header>
@@ -180,7 +184,5 @@ const MainPage = () => {
     </Layout>
   );
 };
-
-const onSearch = value => alert(value);
 
 export default MainPage;
