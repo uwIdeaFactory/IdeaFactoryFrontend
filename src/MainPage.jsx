@@ -90,7 +90,7 @@ const MainPage = () => {
             </Menu.ItemGroup>
           </SubMenu>
           <Menu.Item key="profile" style={{ position: 'absolute', right: 0 }}>
-            <NavLink to="/userProfile">
+            <NavLink to={`/userProfile/${user.uid}`}>
               <Button type="primary" icon={<ProfileOutlined />} size={20}>
               </Button>
             </NavLink>
