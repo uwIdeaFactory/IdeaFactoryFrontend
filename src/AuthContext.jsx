@@ -58,18 +58,26 @@ export function AuthProvider({ children }) {
             .then((userCredential) => {
                 // Signed in
                 console.log(userCredential)
-                // const user = userCredential.user;
-                // Redirect to the sign in page
+                // const user = ;
+                // // Redirect to the sign in page
                 // window.location.href = "/authDetails"
 
-                // axios.post('http://localhost:3000/user/create', {
-                //     uid: user.uid,
-                // })
-            })
-            .then(() => {
                 axios.post('http://localhost:3000/user/create', {
-                    uid: user.uid,
+                    email: userCredential.user.email,
+                    uid: userCredential.user.uid,
                 })
+                console.log("User created")
+
+                // }).then(() => {
+                //     setUser(userCredential.user);
+                // })
+                // .then(() => {
+                //     console.log("Start creating user")
+                //     console.log(user)
+                //     axios.post('http://localhost:3000/user/create', {
+                //         uid: user.uid,
+                //     })
+                //     console.log("User created")
             })
             .catch((error) => {
                 const errorCode = error.code;
