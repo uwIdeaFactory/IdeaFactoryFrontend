@@ -1,24 +1,23 @@
 import { Button, Form, Input, message } from 'antd';
 import axios from 'axios';
+import { useAuth } from '../AuthContext';
 
 const { TextArea } = Input;
 
 const ProjectUploadForm = () => {
   const [form] = Form.useForm();
-
+  const { user, login } = useAuth()
 
   const onFinishFailed = () => {
     message.error('Submit failed!');
   };
-  
+
   const onFinish = () => {
+    // console.log('http://localhost:3000/patchBasicInfo/' + user.uid);
     axios.post(
-      'http://localhost:3000/post', {
-        pname: form.getFieldValue('pname'), 
-        preview: form.getFieldValue('preview'),
-        detail: form.getFieldValue('detail'),
-        owner: "test owner",
-        location: "test location"
+      'http://localhost:3000/patchBasicInfo/' + user.uid, {
+        username: form.getFieldValue('username'),
+        summary: form.getFieldValue('summary')
       }
     )
     .then (() => {
@@ -50,12 +49,12 @@ const ProjectUploadForm = () => {
       autoComplete="off"
     >
       <Form.Item
-        label="Title"
-        name="pname"
+        label="Username"
+        name="username"
         rules={[
           {
             required: true,
-            message: 'Please input your project title!',
+            message: 'Please input a username!',
           },
         ]}
       >
@@ -63,17 +62,17 @@ const ProjectUploadForm = () => {
       </Form.Item>
 
       <Form.Item
-        label="Brief"
-        name="preview"
+        label="Summary"
+        name="summary"
         rules={[
           {
             required: true,
-            message: 'Please input brief description!',
+            message: 'Please input a summary of yourself!',
           },
         ]}
       >
         <TextArea
-          placeholder="brief description"
+          placeholder="summary of yourself"
           autoSize={{
             minRows: 2,
             maxRows: 6,
@@ -81,44 +80,6 @@ const ProjectUploadForm = () => {
         />
       </Form.Item>
 
-      <Form.Item
-        label="Description"
-        name="detail"
-        rules={[
-          {
-            required: true,
-            message: 'Please input description!',
-          },
-        ]}
-      >
-        <TextArea
-          placeholder="description"
-          autoSize={{
-            minRows: 2,
-            maxRows: 6,
-          }}
-        />
-      </Form.Item>
-      
-      <Form.Item
-          name="url"
-          label="URL"
-          rules={[
-            {
-              required: false,
-            },
-            {
-              type: 'url',
-              warningOnly: true,
-            },
-            {
-              type: 'string',
-              min: 6,
-            },
-          ]}
-        >
-          <Input placeholder="input placeholder" />
-        </Form.Item>
       <Form.Item
         wrapperCol={{
           offset: 8,
@@ -129,7 +90,7 @@ const ProjectUploadForm = () => {
           style={{
             textAlign: 'center',
           }}>
-          Upload
+          Update
         </Button>
       </Form.Item>
     </Form>

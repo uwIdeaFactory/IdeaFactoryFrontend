@@ -1,9 +1,7 @@
 import React from "react";
 import { Card, Col, Row } from 'antd';
-import ProjectRow from "./ProjectRow";
 
 function BasicInformation (props) {
-  console.log(props);
   return (
     <Card title="Basic Information">
       <Row span={20}>
@@ -11,11 +9,11 @@ function BasicInformation (props) {
         <Card title="Username">{props.username}</Card>
       </Col>
       <Col span={15}>
-        <Card title="a">a</Card>
+        <Card title="Summary">{props.bio}</Card>
       </Col>
       </Row>
     </Card>
   )
 }
- 
+
 export default BasicInformation;

@@ -1,30 +1,21 @@
 import React, { useState } from 'react'
-import { auth } from '../firebase'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+// import { auth } from '../firebase'
+// import { createUserWithEmailAndPassword } from 'firebase/auth'
 // import { Form, Button, Card, Alert } from 'react-bootstrap'
 import { Link } from "react-router-dom";
 import { Button, Checkbox, Form, Input } from 'antd';
+import { useAuth } from '../AuthContext';
 
 const SignUp = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const { signup } = useAuth()
+
     const handleSignUp = (e) => {
         // Save the email and password
         // e.preventDefault();
 
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in
-                console.log(userCredential)
-                // const user = userCredential.user;
-                // Redirect to the sign in page
-                window.location.href = "/signIn"
-            }).catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log("Error signing up")
-                console.log(errorCode, errorMessage)
-            });
+        signup(email, password)
 
     }
     return (
@@ -77,17 +68,6 @@ const SignUp = () => {
                 >
                     <Input.Password />
                 </Form.Item>
-
-                {/* <Form.Item
-                    name="remember"
-                    valuePropName="checked"
-                    wrapperCol={{
-                        offset: 8,
-                        span: 16,
-                    }}
-                >
-                    <Checkbox>Remember me</Checkbox>
-                </Form.Item> */}
 
                 <Form.Item
                     wrapperCol={{

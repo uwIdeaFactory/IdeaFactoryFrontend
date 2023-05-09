@@ -9,7 +9,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { useAuth } from '../AuthContext.mock';
-import SignIn from '../auth/SignIn';
+import SignUp from '../auth/SignUp';
 
 window.matchMedia = window.matchMedia || function () {
     return {
@@ -25,20 +25,19 @@ jest.mock('../AuthContext', () => {
     };
 });
 
-describe('SignIn component tests', () => {
+describe('SignUp component tests', () => {
     beforeEach(() => {
         render(
             <Router>
-                <SignIn />
+                <SignUp />
             </Router>
         );
     });
 
-    test('renders SignIn component heading', () => {
-        const signInHeading = screen.getByRole('heading', { name: /Log In/i });
-        expect(signInHeading).toBeInTheDocument();
+    test('renders SignUp component', () => {
+        const signUpElement = screen.getByText(/Sign Up/i);
+        expect(signUpElement).toBeInTheDocument();
     });
-
 
     test('renders email input field', () => {
         const emailInput = screen.getByLabelText(/Email/i);
@@ -55,13 +54,8 @@ describe('SignIn component tests', () => {
         expect(submitButton).toBeInTheDocument();
     });
 
-    test('renders Log In with Google button', () => {
-        const googleSignInButton = screen.getByRole('button', { name: /Log In with Google/i });
-        expect(googleSignInButton).toBeInTheDocument();
-    });
-
-    test('renders Sign Up link', () => {
-        const signUpLink = screen.getByText(/Sign Up/i);
-        expect(signUpLink).toBeInTheDocument();
+    test('renders Log in link', () => {
+        const logInLink = screen.getByText(/Log in/i);
+        expect(logInLink).toBeInTheDocument();
     });
 });

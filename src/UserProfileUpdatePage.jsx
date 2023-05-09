@@ -2,7 +2,7 @@ import { Button } from 'antd';
 import { ProfileOutlined, HomeOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom'
 import { Breadcrumb, Layout, Menu } from 'antd';
-import ProjectUploadForm from './components/ProjectUploadForm';
+import UserProfileUpdateForm from './components/UserProfileUpdateForm';
 import { useState } from 'react';
 import Navigation from './components/Navigation';
 import React from 'react';
@@ -27,9 +27,9 @@ const ProjectUploadPage = () => {
           }}
         >
           <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>Upload</Breadcrumb.Item>
+          <Breadcrumb.Item>User Profile Update</Breadcrumb.Item>
         </Breadcrumb>
-        <ProjectUploadForm></ProjectUploadForm>
+        <UserProfileUpdateForm></UserProfileUpdateForm>
       </Content>
       <Footer
         style={{
