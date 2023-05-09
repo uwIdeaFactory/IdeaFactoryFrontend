@@ -16,12 +16,12 @@ import Experience from './components/Experience';
 import BasicInformation from './components/BasicInformation';
 
 const UserProfile = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     axios.get("http://localhost:3000/user/J2lhMMs3P9UISWlzfhKIYj9xOIA3")
-      // .then(res => res.data)
-      .then(res => setUser(res.data));
+      .then(res => res.data)
+      .then(setUser);
   }, []);
 
   const {
@@ -67,11 +67,9 @@ const UserProfile = () => {
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item>User Profile</Breadcrumb.Item>
           </Breadcrumb>
-          <BasicInformation>
-            username: {user.username}
-            contact: {user.contact}
-            location: {user.location}
-            bio: {user.bio}
+          <BasicInformation
+            {...user}
+          >
           </BasicInformation>
           <Experience></Experience>
           <Skill></Skill>

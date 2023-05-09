@@ -7,7 +7,6 @@ import ProjectUploadForm from './components/ProjectUploadForm';
 const { Header, Content, Footer } = Layout;
 
 const ProjectUploadPage = () => {
-  const [value, setValue] = useState('');
   
   return (
     <Layout className="layout">

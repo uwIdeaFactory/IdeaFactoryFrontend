@@ -4,7 +4,6 @@ import ProjectRow from "./ProjectRow";
 
 function BasicInformation (props) {
   console.log(props);
-  console.log(props.children.username);
   return (
     <Card title="Basic Information">
       <Row span={20}>
