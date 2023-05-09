@@ -29,7 +29,7 @@ const Navigation = () => {
             </Menu.ItemGroup>
           </SubMenu>
           <Menu.Item key="profile" style={{ position: 'absolute', right: 0 }}>
-            <NavLink to={`/userProfile/${user.uid}`}>
+            <NavLink to={user ? `/userProfile/${user.uid}` : '/userProfile/J2lhMMs3P9UISWlzfhKIYj9xOIA3'}>
               <Button type="primary" icon={<ProfileOutlined />} size={20}>
               </Button>
             </NavLink>
