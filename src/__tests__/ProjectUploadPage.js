@@ -19,6 +19,11 @@ window.matchMedia = window.matchMedia || function () {
     };
 };
 
+jest.mock('../AuthContext', () => {
+    return {
+        useAuth: jest.fn(() => require('../AuthContext.mock').useAuth()),
+    };
+});
 
 describe('ProjectUploadPage component tests', () => {
     beforeEach(() => {
