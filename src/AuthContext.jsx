@@ -62,6 +62,11 @@ export function AuthProvider({ children }) {
                 // Redirect to the sign in page
                 // window.location.href = "/authDetails"
 
+                // axios.post('http://localhost:3000/user/create', {
+                //     uid: user.uid,
+                // })
+            })
+            .then(() => {
                 axios.post('http://localhost:3000/user/create', {
                     uid: user.uid,
                 })
