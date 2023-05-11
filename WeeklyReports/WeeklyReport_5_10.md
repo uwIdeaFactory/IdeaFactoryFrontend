@@ -45,6 +45,6 @@
 * Allan Ji: 
 * Dicheng Wu, Yansong Liu: Use cloudflare R2 to store files and image information and connect to the project, Implement api for filtering  
   projects based on multiple constraints(like tags and locations)
-* Bohan Wu: 
+* Bohan Wu: implement functionality to modify other parts of the user profile, will involve implementing new backend APIs and frontend functions
 * Caleb Huang: Create a setting for user profile.
 * Zhengrui Sun: Modify the UI for the login, main page, and expecially user profile.
