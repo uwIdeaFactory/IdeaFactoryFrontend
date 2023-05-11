@@ -27,7 +27,7 @@
 ### Previous week's goal
 * Allan Ji: 
 * Bohan Wu: 
-* Caleb Huang: 
+* Caleb Huang: Finish search API and search function
 * Zhengrui Sun: Connect the rest frontend backend interface and start refining bugs and styles.
 * Yansong Liu, Dicheng Wu: Implement more APIs like add an user or project to database, and access information about a specific user or project
 
@@ -37,7 +37,7 @@
 * Yansong Liu: Implement the APIs to update MongoDB when a new user is signed, and fixed minor bugs.
 * Dicheng Wu: Implemented APIs to remove a project, and access information of a specific user.
 * Bohan Wu: 
-* Caleb Huang: 
+* Caleb Huang: Finish search API and search function
 * Zhengrui Sun: Modify the frontend UI, apply hooks, implement the pagination function, and access data by the pagination.
 
 
@@ -46,5 +46,5 @@
 * Dicheng Wu, Yansong Liu: Use cloudflare R2 to store files and image information and connect to the project, Implement api for filtering  
   projects based on multiple constraints(like tags and locations)
 * Bohan Wu: 
-* Caleb Huang: 
+* Caleb Huang: Create a setting for user profile.
 * Zhengrui Sun: Modify the UI for the login, main page, and expecially user profile.
