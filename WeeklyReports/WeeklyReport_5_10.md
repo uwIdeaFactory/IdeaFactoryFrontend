@@ -26,7 +26,7 @@
 ## Contributions of individual team members
 ### Previous week's goal
 * Allan Ji: 
-* Bohan Wu: 
+* Bohan Wu: Implement majority of backend database interaction functionalities, including GET requests for searching and POST requests
 * Caleb Huang: Finish search API and search function
 * Zhengrui Sun: Connect the rest frontend backend interface and start refining bugs and styles.
 * Yansong Liu, Dicheng Wu: Implement more APIs like add an user or project to database, and access information about a specific user or project
@@ -36,7 +36,7 @@
 * Allan Ji: 
 * Yansong Liu: Implement the APIs to update MongoDB when a new user is signed, and fixed minor bugs.
 * Dicheng Wu: Implemented APIs to remove a project, and access information of a specific user.
-* Bohan Wu: 
+* Bohan Wu: Implemented APIs to get a target project and to change uesr profile information; implemented project-detail page and user-profile page of logged-in user
 * Caleb Huang: Finish search API and search function
 * Zhengrui Sun: Modify the frontend UI, apply hooks, implement the pagination function, and access data by the pagination.
 
