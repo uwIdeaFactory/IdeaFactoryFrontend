@@ -1,5 +1,5 @@
 import { Breadcrumb, Layout, Space, theme, Input, Button, Row, Spin } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined, LoginOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
 import Project from './components/Project';
 import { Pagination } from 'antd';
@@ -68,6 +68,29 @@ const MainPage = () => {
     fetchProjects(page, pageSize, "");
   }
 
+  // return the navlink to user profile if the user is logged in, 
+  // otherwise return the navlink to login page
+  const getNavLinkToUserProfile = () => {
+    if (user) {
+      return (
+        <Menu.Item key="profile" style={{ position: 'absolute', right: 0 }}>
+        <NavLink to={user ? `/userProfile/${user.uid}` : '/userProfile/J2lhMMs3P9UISWlzfhKIYj9xOIA3'}>
+          <Button type="primary" icon={<ProfileOutlined />} size={20}>
+          </Button>
+        </NavLink>
+      </Menu.Item>
+      )
+    } else {
+      return (
+        <Menu.Item key="login" style={{ position: 'absolute', right: 0 }}>
+          <NavLink to={"/signIn"}>
+            <Button type="primary" size={20} icon={<LoginOutlined />} />
+          </NavLink>
+        </Menu.Item>
+      ) 
+    }
+  }
+
   return (
     <Layout className="layout">
       <Header>
@@ -89,14 +112,15 @@ const MainPage = () => {
               <Menu.Item key="setting:4">Option 4</Menu.Item>
             </Menu.ItemGroup>
           </SubMenu>
-          <Menu.Item key="profile" style={{ position: 'absolute', right: 0 }}>
-            <NavLink to={user ? `/userProfile/${user.uid}` : '/userProfile/J2lhMMs3P9UISWlzfhKIYj9xOIA3'}>
-              <Button type="primary" icon={<ProfileOutlined />} size={20}>
-              </Button>
-            </NavLink>
-          </Menu.Item>
+          {getNavLinkToUserProfile()}
           <Menu.Item key="search" style={{ position: 'absolute', right: 50 }}>
-            <Search placeholder='Search' allowClear onSearch={value => {fetchProjects(currentPage, pageSize, value)}} prefix={<SearchOutlined />}/>
+            <Search 
+            placeholder='Search' 
+            allowClear 
+            onSearch={value => 
+              {fetchProjects(currentPage, pageSize, value)}} 
+            // style={{ top: 4 }}
+            />
           </Menu.Item>
         </Menu>
       </Header>

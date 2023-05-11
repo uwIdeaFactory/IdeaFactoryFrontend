@@ -30,10 +30,6 @@ const router = createBrowserRouter([
     element: <UserProfileUpdatePage></UserProfileUpdatePage>
   },
   {
-    path: "/",
-    element: <MainPage />,
-  },
-  {
     path: "/signIn",
     element: <SignIn />,
   },
@@ -53,6 +49,10 @@ const router = createBrowserRouter([
     path: "/projects/:pid",
     element: <ProjectPage />
   },
+  {
+    path: "/",
+    element: <MainPage />,
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

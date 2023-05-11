@@ -68,6 +68,13 @@ export function AuthProvider({ children }) {
                 })
                 console.log("User created")
 
+                // Redirect to the main page
+                message.success('SignUp Success as ' + userCredential.user.email);
+                // Wait for 1 second
+                setTimeout(() => {
+                    window.location.href = "/"
+                }, 1000);
+
                 // }).then(() => {
                 //     setUser(userCredential.user);
                 // })
