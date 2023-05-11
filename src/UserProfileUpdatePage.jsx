@@ -10,7 +10,7 @@ import ReactDOM from 'react-dom';
 
 const { Header, Content, Footer } = Layout;
 
-const ProjectUploadPage = () => {
+const UserProfileUpdatePage = () => {
   const [value, setValue] = useState('');
 
   return (
@@ -41,4 +41,4 @@ const ProjectUploadPage = () => {
     </Layout>
   );
 };
-export default ProjectUploadPage;
+export default UserProfileUpdatePage;

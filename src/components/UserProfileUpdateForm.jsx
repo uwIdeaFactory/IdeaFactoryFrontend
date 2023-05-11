@@ -62,6 +62,32 @@ const ProjectUploadForm = () => {
       </Form.Item>
 
       <Form.Item
+        label="Contact"
+        name="contact"
+        rules={[
+          {
+            required: true,
+            message: 'Please input a contact!',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
+        label="Location"
+        name="location"
+        rules={[
+          {
+            required: true,
+            message: 'Please input a location!',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
         label="Summary"
         name="summary"
         rules={[
