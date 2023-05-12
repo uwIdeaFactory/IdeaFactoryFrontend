@@ -1,12 +1,22 @@
 import { Button, Form, Input, message } from 'antd';
 import axios from 'axios';
-import { useAuth } from '../AuthContext';
+import { useEffect, useState } from 'react'
 
 const { TextArea } = Input;
 
-const ProjectUploadForm = () => {
+const ProjectUploadForm = (props) => {
   const [form] = Form.useForm();
-  const { user, login } = useAuth()
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    // axios.get("http://localhost:3000/user/J2lhMMs3P9UISWlzfhKIYj9xOIA3")
+    axios.get("http://localhost:3000/user/" + props.uid)
+      // .then(res => res.data)
+      .then(res => res.data)
+      .then(setUser)
+  }, []);
+
+  // console.log(user.username);
 
   const onFinishFailed = () => {
     message.error('Submit failed!');
@@ -15,8 +25,10 @@ const ProjectUploadForm = () => {
   const onFinish = () => {
     // console.log('http://localhost:3000/patchBasicInfo/' + user.uid);
     axios.post(
-      'http://localhost:3000/patchBasicInfo/' + user.uid, {
+      'http://localhost:3000/patchBasicInfo/' + props.uid, {
         username: form.getFieldValue('username'),
+        contact: form.getFieldValue('contact'),
+        location: form.getFieldValue('location'),
         summary: form.getFieldValue('summary')
       }
     )
@@ -43,11 +55,13 @@ const ProjectUploadForm = () => {
       // }}
       initialValues={{
         remember: true,
+        // username: user.username ? user.username : 'default_username',
       }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
+      {user.username &&
       <Form.Item
         label="Username"
         name="username"
@@ -57,6 +71,73 @@ const ProjectUploadForm = () => {
             message: 'Please input a username!',
           },
         ]}
+        initialValue={user.username ? user.username : 'default_username'}
+      >
+        <Input />
+      </Form.Item>}
+
+      {user.contact &&
+      <Form.Item
+        label="Contact"
+        name="contact"
+        rules={[
+          {
+            required: true,
+            message: 'Please input a contact!',
+          },
+        ]}
+        initialValue={user.contact ? user.contact : 'default_contact'}
+      >
+        <Input />
+      </Form.Item>}
+
+      {user.location &&
+      <Form.Item
+        label="Location"
+        name="location"
+        rules={[
+          {
+            required: true,
+            message: 'Please input a location!',
+          },
+        ]}
+        initialValue={user.location ? user.location : 'default_location'}
+      >
+        <Input />
+      </Form.Item>}
+
+
+      {user.bio &&
+      <Form.Item
+        label="Summary"
+        name="summary"
+        rules={[
+          {
+            required: true,
+            message: 'Please input a summary of yourself!',
+          },
+        ]}
+        initialValue={user.bio ? user.bio : 'default_summary'}
+      >
+        <TextArea
+          placeholder="summary of yourself"
+          autoSize={{
+            minRows: 2,
+            maxRows: 6,
+          }}
+        />
+      </Form.Item>}
+
+      {/* <Form.Item
+        label="Username"
+        name="username"
+        rules={[
+          {
+            required: true,
+            message: 'Please input a username!',
+          },
+        ]}
+        initialValue={user.username ? user.username : 'default_username'}
       >
         <Input />
       </Form.Item>
@@ -104,7 +185,7 @@ const ProjectUploadForm = () => {
             maxRows: 6,
           }}
         />
-      </Form.Item>
+      </Form.Item> */}
 
       <Form.Item
         wrapperCol={{

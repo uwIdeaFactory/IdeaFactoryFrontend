@@ -7,11 +7,13 @@ import { useState } from 'react';
 import Navigation from './components/Navigation';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { useAuth } from './AuthContext';
 
 const { Header, Content, Footer } = Layout;
 
 const UserProfileUpdatePage = () => {
   const [value, setValue] = useState('');
+  const { user, login } = useAuth();
 
   return (
     <Layout className="layout">
@@ -29,7 +31,7 @@ const UserProfileUpdatePage = () => {
           <Breadcrumb.Item>Home</Breadcrumb.Item>
           <Breadcrumb.Item>User Profile Update</Breadcrumb.Item>
         </Breadcrumb>
-        <UserProfileUpdateForm></UserProfileUpdateForm>
+        <UserProfileUpdateForm {...user}></UserProfileUpdateForm>
       </Content>
       <Footer
         style={{
