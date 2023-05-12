@@ -61,7 +61,7 @@ const ProjectUploadForm = (props) => {
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
-      {user.username &&
+      {user.uid &&
       <Form.Item
         label="Username"
         name="username"
@@ -76,7 +76,7 @@ const ProjectUploadForm = (props) => {
         <Input />
       </Form.Item>}
 
-      {user.contact &&
+      {user.uid &&
       <Form.Item
         label="Contact"
         name="contact"
@@ -91,7 +91,7 @@ const ProjectUploadForm = (props) => {
         <Input />
       </Form.Item>}
 
-      {user.location &&
+      {user.uid &&
       <Form.Item
         label="Location"
         name="location"
@@ -107,7 +107,7 @@ const ProjectUploadForm = (props) => {
       </Form.Item>}
 
 
-      {user.bio &&
+      {user.uid &&
       <Form.Item
         label="Summary"
         name="summary"
