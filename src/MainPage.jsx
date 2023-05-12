@@ -68,7 +68,7 @@ const MainPage = () => {
     fetchProjects(page, pageSize, "");
   }
 
-  // return the navlink to user profile if the user is logged in, 
+  // return the navlink to user profile if the user is logged in,
   // otherwise return the navlink to login page
   const getNavLinkToUserProfile = () => {
     if (user) {
@@ -87,7 +87,7 @@ const MainPage = () => {
             <Button type="primary" size={20} icon={<LoginOutlined />} />
           </NavLink>
         </Menu.Item>
-      ) 
+      )
     }
   }
 
@@ -114,11 +114,11 @@ const MainPage = () => {
           </SubMenu>
           {getNavLinkToUserProfile()}
           <Menu.Item key="search" style={{ position: 'absolute', right: 50 }}>
-            <Search 
-            placeholder='Search' 
-            allowClear 
-            onSearch={value => 
-              {fetchProjects(currentPage, pageSize, value)}} 
+            <Search
+            placeholder='Search'
+            allowClear
+            onSearch={value =>
+              {fetchProjects(currentPage, pageSize, value)}}
             // style={{ top: 4 }}
             />
           </Menu.Item>
