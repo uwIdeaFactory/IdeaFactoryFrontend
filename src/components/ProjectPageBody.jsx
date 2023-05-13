@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Descriptions, Table, Divider, Tag } from "antd";
+import { useAuth } from '../AuthContext';
+import { Button, notification, Space } from 'antd';
 const { Column } = Table;
 
 function ProjectPageBody(props) {
@@ -27,19 +29,46 @@ function ProjectPageBody(props) {
 }
 
 function RoleTable(props) {
-    const data = []
-    props.roles && props.roles.map((value) => {
-        data.push({
+    const { user, login } = useAuth();
+    const data = props.roles ? props.roles.map((value) => {
+        return {
             role: value[0],
-            capacity: value[1],
             accepted: value[2],
-        })
-    })
+            applied: value[3], 
+            portion: value[2].length + "/" + value[1],
+            full: value[2].length == value[1],
+            options: value[3].map((item) => {
+                return <option value={item}>{item}</option>
+            })
+        }
+    }) : [];
     return (
         <Table dataSource={data}>
             <Column title="Role" dataIndex="role" key="role" />
-            <Column title="Capacity" dataIndex="capacity" key="capacity" />
-            <Column title="Accepted" dataIndex="accepted" key="accepted" />
+            <Column title="Accepted" dataIndex="portion" key="accepted" />
+            {props.owner == user.uid && // if the user is the owner of the project
+                <Column 
+                    title="Status" 
+                    key="status"
+                    render={(record) => (
+                        <>
+                            {/* if the role is full */}
+                            {record.full && <span>Full</span>}
+                            {/* if the role is not full and user is owner */}
+                            {!record.full && props.owner == user.uid && 
+                                <>
+                                    <select onChange={(event) => alert(event.target.value)}>
+                                    {record.options}
+                                    </select>
+                                </>}
+                            {/* if the role is not full and user applied */}
+                            {!record.full && record.applied.includes(user.uid) && <span>Applied</span>}
+                            {/* if the role is not full and user accepted */}
+                            {!record.full && record.accepted.includes(user.uid) && <span>Accepted</span>}
+                        </>
+                    )}
+                />
+            }
         </Table>
     )
 }
