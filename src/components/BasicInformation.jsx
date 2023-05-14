@@ -9,7 +9,13 @@ function BasicInformation(props) {
           <Card title="Username">{props.username}</Card>
         </Col>
         <Col span={6}>
-          <Card title="Contact">{props.contact}</Card>
+          <Card title="Email">{props.contact ? props.contact[0] : ""}</Card>
+        </Col>
+        <Col span={6}>
+          <Card title="Phone">{props.contact ? props.contact[1] : ""}</Card>
+        </Col>
+        <Col span={6}>
+          <Card title="Website"><a href={props.contact ? props.contact[2] : ""}>{props.contact ? props.contact[2] : ""}</a></Card>
         </Col>
         <Col span={6}>
           <Card title="Location">{props.location}</Card>

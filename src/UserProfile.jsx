@@ -70,9 +70,9 @@ const UserProfile = () => {
           {...user}
         >
         </BasicInformation>
-        <Experience></Experience>
-        <Skill></Skill>
-        <UserRelatedProjects></UserRelatedProjects>
+        {/* <Experience></Experience>
+        <Skill></Skill> */}
+        <UserRelatedProjects user={user}></UserRelatedProjects>
       </Content>
 
       <Footer
