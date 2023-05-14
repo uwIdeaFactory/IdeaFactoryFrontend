@@ -1,8 +1,5 @@
 import React, { useState } from 'react'
-// import { auth } from '../firebase'
 import { NavLink } from 'react-router-dom'
-// import { Form, Button, Card, Alert } from 'react-bootstrap'
-// import { signInWithEmailAndPassword, getAuth, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
 import { Button, message, Form, Input } from 'antd';
 import { useAuth } from '../AuthContext';
 

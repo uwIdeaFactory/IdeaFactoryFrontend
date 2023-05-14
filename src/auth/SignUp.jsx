@@ -1,7 +1,4 @@
 import React, { useState } from 'react'
-// import { auth } from '../firebase'
-// import { createUserWithEmailAndPassword } from 'firebase/auth'
-// import { Form, Button, Card, Alert } from 'react-bootstrap'
 import { Link } from "react-router-dom";
 import { Button, Checkbox, Form, Input } from 'antd';
 import { useAuth } from '../AuthContext';
