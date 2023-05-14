@@ -9,7 +9,7 @@ import { useAuth } from '../AuthContext';
 const SignUp = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { signup } = useAuth()
+    const { signup, signupDisable } = useAuth()
 
     const handleSignUp = (e) => {
         // Save the email and password
@@ -75,7 +75,7 @@ const SignUp = () => {
                         span: 16,
                     }}
                 >
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" disabled={signupDisable}>
                         Submit
                     </Button>
 

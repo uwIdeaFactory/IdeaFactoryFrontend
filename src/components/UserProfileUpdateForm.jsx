@@ -7,6 +7,7 @@ const { TextArea } = Input;
 const ProjectUploadForm = (props) => {
   const [form] = Form.useForm();
   const [user, setUser] = useState({});
+  const [disable, setDisable] = useState(false);
 
   useEffect(() => {
     // axios.get("http://localhost:3000/user/J2lhMMs3P9UISWlzfhKIYj9xOIA3")
@@ -38,6 +39,7 @@ const ProjectUploadForm = (props) => {
         setTimeout(() => {
           window.location.href = "/userprofile/" + props.uid
         }, 1000);
+        setDisable(true);
       })
       .catch(() => {
         onFinishFailed()
@@ -75,9 +77,9 @@ const ProjectUploadForm = (props) => {
               message: 'Please input a username!',
             },
           ]}
-          initialValue={user.username ? user.username : 'default_username'}
+          initialValue={user.username ? user.username : ''}
         >
-          <Input />
+          <Input placeholder="DummyUser" />
         </Form.Item>}
 
       {user.uid &&
@@ -90,9 +92,9 @@ const ProjectUploadForm = (props) => {
               message: 'Please input a contact!',
             },
           ]}
-          initialValue={user.contact ? user.contact : 'default_contact'}
+          initialValue={user.contact ? user.contact : ''}
         >
-          <Input />
+          <Input placeholder="+1 000-000-0000" />
         </Form.Item>}
 
       {user.uid &&
@@ -105,9 +107,9 @@ const ProjectUploadForm = (props) => {
               message: 'Please input a location!',
             },
           ]}
-          initialValue={user.location ? user.location : 'default_location'}
+          initialValue={user.location ? user.location : ''}
         >
-          <Input />
+          <Input placeholder="Seattle, WA" />
         </Form.Item>}
 
 
@@ -121,7 +123,7 @@ const ProjectUploadForm = (props) => {
               message: 'Please input a summary of yourself!',
             },
           ]}
-          initialValue={user.bio ? user.bio : 'default_summary'}
+          initialValue={user.bio ? user.bio : ''}
         >
           <TextArea
             placeholder="summary of yourself"
@@ -197,7 +199,7 @@ const ProjectUploadForm = (props) => {
           span: 16,
         }}
       >
-        <Button type="primary" htmlType="submit"
+        <Button type="primary" htmlType="submit" disabled={disable}
           style={{
             textAlign: 'center',
           }}>

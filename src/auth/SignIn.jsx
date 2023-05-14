@@ -10,7 +10,7 @@ import { useAuth } from '../AuthContext';
 const SignIn = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { login, googleLogin } = useAuth()
+    const { login, googleLogin, loginDisable } = useAuth()
 
     const handleGoogleSignIn = () => {
         googleLogin();
@@ -88,7 +88,7 @@ const SignIn = () => {
                         span: 16,
                     }}
                 >
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" disabled={loginDisable}>
                         Submit
                     </Button>
 
