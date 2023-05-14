@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Col, Row, Button } from 'antd';
 
-function BasicInformation (props) {
+function BasicInformation(props) {
   return (
     <Card title="Basic Information" extra={<a href="/userProfileUpdate">Update</a>}>
       <Row span={20}>
@@ -15,7 +15,7 @@ function BasicInformation (props) {
           <Card title="Location">{props.location}</Card>
         </Col>
         <Col span={6}>
-        <Card title="Resume">{props.resume}</Card>
+          <Card title="Resume">{props.resume}</Card>
         </Col>
       </Row>
       <Row span={20}>

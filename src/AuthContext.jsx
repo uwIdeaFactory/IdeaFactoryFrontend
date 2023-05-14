@@ -58,9 +58,6 @@ export function AuthProvider({ children }) {
             .then((userCredential) => {
                 // Signed in
                 console.log(userCredential)
-                // const user = ;
-                // // Redirect to the sign in page
-                // window.location.href = "/authDetails"
 
                 axios.post('http://localhost:3000/user/create', {
                     email: userCredential.user.email,
@@ -72,19 +69,8 @@ export function AuthProvider({ children }) {
                 message.success('SignUp Success as ' + userCredential.user.email);
                 // Wait for 1 second
                 setTimeout(() => {
-                    window.location.href = "/"
+                    window.location.href = "/userProfileUpdate/"
                 }, 1000);
-
-                // }).then(() => {
-                //     setUser(userCredential.user);
-                // })
-                // .then(() => {
-                //     console.log("Start creating user")
-                //     console.log(user)
-                //     axios.post('http://localhost:3000/user/create', {
-                //         uid: user.uid,
-                //     })
-                //     console.log("User created")
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -101,8 +87,6 @@ export function AuthProvider({ children }) {
         // });
         // log in with redirect
         // return signInWithRedirect(auth, googleAuthProvider);
-
-
 
         const provider = new GoogleAuthProvider();
         const GoogleAuth = getAuth();

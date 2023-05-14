@@ -26,18 +26,22 @@ const ProjectUploadForm = (props) => {
     // console.log('http://localhost:3000/patchBasicInfo/' + user.uid);
     axios.post(
       'http://localhost:3000/patchBasicInfo/' + props.uid, {
-        username: form.getFieldValue('username'),
-        contact: form.getFieldValue('contact'),
-        location: form.getFieldValue('location'),
-        summary: form.getFieldValue('summary')
-      }
+      username: form.getFieldValue('username'),
+      contact: form.getFieldValue('contact'),
+      location: form.getFieldValue('location'),
+      summary: form.getFieldValue('summary')
+    }
     )
-    .then (() => {
-      message.success('Submit success!');
-    })
-    .catch (() => {
-      onFinishFailed()
-    })
+      .then(() => {
+        message.success('Submit success!');
+        // Wait for 1 second
+        setTimeout(() => {
+          window.location.href = "/userprofile/" + props.uid
+        }, 1000);
+      })
+      .catch(() => {
+        onFinishFailed()
+      })
   };
 
   return (
@@ -62,71 +66,71 @@ const ProjectUploadForm = (props) => {
       autoComplete="off"
     >
       {user.uid &&
-      <Form.Item
-        label="Username"
-        name="username"
-        rules={[
-          {
-            required: true,
-            message: 'Please input a username!',
-          },
-        ]}
-        initialValue={user.username ? user.username : 'default_username'}
-      >
-        <Input />
-      </Form.Item>}
+        <Form.Item
+          label="Username"
+          name="username"
+          rules={[
+            {
+              required: true,
+              message: 'Please input a username!',
+            },
+          ]}
+          initialValue={user.username ? user.username : 'default_username'}
+        >
+          <Input />
+        </Form.Item>}
 
       {user.uid &&
-      <Form.Item
-        label="Contact"
-        name="contact"
-        rules={[
-          {
-            required: true,
-            message: 'Please input a contact!',
-          },
-        ]}
-        initialValue={user.contact ? user.contact : 'default_contact'}
-      >
-        <Input />
-      </Form.Item>}
+        <Form.Item
+          label="Contact"
+          name="contact"
+          rules={[
+            {
+              required: true,
+              message: 'Please input a contact!',
+            },
+          ]}
+          initialValue={user.contact ? user.contact : 'default_contact'}
+        >
+          <Input />
+        </Form.Item>}
 
       {user.uid &&
-      <Form.Item
-        label="Location"
-        name="location"
-        rules={[
-          {
-            required: true,
-            message: 'Please input a location!',
-          },
-        ]}
-        initialValue={user.location ? user.location : 'default_location'}
-      >
-        <Input />
-      </Form.Item>}
+        <Form.Item
+          label="Location"
+          name="location"
+          rules={[
+            {
+              required: true,
+              message: 'Please input a location!',
+            },
+          ]}
+          initialValue={user.location ? user.location : 'default_location'}
+        >
+          <Input />
+        </Form.Item>}
 
 
       {user.uid &&
-      <Form.Item
-        label="Summary"
-        name="summary"
-        rules={[
-          {
-            required: true,
-            message: 'Please input a summary of yourself!',
-          },
-        ]}
-        initialValue={user.bio ? user.bio : 'default_summary'}
-      >
-        <TextArea
-          placeholder="summary of yourself"
-          autoSize={{
-            minRows: 2,
-            maxRows: 6,
-          }}
-        />
-      </Form.Item>}
+        <Form.Item
+          label="Summary"
+          name="summary"
+          rules={[
+            {
+              required: true,
+              message: 'Please input a summary of yourself!',
+            },
+          ]}
+          initialValue={user.bio ? user.bio : 'default_summary'}
+        >
+          <TextArea
+            placeholder="summary of yourself"
+            autoSize={{
+              minRows: 2,
+              maxRows: 6,
+            }}
+          />
+        </Form.Item>}
 
       {/* <Form.Item
         label="Username"
@@ -201,5 +205,6 @@ const ProjectUploadForm = (props) => {
         </Button>
       </Form.Item>
     </Form>
-  )}
+  )
+}
 export default ProjectUploadForm;
