@@ -200,10 +200,7 @@ const MainPage = () => {
           textAlign: 'center',
         }}
       >
-        Ant Design ©2023 Created by Ant UED
-        {/* {authUser.email} */}
-        {/* {AuthDetails.authUser} */}
-        {/* <AuthDetails></AuthDetails> */}
+        IDEA FACTORY ©2023
       </Footer>
     </Layout>
   );
