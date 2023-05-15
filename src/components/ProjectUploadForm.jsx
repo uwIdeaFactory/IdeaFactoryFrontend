@@ -40,7 +40,6 @@ const ProjectUploadForm = () => {
       detail: form.getFieldValue('detail'),
       owner: "test owner",
       location: "test",
-      dummy: "dummy",
       roles: spaces,
     }
     )
