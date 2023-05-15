@@ -40,6 +40,12 @@ const ProjectUploadForm = () => {
       .then(() => {
         message.success('Submit success!');
         console.log(spaces);
+        // wait for a second and then redirect to the project page
+        setTimeout(() => {
+          window.location.href = '/';
+        }
+          , 1000);
+
       })
       .catch(() => {
         onFinishFailed()
@@ -133,30 +139,35 @@ const ProjectUploadForm = () => {
         </Button>
         <div>
           {spaces.map((space, index) => (
-            <div key={space}>
+            <div key={index}> {/* Assign unique key using the index */}
               <Space.Compact>
-                <Input placeholder="Role Name" required
+                <Input
+                  placeholder="Role Name"
+                  required
                   value={space[0]}
                   onChange={(e) => {
                     const updatedSpaces = [...spaces];
                     updatedSpaces[index][0] = e.target.value;
                     setSpaces(updatedSpaces);
-                    console.log(spaces);
-                  }} />
-                <InputNumber placeholder="Capacity" required
+                  }}
+                />
+                <InputNumber
+                  placeholder="Capacity"
+                  required
                   value={space[1]}
                   onChange={(value) => {
                     const updatedSpaces = [...spaces];
                     updatedSpaces[index][1] = value;
                     setSpaces(updatedSpaces);
-                    console.log(spaces);
-                  }} />
+                  }}
+                />
                 <Button onClick={() => handleRemoveSpace(index)}>Delete</Button>
               </Space.Compact>
             </div>
           ))}
         </div>
       </Form.Item>
+
 
       <Form.Item
         name="url"
