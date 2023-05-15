@@ -40,10 +40,9 @@ const ProjectUploadForm = () => {
       pname: form.getFieldValue('pname'),
       preview: form.getFieldValue('preview'),
       detail: form.getFieldValue('detail'),
-      owner: "test owner",
+      owner: user.uid,
       location: "test",
       roles: spaces,
-      user: user.uid,
     }
     )
       .then(() => {
@@ -53,21 +52,6 @@ const ProjectUploadForm = () => {
       .catch(() => {
         onFinishFailed()
       })
-
-    await axios.post(
-      'http://localhost:3000/updata/host', {
-      uid: user.uid,
-      host: 
-    }
-    )
-      .then(() => {
-        message.success('Submit success!');
-        console.log(spaces);
-      })
-      .catch(() => {
-        onFinishFailed()
-      })
-
   };
 
   return (
