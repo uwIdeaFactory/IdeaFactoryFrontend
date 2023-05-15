@@ -17,7 +17,9 @@ function ProjectPageBody(props) {
 
             <Descriptions bordered>
             <Descriptions.Item label="Owner">{props.owner}</Descriptions.Item>
-            <Descriptions.Item label="Contact">{props.contact}</Descriptions.Item>
+            <Descriptions.Item label="Email">{props.contact ? props.contact[0] : ""}</Descriptions.Item>
+            <Descriptions.Item label="Phone">{props.contact ? props.contact[1] : ""}</Descriptions.Item>
+            <Descriptions.Item label="Website"><a href={props.contact ? props.contact[2] : ""}>{props.contact ? props.contact[2] : ""}</a></Descriptions.Item>
             <Descriptions.Item label="Location">{props.location}</Descriptions.Item>
             <Descriptions.Item label="Preview" span={3}>{props.preview}</Descriptions.Item>
             <Descriptions.Item label="Roles" span={3}>{RoleTable(props)}</Descriptions.Item>
