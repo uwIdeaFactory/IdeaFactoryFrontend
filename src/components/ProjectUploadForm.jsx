@@ -7,10 +7,11 @@ const { TextArea } = Input;
 const ProjectUploadForm = () => {
   const [form] = Form.useForm();
 
-  const [spaces, setSpaces] = useState([0]); // State to store the number of spaces
+  const [spaces, setSpaces] = useState([]);
 
   const handleAddSpace = () => {
-    setSpaces([...spaces, spaces.length]); // Add a new space to the array
+    setSpaces([...spaces, ['', '', [], []]]);
+    console.log(spaces);
   };
 
   const handleRemoveSpace = (index) => {
@@ -23,22 +24,34 @@ const ProjectUploadForm = () => {
     message.error('Submit failed!');
   };
 
-  const onFinish = () => {
-    axios.post(
+  const onFinish = async () => {
+    // const roles = spaces.map((space) => ({
+    //   name: space.name,
+    //   capacity: space.capacity,
+    //   applicants: [],
+    //   members: [],
+    // }));
+
+    // console.log("roles", JSON.stringify(roles));
+    await axios.post(
       'http://localhost:3000/post', {
       pname: form.getFieldValue('pname'),
       preview: form.getFieldValue('preview'),
       detail: form.getFieldValue('detail'),
       owner: "test owner",
-      location: "test location"
+      location: "test",
+      dummy: "dummy",
+      roles: spaces,
     }
     )
       .then(() => {
         message.success('Submit success!');
+        console.log(spaces);
       })
       .catch(() => {
         onFinishFailed()
       })
+
   };
 
   return (
@@ -71,7 +84,7 @@ const ProjectUploadForm = () => {
           },
         ]}
       >
-        <Input />
+        <Input placeholder="MyProject" />
       </Form.Item>
 
       <Form.Item
@@ -130,8 +143,22 @@ const ProjectUploadForm = () => {
           {spaces.map((space, index) => (
             <div key={space}>
               <Space.Compact>
-                <Input placeholder="input placeholder" />
-                <InputNumber placeholder="input placeholder" />
+                <Input placeholder="Role Name" required
+                  value={space[0]}
+                  onChange={(e) => {
+                    const updatedSpaces = [...spaces];
+                    updatedSpaces[index][0] = e.target.value;
+                    setSpaces(updatedSpaces);
+                    console.log(spaces);
+                  }} />
+                <InputNumber placeholder="Capacity" required
+                  value={space[1]}
+                  onChange={(value) => {
+                    const updatedSpaces = [...spaces];
+                    updatedSpaces[index][1] = value;
+                    setSpaces(updatedSpaces);
+                    console.log(spaces);
+                  }} />
                 <Button onClick={() => handleRemoveSpace(index)}>Delete</Button>
               </Space.Compact>
             </div>
