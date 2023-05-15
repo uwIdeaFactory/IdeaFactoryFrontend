@@ -27,14 +27,6 @@ const ProjectUploadForm = () => {
   };
 
   const onFinish = async () => {
-    // const roles = spaces.map((space) => ({
-    //   name: space.name,
-    //   capacity: space.capacity,
-    //   applicants: [],
-    //   members: [],
-    // }));
-
-    // console.log("roles", JSON.stringify(roles));
     await axios.post(
       'http://localhost:3000/post', {
       pname: form.getFieldValue('pname'),
