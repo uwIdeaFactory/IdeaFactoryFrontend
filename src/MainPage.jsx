@@ -8,9 +8,11 @@ import { useEffect, useState } from 'react';
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { useAuth } from './AuthContext';
 import Navigation from './components/Navigation';
-import {  Menu} from 'antd';
+import { Menu } from 'antd';
 import { ProfileOutlined } from '@ant-design/icons';
 import { HomeOutlined, AppstoreOutlined, SearchOutlined } from '@ant-design/icons';
+import IconDropdown from './components/IconDropdown';
+import NewUserDropdown from './components/NewUserDropdown';
 const { Header } = Layout;
 const { SubMenu } = Menu;
 const { Search } = Input;
@@ -68,6 +70,7 @@ const MainPage = () => {
     fetchProjects(page, pageSize, "");
   }
 
+  
   // return the navlink to user profile if the user is logged in, 
   // otherwise return the navlink to login page
   const getNavLinkToUserProfile = () => {
@@ -99,10 +102,10 @@ const MainPage = () => {
           <Menu.Item key="mail" icon={<HomeOutlined />}>
             <NavLink to={"/"}> Home </NavLink>
           </Menu.Item>
-          <Menu.Item key="app" icon={<AppstoreOutlined />}>
+          {/* <Menu.Item key="app" icon={<AppstoreOutlined />}>
             Navigation 2
-          </Menu.Item>
-          <SubMenu key="SubMenu" icon={<AppstoreOutlined />} title="Navigation 3">
+          </Menu.Item> */}
+          {/* <SubMenu key="SubMenu" icon={<AppstoreOutlined />} title="Navigation 3">
             <Menu.ItemGroup title="Item 1">
               <Menu.Item key="setting:1">Option 1</Menu.Item>
               <Menu.Item key="setting:2">Option 2</Menu.Item>
@@ -111,9 +114,9 @@ const MainPage = () => {
               <Menu.Item key="setting:3">Option 3</Menu.Item>
               <Menu.Item key="setting:4">Option 4</Menu.Item>
             </Menu.ItemGroup>
-          </SubMenu>
-          {getNavLinkToUserProfile()}
-          <Menu.Item key="search" style={{ position: 'absolute', right: 50 }}>
+          </SubMenu> */}
+          {/* {getNavLinkToUserProfile()} */}
+          <Menu.Item key="search" style={{left: 100 }}>
             <Search 
             placeholder='Search' 
             allowClear 
@@ -122,6 +125,9 @@ const MainPage = () => {
             // style={{ top: 4 }}
             />
           </Menu.Item>
+          
+          <IconDropdown></IconDropdown>
+
         </Menu>
       </Header>
       <Content
