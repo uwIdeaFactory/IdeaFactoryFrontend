@@ -1,8 +1,5 @@
 import React, { useState } from 'react'
-// import { auth } from '../firebase'
 import { NavLink } from 'react-router-dom'
-// import { Form, Button, Card, Alert } from 'react-bootstrap'
-// import { signInWithEmailAndPassword, getAuth, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
 import { Button, message, Form, Input } from 'antd';
 import { useAuth } from '../AuthContext';
 
@@ -10,7 +7,7 @@ import { useAuth } from '../AuthContext';
 const SignIn = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { login, googleLogin } = useAuth()
+    const { login, googleLogin, loginDisable } = useAuth()
 
     const handleGoogleSignIn = () => {
         googleLogin();
@@ -88,7 +85,7 @@ const SignIn = () => {
                         span: 16,
                     }}
                 >
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" disabled={loginDisable}>
                         Submit
                     </Button>
 

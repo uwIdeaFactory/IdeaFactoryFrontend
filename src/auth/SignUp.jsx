@@ -1,7 +1,4 @@
 import React, { useState } from 'react'
-// import { auth } from '../firebase'
-// import { createUserWithEmailAndPassword } from 'firebase/auth'
-// import { Form, Button, Card, Alert } from 'react-bootstrap'
 import { Link } from "react-router-dom";
 import { Button, Checkbox, Form, Input } from 'antd';
 import { useAuth } from '../AuthContext';
@@ -9,7 +6,7 @@ import { useAuth } from '../AuthContext';
 const SignUp = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { signup } = useAuth()
+    const { signup, signupDisable } = useAuth()
 
     const handleSignUp = (e) => {
         // Save the email and password
@@ -75,7 +72,7 @@ const SignUp = () => {
                         span: 16,
                     }}
                 >
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" disabled={signupDisable}>
                         Submit
                     </Button>
 

@@ -23,6 +23,8 @@ export function useAuth() {
 export function AuthProvider({ children }) {
     const [user, setUser] = useState();
     const [loading, setLoading] = useState(true);
+    const [loginDisable, setLoginDisable] = useState(false);
+    const [signupDisable, setSignupDisable] = useState(false);
 
     function login(email, password) {
         // return signInWithEmailAndPassword(auth, email, password);
@@ -40,10 +42,13 @@ export function AuthProvider({ children }) {
                     window.location.href = "/"
                 }, 1000);
                 // window.location.href = "/authDetails"
+                setLoginDisable(true);
             }).catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorCode, errorMessage)
+                setLoginDisable(false);
+
                 if (errorCode === "auth/wrong-password") {
                     message.error('Wrong password');
                 }
@@ -58,9 +63,6 @@ export function AuthProvider({ children }) {
             .then((userCredential) => {
                 // Signed in
                 console.log(userCredential)
-                // const user = ;
-                // // Redirect to the sign in page
-                // window.location.href = "/authDetails"
 
                 axios.post('http://localhost:3000/user/create', {
                     email: userCredential.user.email,
@@ -72,25 +74,27 @@ export function AuthProvider({ children }) {
                 message.success('SignUp Success as ' + userCredential.user.email);
                 // Wait for 1 second
                 setTimeout(() => {
-                    window.location.href = "/"
+                    window.location.href = "/userProfileUpdate/"
                 }, 1000);
-
-                // }).then(() => {
-                //     setUser(userCredential.user);
-                // })
-                // .then(() => {
-                //     console.log("Start creating user")
-                //     console.log(user)
-                //     axios.post('http://localhost:3000/user/create', {
-                //         uid: user.uid,
-                //     })
-                //     console.log("User created")
+                setSignupDisable(true);
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log("Error signing up")
                 console.log(errorCode, errorMessage)
+                setSignupDisable(false);
+
+                if (errorCode === "auth/email-already-in-use") {
+                    message.error('Email already in use');
+                }
+                else if (errorCode === "auth/invalid-email") {
+                    message.error('Invalid email');
+                }
+                else if (errorCode === "auth/weak-password") {
+                    message.error('Weak password');
+                }
+
             });
     }
 
@@ -101,8 +105,6 @@ export function AuthProvider({ children }) {
         // });
         // log in with redirect
         // return signInWithRedirect(auth, googleAuthProvider);
-
-
 
         const provider = new GoogleAuthProvider();
         const GoogleAuth = getAuth();
@@ -128,7 +130,9 @@ export function AuthProvider({ children }) {
         login,
         signup,
         googleLogin,
-        signout
+        signout,
+        loginDisable,
+        signupDisable
     };
 
     return (

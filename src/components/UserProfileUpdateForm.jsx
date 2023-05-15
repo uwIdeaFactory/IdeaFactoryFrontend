@@ -1,12 +1,23 @@
 import { Button, Form, Input, message } from 'antd';
 import axios from 'axios';
-import { useAuth } from '../AuthContext';
+import { useEffect, useState } from 'react'
 
 const { TextArea } = Input;
 
-const ProjectUploadForm = () => {
+const ProjectUploadForm = (props) => {
   const [form] = Form.useForm();
-  const { user, login } = useAuth()
+  const [user, setUser] = useState({});
+  const [disable, setDisable] = useState(false);
+
+  useEffect(() => {
+    // axios.get("http://localhost:3000/user/J2lhMMs3P9UISWlzfhKIYj9xOIA3")
+    axios.get("http://localhost:3000/user/" + props.uid)
+      // .then(res => res.data)
+      .then(res => res.data)
+      .then(setUser)
+  }, []);
+
+  // console.log(user.username);
 
   const onFinishFailed = () => {
     message.error('Submit failed!');
@@ -14,18 +25,26 @@ const ProjectUploadForm = () => {
 
   const onFinish = () => {
     // console.log('http://localhost:3000/patchBasicInfo/' + user.uid);
+    let contact = [form.getFieldValue('email'), form.getFieldValue('mobile'), form.getFieldValue('website')]
     axios.post(
-      'http://localhost:3000/patchBasicInfo/' + user.uid, {
-        username: form.getFieldValue('username'),
-        summary: form.getFieldValue('summary')
-      }
+      'http://localhost:3000/patchBasicInfo/' + props.uid, {
+      username: form.getFieldValue('username'),
+      contact: contact,
+      location: form.getFieldValue('location'),
+      summary: form.getFieldValue('summary')
+    }
     )
-    .then (() => {
-      message.success('Submit success!');
-    })
-    .catch (() => {
-      onFinishFailed()
-    })
+      .then(() => {
+        message.success('Submit success!');
+        // Wait for 1 second
+        setTimeout(() => {
+          window.location.href = "/userprofile/" + props.uid
+        }, 1000);
+        setDisable(true);
+      })
+      .catch(() => {
+        onFinishFailed()
+      })
   };
 
   return (
@@ -43,42 +62,122 @@ const ProjectUploadForm = () => {
       // }}
       initialValues={{
         remember: true,
+        // username: user.username ? user.username : 'default_username',
       }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
-      <Form.Item
-        label="Username"
-        name="username"
-        rules={[
-          {
-            required: true,
-            message: 'Please input a username!',
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
+      {user.uid &&
+        <Form.Item
+          label="Username"
+          name="username"
+          rules={[
+            {
+              required: true,
+              message: 'Please input a username!',
+            },
+          ]}
+          initialValue={user.username ? user.username : ''}
+        >
+          <Input placeholder="DummyUser" />
+        </Form.Item>}
 
-      <Form.Item
-        label="Summary"
-        name="summary"
-        rules={[
-          {
-            required: true,
-            message: 'Please input a summary of yourself!',
-          },
-        ]}
-      >
-        <TextArea
-          placeholder="summary of yourself"
-          autoSize={{
-            minRows: 2,
-            maxRows: 6,
-          }}
-        />
-      </Form.Item>
+      {/* {user.uid &&
+        <Form.Item
+          label="Contact"
+          name="contact"
+          rules={[
+            {
+              required: true,
+              message: 'Please input a contact!',
+            },
+          ]}
+          initialValue={user.contact ? user.contact : ''}
+        >
+          <Input placeholder="+1 000-000-0000" />
+        </Form.Item>} */}
+
+      {user.uid &&
+        <Form.Item
+          label="Email"
+          name="email"
+          rules={[
+            {
+              required: true,
+              message: 'Please input an email!',
+            },
+          ]}
+          initialValue={(user.contact && user.contact[0]) ? user.contact[0] : ''}
+        >
+          <Input placeholder="sample@email.com" />
+        </Form.Item>}
+
+      {user.uid &&
+        <Form.Item
+          label="Mobile"
+          name="mobile"
+          rules={[
+            {
+              required: true,
+              message: 'Please input a mobile number!',
+            },
+          ]}
+          initialValue={(user.contact && user.contact[1]) ? user.contact[1] : ''}
+        >
+          <Input placeholder="+1 000-000-0000" />
+        </Form.Item>}
+
+      {user.uid &&
+        <Form.Item
+          label="Website"
+          name="website"
+          rules={[
+            {
+              required: false,
+              // message: 'Please input a website!',
+            },
+          ]}
+          initialValue={(user.contact && user.contact[2]) ? user.contact[2] : ''}
+        >
+          <Input placeholder="sample_website.com" />
+        </Form.Item>}
+
+      {user.uid &&
+        <Form.Item
+          label="Location"
+          name="location"
+          rules={[
+            {
+              required: true,
+              message: 'Please input a location!',
+            },
+          ]}
+          initialValue={user.location ? user.location : ''}
+        >
+          <Input placeholder="Seattle, WA" />
+        </Form.Item>}
+
+      {user.uid &&
+        <Form.Item
+          label="Summary"
+          name="summary"
+          rules={[
+            {
+              required: true,
+              message: 'Please input a summary of yourself!',
+            },
+          ]}
+          initialValue={user.bio ? user.bio : ''}
+        >
+          <TextArea
+            placeholder="summary of yourself"
+            autoSize={{
+              minRows: 2,
+              maxRows: 6,
+            }}
+          />
+        </Form.Item>}
 
       <Form.Item
         wrapperCol={{
@@ -86,7 +185,7 @@ const ProjectUploadForm = () => {
           span: 16,
         }}
       >
-        <Button type="primary" htmlType="submit"
+        <Button type="primary" htmlType="submit" disabled={disable}
           style={{
             textAlign: 'center',
           }}>
@@ -94,5 +193,6 @@ const ProjectUploadForm = () => {
         </Button>
       </Form.Item>
     </Form>
-  )}
+  )
+}
 export default ProjectUploadForm;

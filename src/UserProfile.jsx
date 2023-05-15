@@ -70,9 +70,9 @@ const UserProfile = () => {
           {...user}
         >
         </BasicInformation>
-        <Experience></Experience>
-        <Skill></Skill>
-        <UserRelatedProjects></UserRelatedProjects>
+        {/* <Experience></Experience>
+        <Skill></Skill> */}
+        <UserRelatedProjects user={user}></UserRelatedProjects>
       </Content>
 
       <Footer
@@ -80,7 +80,7 @@ const UserProfile = () => {
           textAlign: 'center',
         }}
       >
-        Ant Design ©2023 Created by Ant UED
+        IDEA FACTORY ©2023
       </Footer>
     </Layout>
   )

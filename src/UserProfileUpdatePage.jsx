@@ -7,11 +7,13 @@ import { useState } from 'react';
 import Navigation from './components/Navigation';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { useAuth } from './AuthContext';
 
 const { Header, Content, Footer } = Layout;
 
-const ProjectUploadPage = () => {
+const UserProfileUpdatePage = () => {
   const [value, setValue] = useState('');
+  const { user, login } = useAuth();
 
   return (
     <Layout className="layout">
@@ -29,16 +31,16 @@ const ProjectUploadPage = () => {
           <Breadcrumb.Item>Home</Breadcrumb.Item>
           <Breadcrumb.Item>User Profile Update</Breadcrumb.Item>
         </Breadcrumb>
-        <UserProfileUpdateForm></UserProfileUpdateForm>
+        <UserProfileUpdateForm {...user}></UserProfileUpdateForm>
       </Content>
       <Footer
         style={{
           textAlign: 'center',
         }}
       >
-        Ant Design ©2023 Created by Ant UED
+        IDEA FACTORY ©2023
       </Footer>
     </Layout>
   );
 };
-export default ProjectUploadPage;
+export default UserProfileUpdatePage;

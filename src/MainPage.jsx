@@ -69,7 +69,6 @@ const MainPage = () => {
     setPageSize(pageSize);
     fetchProjects(page, pageSize, "");
   }
-
   
   // return the navlink to user profile if the user is logged in, 
   // otherwise return the navlink to login page
@@ -90,7 +89,7 @@ const MainPage = () => {
             <Button type="primary" size={20} icon={<LoginOutlined />} />
           </NavLink>
         </Menu.Item>
-      ) 
+      )
     }
   }
 
@@ -114,6 +113,7 @@ const MainPage = () => {
               <Menu.Item key="setting:3">Option 3</Menu.Item>
               <Menu.Item key="setting:4">Option 4</Menu.Item>
             </Menu.ItemGroup>
+
           </SubMenu> */}
           {/* {getNavLinkToUserProfile()} */}
           <Menu.Item key="search" style={{left: 100 }}>
@@ -206,10 +206,7 @@ const MainPage = () => {
           textAlign: 'center',
         }}
       >
-        Ant Design ©2023 Created by Ant UED
-        {/* {authUser.email} */}
-        {/* {AuthDetails.authUser} */}
-        {/* <AuthDetails></AuthDetails> */}
+        IDEA FACTORY ©2023
       </Footer>
     </Layout>
   );
