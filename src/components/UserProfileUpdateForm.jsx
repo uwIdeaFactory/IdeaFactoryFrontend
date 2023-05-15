@@ -25,10 +25,11 @@ const ProjectUploadForm = (props) => {
 
   const onFinish = () => {
     // console.log('http://localhost:3000/patchBasicInfo/' + user.uid);
+    let contact = [form.getFieldValue('email'), form.getFieldValue('mobile'), form.getFieldValue('website')]
     axios.post(
       'http://localhost:3000/patchBasicInfo/' + props.uid, {
       username: form.getFieldValue('username'),
-      contact: form.getFieldValue('contact'),
+      contact: contact,
       location: form.getFieldValue('location'),
       summary: form.getFieldValue('summary')
     }
@@ -82,7 +83,7 @@ const ProjectUploadForm = (props) => {
           <Input placeholder="DummyUser" />
         </Form.Item>}
 
-      {user.uid &&
+      {/* {user.uid &&
         <Form.Item
           label="Contact"
           name="contact"
@@ -95,6 +96,51 @@ const ProjectUploadForm = (props) => {
           initialValue={user.contact ? user.contact : ''}
         >
           <Input placeholder="+1 000-000-0000" />
+        </Form.Item>} */}
+
+      {user.uid &&
+        <Form.Item
+          label="Email"
+          name="email"
+          rules={[
+            {
+              required: true,
+              message: 'Please input an email!',
+            },
+          ]}
+          initialValue={(user.contact && user.contact[0]) ? user.contact[0] : ''}
+        >
+          <Input placeholder="sample@email.com" />
+        </Form.Item>}
+
+      {user.uid &&
+        <Form.Item
+          label="Mobile"
+          name="mobile"
+          rules={[
+            {
+              required: true,
+              message: 'Please input a mobile number!',
+            },
+          ]}
+          initialValue={(user.contact && user.contact[1]) ? user.contact[1] : ''}
+        >
+          <Input placeholder="+1 000-000-0000" />
+        </Form.Item>}
+
+      {user.uid &&
+        <Form.Item
+          label="Website"
+          name="website"
+          rules={[
+            {
+              required: false,
+              // message: 'Please input a website!',
+            },
+          ]}
+          initialValue={(user.contact && user.contact[2]) ? user.contact[2] : ''}
+        >
+          <Input placeholder="sample_website.com" />
         </Form.Item>}
 
       {user.uid &&
@@ -111,7 +157,6 @@ const ProjectUploadForm = (props) => {
         >
           <Input placeholder="Seattle, WA" />
         </Form.Item>}
-
 
       {user.uid &&
         <Form.Item
@@ -133,65 +178,6 @@ const ProjectUploadForm = (props) => {
             }}
           />
         </Form.Item>}
-
-      {/* <Form.Item
-        label="Username"
-        name="username"
-        rules={[
-          {
-            required: true,
-            message: 'Please input a username!',
-          },
-        ]}
-        initialValue={user.username ? user.username : 'default_username'}
-      >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        label="Contact"
-        name="contact"
-        rules={[
-          {
-            required: true,
-            message: 'Please input a contact!',
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        label="Location"
-        name="location"
-        rules={[
-          {
-            required: true,
-            message: 'Please input a location!',
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        label="Summary"
-        name="summary"
-        rules={[
-          {
-            required: true,
-            message: 'Please input a summary of yourself!',
-          },
-        ]}
-      >
-        <TextArea
-          placeholder="summary of yourself"
-          autoSize={{
-            minRows: 2,
-            maxRows: 6,
-          }}
-        />
-      </Form.Item> */}
 
       <Form.Item
         wrapperCol={{
