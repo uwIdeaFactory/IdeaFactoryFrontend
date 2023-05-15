@@ -1,11 +1,13 @@
 import { Button, Form, Input, message, Space, InputNumber } from 'antd';
 import axios from 'axios';
 import { useState } from 'react';
+import { useAuth } from '../AuthContext';
 
 const { TextArea } = Input;
 
 const ProjectUploadForm = () => {
   const [form] = Form.useForm();
+  const { user } = useAuth();
 
   const [spaces, setSpaces] = useState([]);
 
@@ -41,6 +43,21 @@ const ProjectUploadForm = () => {
       owner: "test owner",
       location: "test",
       roles: spaces,
+      user: user.uid,
+    }
+    )
+      .then(() => {
+        message.success('Submit success!');
+        console.log(spaces);
+      })
+      .catch(() => {
+        onFinishFailed()
+      })
+
+    await axios.post(
+      'http://localhost:3000/updata/host', {
+      uid: user.uid,
+      host: 
     }
     )
       .then(() => {
