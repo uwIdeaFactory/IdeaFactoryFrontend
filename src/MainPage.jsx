@@ -88,7 +88,7 @@ const MainPage = () => {
       <Header>
         <div className="logo"></div>
         <Menu theme="dark" mode="horizontal">
-          <Menu.Item key="mail" icon={<HomeOutlined />}>
+          <Menu.Item key="home" icon={<HomeOutlined />}>
             <NavLink to={"/"}> Home </NavLink>
           </Menu.Item>
           <Menu.Item key="search" style={{ left: 100 }}>
@@ -98,9 +98,12 @@ const MainPage = () => {
               onSearch={value => { fetchProjects(currentPage, pageSize, value) }}
             />
           </Menu.Item>
-
-          <IconDropdown></IconDropdown>
-
+          <Menu.Item 
+            key="user" 
+            style={{ position: 'absolute', right: 0 }}
+          >
+            <IconDropdown></IconDropdown>
+          </Menu.Item>
         </Menu>
       </Header>
       <Content
