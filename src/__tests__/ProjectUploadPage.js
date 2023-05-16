@@ -44,19 +44,6 @@ describe('ProjectUploadPage component tests', () => {
         expect(navigationElement).toBeInTheDocument();
     });
 
-    // test('renders breadcrumb with Home and Upload items', () => {
-    //     const homeBreadcrumb = screen.getByRole('listitem', { name: /home/i });
-    //     const uploadBreadcrumb = screen.getByRole('listitem', { name: /upload/i });
-
-    //     expect(homeBreadcrumb).toBeInTheDocument();
-    //     expect(uploadBreadcrumb).toBeInTheDocument();
-    // });
-
-    // test('renders project upload form', () => {
-    //     const projectUploadFormElement = screen.getByTestId('project-upload-form');
-    //     expect(projectUploadFormElement).toBeInTheDocument();
-    // });
-
     test('renders footer', () => {
         const footerElement = screen.getByRole('contentinfo');
         expect(footerElement).toBeInTheDocument();

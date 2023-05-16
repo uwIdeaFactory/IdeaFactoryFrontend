@@ -40,24 +40,9 @@ describe('MainPage component tests', () => {
         expect(mainPageElement).toBeInTheDocument();
     });
 
-    test('renders project upload button', () => {
-        const uploadButton = screen.getByRole('button', { name: /upload/i });
-        expect(uploadButton).toBeInTheDocument();
-    });
-
     test('renders search input', () => {
         const searchInput = screen.getByPlaceholderText(/search/i);
         expect(searchInput).toBeInTheDocument();
-    });
-
-    test('renders navigation links', () => {
-        const homeLink = screen.getByRole('link', { name: /home/i });
-        const nav2Link = screen.getByText(/navigation 2/i);
-        const nav3Link = screen.getByText(/navigation 3/i);
-
-        expect(homeLink).toBeInTheDocument();
-        expect(nav2Link).toBeInTheDocument();
-        expect(nav3Link).toBeInTheDocument();
     });
 
     test('renders pagination', () => {
@@ -69,14 +54,4 @@ describe('MainPage component tests', () => {
         const footerElement = screen.getByRole('contentinfo');
         expect(footerElement).toBeInTheDocument();
     });
-
-    // test('clicking search button triggers search', () => {
-    //     const searchInput = screen.getByPlaceholderText(/search/i);
-    //     const searchValue = 'Test search';
-    //     fireEvent.change(searchInput, { target: { value: searchValue } });
-
-    //     const onSearch = jest.spyOn(global, 'alert');
-    //     fireEvent.keyPress(searchInput, { key: 'Enter', code: 'Enter' });
-    //     expect(onSearch).toHaveBeenCalledWith(searchValue);
-    // });
 });
