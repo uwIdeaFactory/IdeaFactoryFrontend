@@ -4,6 +4,7 @@ import { DownOutlined, UserOutlined } from '@ant-design/icons';
 import { useAuth } from '../AuthContext';
 import { Button, notification, Space, Dropdown } from 'antd';
 import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom'
 import axios from 'axios';
 
 const { Column } = Table;
@@ -18,7 +19,10 @@ function ProjectPageBody(props) {
             <Divider></Divider>
 
             <Descriptions bordered>
-            <Descriptions.Item label="Owner">{props.owner_username}</Descriptions.Item>
+            {/* <Descriptions.Item label="Owner">{props.owner_username}</Descriptions.Item> */}
+            <Descriptions.Item label="Owner">
+                <NavLink to={`/userProfile/${props.owner}`}>{props.owner_username}</NavLink>
+            </Descriptions.Item>
             <Descriptions.Item label="Email">{props.contact ? props.contact[0] : ""}</Descriptions.Item>
             <Descriptions.Item label="Phone">{props.contact ? props.contact[1] : ""}</Descriptions.Item>
             <Descriptions.Item label="Website"><a href={props.contact ? props.contact[2] : ""}>{props.contact ? props.contact[2] : ""}</a></Descriptions.Item>
@@ -38,13 +42,13 @@ function ProjectPageBody(props) {
 // map the roles array to a table
 function RoleTable(props) {
     const handleMenuClick = (e) => {
-        
+
         // find the index of the first " "
         let temp = e.key.indexOf(" ");
         // substring first part
         let username = e.key.substring(0, temp);
         // substring second part
-        let role = e.key.substring(temp + 1); 
+        let role = e.key.substring(temp + 1);
         setUsername(username);
         setRole(role);
       };
@@ -61,7 +65,7 @@ function RoleTable(props) {
             } else {
                 openNotificationOwner();
             }
-        } 
+        }
     }, [username]);
 
     const close = () => {
@@ -211,16 +215,16 @@ function RoleTable(props) {
         <Table dataSource={data}>
             <Column title="Role" dataIndex="role" key="role" />
             <Column title="Accepted" dataIndex="portion" key="accepted" />
-            <Column 
-                title="Status" 
+            <Column
+                title="Status"
                 key="status"
                 render={(record) => (
-                    <>  
+                    <>
                         {contextHolder}
                         {/* if the role is full */}
                         {record.full && !record.accepted.includes(user.uid) && <span>Full</span>}
                         {/* if the role is not full and user is owner */}
-                        {!record.full && props.owner == user.uid && 
+                        {!record.full && props.owner == user.uid &&
                         <>
                             <Dropdown menu={record.options}>
                             <Button>
@@ -236,7 +240,7 @@ function RoleTable(props) {
                         {/* if the role is not full and user accepted */}
                         {record.accepted.includes(user.uid) && <span>Accepted</span>}
                         {/* if the role is not full and user is not applied yet */}
-                        {!record.full && !record.applied.includes(user.uid) && !record.accepted.includes(user.uid) && props.owner != user.uid && 
+                        {!record.full && !record.applied.includes(user.uid) && !record.accepted.includes(user.uid) && props.owner != user.uid &&
                             <Button type="primary" onClick={() => {
                                 setUsername(user.uid);
                                 setRole(record.role);
@@ -245,9 +249,9 @@ function RoleTable(props) {
                     </>
                 )}
             />
-            {/* {props.owner == user.uid && 
-            <Column 
-                title="Members" 
+            {/* {props.owner == user.uid &&
+            <Column
+                title="Members"
                 key="Members"
                 render={(record) => (
                     console.log(record.members),
