@@ -9,6 +9,7 @@ import axios from 'axios';
 const { Column } = Table;
 
 function ProjectPageBody(props) {
+    console.log(props);
     return (
         <div className="projectPageBody">
             <h1>{props.pname}</h1>
@@ -17,7 +18,7 @@ function ProjectPageBody(props) {
             <Divider></Divider>
 
             <Descriptions bordered>
-            <Descriptions.Item label="Owner">{props.owner}</Descriptions.Item>
+            <Descriptions.Item label="Owner">{props.owner_username}</Descriptions.Item>
             <Descriptions.Item label="Email">{props.contact ? props.contact[0] : ""}</Descriptions.Item>
             <Descriptions.Item label="Phone">{props.contact ? props.contact[1] : ""}</Descriptions.Item>
             <Descriptions.Item label="Website"><a href={props.contact ? props.contact[2] : ""}>{props.contact ? props.contact[2] : ""}</a></Descriptions.Item>
@@ -185,10 +186,9 @@ function RoleTable(props) {
         });
     };
 
-
-
     const { user, login } = useAuth();
     const data = props.roles ? props.roles.map((value) => {
+        // fetch an array for all users who applied to this role
         return {
             role: value[0],
             accepted: value[2],
@@ -196,9 +196,11 @@ function RoleTable(props) {
             portion: value[2].length + "/" + value[1],
             full: value[2].length == value[1],
             options: {items: value[3].map((item) => {
+                // separate item by "$-$"
+                const temp = item.split("$-$");
                 return {
-                    label: item,
-                    key: item + " " + value[0],
+                    label: temp[1],
+                    key: temp[0] + " " + value[0],
                     icon: <UserOutlined />,
                 }
             }), onClick: handleMenuClick,}
