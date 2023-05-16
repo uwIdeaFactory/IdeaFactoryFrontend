@@ -15,14 +15,41 @@ const ProjectPage = () => {
   //   axios.get("http://localhost:3000/project/" + pid)
   //     .then(res => res.data)
   //     .then(res_ => {
-  //             axios.get("http://localhost:3000/user/" + res_.owner)
-  //               .then(res => res.data)
-  //               // fetch applicants username by their uid, it is in the roles array, in every role, the third array is the applicants uid
+  //       axios.get("http://localhost:3000/user/" + res_.owner)
+  //         .then(res => res.data)
+  //         .then(owner => {
+  //           res_.owner_username = owner ? owner.username : 'anonymous user';
 
-  //               .then((res) => { res_.owner_username = res ? res.username : 'anonymous user'; return res_; })
-  //               .then(setProject);
+  //           const fetchApplicantsPromises = res_.roles.map(role => {
+  //             const applicantsPromises = role[3].map(uid => {
+  //               return axios.get("http://localhost:3000/user/" + uid)
+  //                 .then(res => res.data)
+  //                 .then(applicant => {
+  //                   return applicant ? applicant.username : 'anonymous user';
+  //                 });
   //             });
+
+  //             return Promise.all(applicantsPromises);
+  //           });
+
+  //           Promise.all(fetchApplicantsPromises)
+  //             .then(applicants => {
+  //               res_.roles.forEach((role, index) => {
+  //                 const combinedElements = role[3].map((uid, i) => {
+  //                   return uid + "$-$" + applicants[index][i];
+  //                 });
+
+  //                 role[3] = combinedElements;
+  //               });
+
+  //               setProject(res_);
+  //             });
+
+
+  //         });
+  //     });
   // }, []);
+
   useEffect(() => {
     axios.get("http://localhost:3000/project/" + pid)
       .then(res => res.data)
@@ -31,7 +58,7 @@ const ProjectPage = () => {
           .then(res => res.data)
           .then(owner => {
             res_.owner_username = owner ? owner.username : 'anonymous user';
-
+  
             const fetchApplicantsPromises = res_.roles.map(role => {
               const applicantsPromises = role[3].map(uid => {
                 return axios.get("http://localhost:3000/user/" + uid)
@@ -40,25 +67,49 @@ const ProjectPage = () => {
                     return applicant ? applicant.username : 'anonymous user';
                   });
               });
-
+  
               return Promise.all(applicantsPromises);
             });
-
+  
             Promise.all(fetchApplicantsPromises)
               .then(applicants => {
                 res_.roles.forEach((role, index) => {
                   const combinedElements = role[3].map((uid, i) => {
                     return uid + "$-$" + applicants[index][i];
                   });
-
+  
                   role[3] = combinedElements;
                 });
-
-                setProject(res_);
+                const fetchRole2UsernamesPromises = res_.roles.map(role => {
+                  const applicantsPromises = role[2].map(uid => {
+                    return axios.get("http://localhost:3000/user/" + uid)
+                      .then(res => res.data)
+                      .then(applicant => {
+                        return applicant ? applicant.username : 'anonymous user';
+                      });
+                  });
+                  return Promise.all(applicantsPromises); // Returning Promise.all for each role[2]
+                });
+                
+                Promise.all(fetchRole2UsernamesPromises)
+                  .then(usernamesArray => {
+                    res_.roles.forEach((role, index) => {
+                      const usernames = usernamesArray[index]; // Fetching the usernames array for the corresponding role
+                      const combinedElements = role[2].map((uid, i) => {
+                        return uid + "$-$" + usernames[i];
+                      });
+                      console.log(combinedElements);
+                      role[2] = combinedElements;
+                    });
+                    setProject(res_);
+                  });
+                
               });
           });
       });
   }, []);
+  
+
 
 
   const {

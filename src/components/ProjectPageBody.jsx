@@ -48,6 +48,13 @@ function RoleTable(props) {
         setUsername(username);
         setRole(role);
       };
+
+    const handleMembersClick = (e) => {
+        const link = "/userProfile/" + e.key;
+        window.location.href = link; // Navigating using window.location.href
+
+    };
+
     // the notification component api
     const [api, contextHolder] = notification.useNotification();
     // rolename to help find which role is being added
@@ -196,15 +203,25 @@ function RoleTable(props) {
             portion: value[2].length + "/" + value[1],
             full: value[2].length == value[1],
             options: {items: value[3].map((item) => {
-                console.log(item);
-                // separate item by "$-$"
                 const temp = item.split("$-$");
                 return {
-                    label: temp[1],
-                    key: temp[0] + " " + value[0],
+                    label: temp[1], // username
+                    key: temp[0] + " " + value[0], // uid + " " + rolename
                     icon: <UserOutlined />,
                 }
-            }), onClick: handleMenuClick,}
+            }), onClick: handleMenuClick,},
+            members: {items: value[2].map((item) => {
+                const temp = item.split("$-$");
+                console.log(item);
+                console.log(temp);
+                console.log(temp[1]);
+                console.log(temp[0]);
+                return {
+                    label: temp[1], // username
+                    key: temp[0], // uid
+                    icon: <UserOutlined />,
+                }
+            }), onClick: handleMembersClick}
         }
     }) : [];
     return (
@@ -245,24 +262,25 @@ function RoleTable(props) {
                     </>
                 )}
             />
-            {/* {props.owner == user.uid && 
+            {props.owner == user.uid && 
             <Column 
                 title="Members" 
                 key="Members"
                 render={(record) => (
-                    console.log(record.members),
                     <>
-                        <Dropdown menu={record.members}>
-                        <Button>
-                            <Space>
-                            Accepted members
-                            <DownOutlined />
-                            </Space>
-                        </Button>
-                        </Dropdown>
+                        <>
+                            <Dropdown menu={record.members}>
+                                <Button>
+                                    <Space>
+                                    Accepted members
+                                    <DownOutlined />
+                                    </Space>
+                                </Button>
+                            </Dropdown>
+                        </>
                     </>
                 )}
-            />} */}
+            />}
         </Table>
     )
 }
