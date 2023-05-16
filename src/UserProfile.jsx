@@ -1,17 +1,14 @@
-import React from 'react'
 import { Breadcrumb, Layout, theme } from 'antd';
-import { useEffect, useState } from 'react'
-import { NavLink, useParams } from 'react-router-dom'
-import './App.css'
 import axios from 'axios';
-import { auth } from './firebase'
-import { signOut } from 'firebase/auth'
-import UserRelatedProjects from './components/UserRelatedProjects';
-import Skill from './components/Skill';
-import Experience from './components/Experience';
+import { signOut } from 'firebase/auth';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import './App.css';
+import { useAuth } from './AuthContext';
 import BasicInformation from './components/BasicInformation';
 import Navigation from './components/Navigation';
-import { useAuth } from './AuthContext';
+import UserRelatedProjects from './components/UserRelatedProjects';
+import { auth } from './firebase';
 
 const { Content, Footer } = Layout;
 
