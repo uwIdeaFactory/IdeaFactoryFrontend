@@ -1,6 +1,8 @@
 import { Button, Form, Input, message } from 'antd';
 import axios from 'axios';
 import { useEffect, useState } from 'react'
+import { storage } from '../firebase';
+import {ref, uploadBytes, getDownloadURL} from 'firebase/storage';
 
 const { TextArea } = Input;
 
@@ -8,6 +10,7 @@ const ProjectUploadForm = (props) => {
   const [form] = Form.useForm();
   const [user, setUser] = useState({});
   const [disable, setDisable] = useState(false);
+  const [file, setFile] = useState(null);
 
   useEffect(() => {
     // axios.get("http://localhost:3000/user/J2lhMMs3P9UISWlzfhKIYj9xOIA3")
@@ -19,27 +22,47 @@ const ProjectUploadForm = (props) => {
 
   // console.log(user.username);
 
+  const uploadResume = async() => {
+    if (!file) return;
+    const storageRef = ref(storage, 'resumes/' + user.uid + '.pdf');
+    uploadBytes(storageRef, file);
+  }
+
   const onFinishFailed = () => {
     message.error('Submit failed!');
   };
 
-  const onFinish = () => {
-    // console.log('http://localhost:3000/patchBasicInfo/' + user.uid);
+  const onFinish = async() => {
+    let resume = "";
+    if (file) {
+      console.log("enter");
+      const storageRef = ref(storage, 'resumes/' + user.uid + '.pdf');
+      try {
+        await uploadBytes(storageRef, file);
+        resume = await getDownloadURL(storageRef);
+        console.log('File available at', resume);
+      } catch (error) {
+        console.error('Error uploading resume:', error);
+      }
+    }
+
     let contact = [form.getFieldValue('email'), form.getFieldValue('mobile'), form.getFieldValue('website')]
     axios.post(
       'http://localhost:3000/patchBasicInfo/' + props.uid, {
       username: form.getFieldValue('username'),
       contact: contact,
       location: form.getFieldValue('location'),
-      summary: form.getFieldValue('summary')
+      summary: form.getFieldValue('summary'),
+      resume: resume,
     }
     )
       .then(() => {
+        uploadResume();
         message.success('Submit success!');
         // Wait for 1 second
         setTimeout(() => {
           window.location.href = "/userprofile/" + props.uid
-        }, 1000);
+        }, 5000);
         setDisable(true);
       })
       .catch(() => {
@@ -82,21 +105,6 @@ const ProjectUploadForm = (props) => {
         >
           <Input placeholder="DummyUser" />
         </Form.Item>}
-
-      {/* {user.uid &&
-        <Form.Item
-          label="Contact"
-          name="contact"
-          rules={[
-            {
-              required: true,
-              message: 'Please input a contact!',
-            },
-          ]}
-          initialValue={user.contact ? user.contact : ''}
-        >
-          <Input placeholder="+1 000-000-0000" />
-        </Form.Item>} */}
 
       {user.uid &&
         <Form.Item
@@ -185,6 +193,9 @@ const ProjectUploadForm = (props) => {
           span: 16,
         }}
       >
+
+      <input type='file' id='select-file' onChange={(event) => {setFile(event.target.files[0])}}/>
+
         <Button type="primary" htmlType="submit" disabled={disable}
           style={{
             textAlign: 'center',

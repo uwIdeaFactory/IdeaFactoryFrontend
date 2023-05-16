@@ -2,13 +2,14 @@ import { DownOutlined } from '@ant-design/icons';
 import { Button, Divider, Dropdown, Space, theme } from 'antd';
 import React from 'react';
 import { useAuth } from '../AuthContext';
+import { NavLink } from 'react-router-dom'
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 const { useToken } = theme;
 const OldUserDropdown = () => {
   const { user, signout } = useAuth()
-  let link = "http://127.0.0.1:5173/userProfile/" + user.uid
+  let link = "/userProfile/" + user.uid
   const { token } = useToken();
 
   const [username, setUsername] = useState("");
@@ -29,9 +30,12 @@ const OldUserDropdown = () => {
     {
         key: '1',
         label: (
-        <a href = {link}>
-            My Profile
-        </a>
+        <NavLink to={link}>
+          <a>
+              My Profile
+          </a>
+        </NavLink>
+
         ),
     }, 
     {
