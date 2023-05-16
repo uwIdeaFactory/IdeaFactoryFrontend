@@ -1,18 +1,11 @@
-import { Breadcrumb, Layout, Space, theme, Input, Button, Row, Spin } from 'antd';
-import { UploadOutlined, LoginOutlined } from '@ant-design/icons';
-import { NavLink } from 'react-router-dom';
-import Project from './components/Project';
-import { Pagination } from 'antd';
+import { HomeOutlined, LoginOutlined, ProfileOutlined } from '@ant-design/icons';
+import { Breadcrumb, Button, Input, Layout, Menu, Pagination, Row, Spin, theme } from 'antd';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { onAuthStateChanged, signOut } from 'firebase/auth'
+import { NavLink } from 'react-router-dom';
 import { useAuth } from './AuthContext';
-import Navigation from './components/Navigation';
-import { Menu } from 'antd';
-import { ProfileOutlined } from '@ant-design/icons';
-import { HomeOutlined, AppstoreOutlined, SearchOutlined } from '@ant-design/icons';
 import IconDropdown from './components/IconDropdown';
-import NewUserDropdown from './components/NewUserDropdown';
+import Project from './components/Project';
 const { Header } = Layout;
 const { SubMenu } = Menu;
 const { Search } = Input;
@@ -46,14 +39,11 @@ const MainPage = () => {
 
   useEffect(() => {
     fetchProjects(currentPage, pageSize, "");
-  }, []);
 
-  // get counts of projects
-  useEffect(() => {
     axios.get("http://localhost:3000/projects/count")
       .then(res => res.data)
       .then(setNumProjects);
-  }, []);
+  }, [currentPage, pageSize]);
 
   const {
     token: { colorBgContainer },
@@ -69,18 +59,18 @@ const MainPage = () => {
     setPageSize(pageSize);
     fetchProjects(page, pageSize, "");
   }
-  
+
   // return the navlink to user profile if the user is logged in, 
   // otherwise return the navlink to login page
   const getNavLinkToUserProfile = () => {
     if (user) {
       return (
         <Menu.Item key="profile" style={{ position: 'absolute', right: 0 }}>
-        <NavLink to={user ? `/userProfile/${user.uid}` : '/userProfile/J2lhMMs3P9UISWlzfhKIYj9xOIA3'}>
-          <Button type="primary" icon={<ProfileOutlined />} size={20}>
-          </Button>
-        </NavLink>
-      </Menu.Item>
+          <NavLink to={user ? `/userProfile/${user.uid}` : '/userProfile/J2lhMMs3P9UISWlzfhKIYj9xOIA3'}>
+            <Button type="primary" icon={<ProfileOutlined />} size={20}>
+            </Button>
+          </NavLink>
+        </Menu.Item>
       )
     } else {
       return (
@@ -101,15 +91,14 @@ const MainPage = () => {
           <Menu.Item key="mail" icon={<HomeOutlined />}>
             <NavLink to={"/"}> Home </NavLink>
           </Menu.Item>
-          <Menu.Item key="search" style={{left: 100 }}>
-            <Search 
-            placeholder='Search' 
-            allowClear 
-            onSearch={value => 
-              {fetchProjects(currentPage, pageSize, value)}} 
+          <Menu.Item key="search" style={{ left: 100 }}>
+            <Search
+              placeholder='Search'
+              allowClear
+              onSearch={value => { fetchProjects(currentPage, pageSize, value) }}
             />
           </Menu.Item>
-          
+
           <IconDropdown></IconDropdown>
 
         </Menu>
