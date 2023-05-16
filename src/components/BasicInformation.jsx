@@ -1,5 +1,5 @@
+import { Card, Col, Row } from 'antd';
 import React from "react";
-import { Card, Col, Row, Image } from 'antd';
 
 function BasicInformation(props) {
   return (
