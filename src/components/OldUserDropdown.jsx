@@ -11,7 +11,6 @@ import { signOut } from 'firebase/auth'
 const { useToken } = theme;
 const OldUserDropdown = () => {
   const { user, signout } = useAuth()
-  let link = "/userProfile/" + user.uid
   const { token } = useToken();
 
   const [username, setUsername] = useState("");
@@ -19,6 +18,8 @@ const OldUserDropdown = () => {
   useEffect(() => {
     axios.get("http://localhost:3000/user/" + user.uid)
       .then(res => res.data)
+      // set the username
+      .then(res_ => setUsername(res_.username));
   }, []);
 
   const contentStyle = {
@@ -41,9 +42,9 @@ const OldUserDropdown = () => {
 
   const items = [
     {
-        key: '1',
+        key: 'profile',
         label: (
-        <NavLink to={link}>
+        <NavLink to={"/userProfile/" + user.uid}>
           <a>
               My Profile
           </a>
@@ -51,6 +52,17 @@ const OldUserDropdown = () => {
 
         ),
     }, 
+    {
+        key: 'upload',
+        label: (
+        <NavLink to={"/projectUpload"}>
+          <a>
+              Upload
+          </a>
+        </NavLink>
+
+        ),
+    },
     {
         key: '2',
         type: 'group',

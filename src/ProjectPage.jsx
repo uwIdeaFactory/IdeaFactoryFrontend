@@ -31,7 +31,7 @@ const ProjectPage = () => {
           .then(res => res.data)
           .then(owner => {
             res_.owner_username = owner ? owner.username : 'anonymous user';
-  
+
             const fetchApplicantsPromises = res_.roles.map(role => {
               const applicantsPromises = role[3].map(uid => {
                 return axios.get("http://localhost:3000/user/" + uid)
@@ -40,35 +40,33 @@ const ProjectPage = () => {
                     return applicant ? applicant.username : 'anonymous user';
                   });
               });
-  
+
               return Promise.all(applicantsPromises);
             });
-  
+
             Promise.all(fetchApplicantsPromises)
               .then(applicants => {
                 res_.roles.forEach((role, index) => {
                   const combinedElements = role[3].map((uid, i) => {
                     return uid + "$-$" + applicants[index][i];
                   });
-  
+
                   role[3] = combinedElements;
                 });
-  
+
                 setProject(res_);
               });
           });
       });
   }, []);
-  
+
 
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-
   return (
     <Layout className="layout">
       <Navigation />
-
       <Content
         style={{
           padding: '0 50px',
@@ -98,7 +96,6 @@ const ProjectPage = () => {
           }
         </div>
       </Content>
-
       <Footer
         style={{
           textAlign: 'center',
@@ -109,5 +106,4 @@ const ProjectPage = () => {
     </Layout>
   );
 };
-
 export default ProjectPage;

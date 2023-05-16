@@ -191,11 +191,12 @@ function RoleTable(props) {
         // fetch an array for all users who applied to this role
         return {
             role: value[0],
-            accepted: value[2],
-            applied: value[3], 
+            accepted: value[2].map(value => value.split("$-$")[0]), // accepted id
+            applied: value[3].map(value => value.split("$-$")[0]),  // applied id
             portion: value[2].length + "/" + value[1],
             full: value[2].length == value[1],
             options: {items: value[3].map((item) => {
+                console.log(item);
                 // separate item by "$-$"
                 const temp = item.split("$-$");
                 return {
@@ -244,6 +245,24 @@ function RoleTable(props) {
                     </>
                 )}
             />
+            {/* {props.owner == user.uid && 
+            <Column 
+                title="Members" 
+                key="Members"
+                render={(record) => (
+                    console.log(record.members),
+                    <>
+                        <Dropdown menu={record.members}>
+                        <Button>
+                            <Space>
+                            Accepted members
+                            <DownOutlined />
+                            </Space>
+                        </Button>
+                        </Dropdown>
+                    </>
+                )}
+            />} */}
         </Table>
     )
 }

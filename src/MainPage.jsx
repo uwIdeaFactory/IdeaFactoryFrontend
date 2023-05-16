@@ -101,28 +101,12 @@ const MainPage = () => {
           <Menu.Item key="mail" icon={<HomeOutlined />}>
             <NavLink to={"/"}> Home </NavLink>
           </Menu.Item>
-          {/* <Menu.Item key="app" icon={<AppstoreOutlined />}>
-            Navigation 2
-          </Menu.Item> */}
-          {/* <SubMenu key="SubMenu" icon={<AppstoreOutlined />} title="Navigation 3">
-            <Menu.ItemGroup title="Item 1">
-              <Menu.Item key="setting:1">Option 1</Menu.Item>
-              <Menu.Item key="setting:2">Option 2</Menu.Item>
-            </Menu.ItemGroup>
-            <Menu.ItemGroup title="Item 2">
-              <Menu.Item key="setting:3">Option 3</Menu.Item>
-              <Menu.Item key="setting:4">Option 4</Menu.Item>
-            </Menu.ItemGroup>
-
-          </SubMenu> */}
-          {/* {getNavLinkToUserProfile()} */}
           <Menu.Item key="search" style={{left: 100 }}>
             <Search 
             placeholder='Search' 
             allowClear 
             onSearch={value => 
               {fetchProjects(currentPage, pageSize, value)}} 
-            // style={{ top: 4 }}
             />
           </Menu.Item>
           
@@ -150,11 +134,11 @@ const MainPage = () => {
             background: colorBgContainer,
           }}
         >
-          <NavLink to={"/projectUpload"}>
+          {/* <NavLink to={"/projectUpload"}>
             <Button type="primary" icon={<UploadOutlined />} size={20}>
               Upload
             </Button>
-          </NavLink>
+          </NavLink> */}
           {isLoading ? (
             <div>
               <Spin
