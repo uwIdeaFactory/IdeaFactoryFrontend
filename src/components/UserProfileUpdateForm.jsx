@@ -1,8 +1,8 @@
 import { Button, Form, Input, message } from 'antd';
 import axios from 'axios';
-import { useEffect, useState } from 'react'
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { useEffect, useState } from 'react';
 import { storage } from '../firebase';
-import {ref, uploadBytes, getDownloadURL} from 'firebase/storage';
 
 const { TextArea } = Input;
 
@@ -13,16 +13,13 @@ const ProjectUploadForm = (props) => {
   const [file, setFile] = useState(null);
 
   useEffect(() => {
-    // axios.get("http://localhost:3000/user/J2lhMMs3P9UISWlzfhKIYj9xOIA3")
     axios.get("http://localhost:3000/user/" + props.uid)
-      // .then(res => res.data)
       .then(res => res.data)
       .then(setUser)
   }, []);
 
-  // console.log(user.username);
 
-  const uploadResume = async() => {
+  const uploadResume = async () => {
     if (!file) return;
     const storageRef = ref(storage, 'resumes/' + user.uid + '.pdf');
     uploadBytes(storageRef, file);
@@ -32,7 +29,7 @@ const ProjectUploadForm = (props) => {
     message.error('Submit failed!');
   };
 
-  const onFinish = async() => {
+  const onFinish = async () => {
     let resume = "";
     if (file) {
       console.log("enter");
@@ -80,12 +77,9 @@ const ProjectUploadForm = (props) => {
       wrapperCol={{
         span: 16,
       }}
-      // style={{
-      //   maxWidth: 600,
-      // }}
+
       initialValues={{
         remember: true,
-        // username: user.username ? user.username : 'default_username',
       }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
@@ -193,9 +187,14 @@ const ProjectUploadForm = (props) => {
           span: 16,
         }}
       >
-
-      <input type='file' id='select-file' onChange={(event) => {setFile(event.target.files[0])}}/>
-
+        <input type='file' id='select-file' onChange={(event) => { setFile(event.target.files[0]) }} />
+      </Form.Item>
+      <Form.Item
+        wrapperCol={{
+          offset: 8,
+          span: 16,
+        }}
+      >
         <Button type="primary" htmlType="submit" disabled={disable}
           style={{
             textAlign: 'center',

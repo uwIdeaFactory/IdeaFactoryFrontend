@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
-import { Descriptions, Table, Divider, Tag, message } from "antd";
 import { DownOutlined, UserOutlined } from '@ant-design/icons';
-import { useAuth } from '../AuthContext';
-import { Button, notification, Space, Dropdown } from 'antd';
-import { useEffect, useState } from 'react';
+import { Button, Descriptions, Divider, Dropdown, Space, Table, Tag, message, notification } from "antd";
 import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { useAuth } from '../AuthContext';
 
 const { Column } = Table;
 
@@ -94,10 +94,10 @@ function RoleTable(props) {
             uid: username,
             attend: props._id
         })
-        .catch((error) => {
-            console.error('Error occurred during the POST request:', error);
-            onFinishFailed();
-        });
+            .catch((error) => {
+                console.error('Error occurred during the POST request:', error);
+                onFinishFailed();
+            });
         axios.post('http://localhost:3000/update/project', {
             id: props._id,
             pname: props.pname,
@@ -107,13 +107,13 @@ function RoleTable(props) {
             location: props.location,
             roles: props.roles,
         })
-        .then(() => {
-            message.success('Submit success!');
-        })
-        .catch((error) => {
-            console.error('Error occurred during the POST request:', error);
-            onFinishFailed();
-        });
+            .then(() => {
+                message.success('Submit success!');
+            })
+            .catch((error) => {
+                console.error('Error occurred during the POST request:', error);
+                onFinishFailed();
+            });
 
         api.destroy();
         setUsername("");
@@ -136,13 +136,13 @@ function RoleTable(props) {
             location: props.location,
             roles: props.roles,
         })
-        .then(() => {
-            message.success('Submit success!');
-        })
-        .catch((error) => {
-            console.error('Error occurred during the POST request:', error);
-            onFinishFailed();
-        });
+            .then(() => {
+                message.success('Submit success!');
+            })
+            .catch((error) => {
+                console.error('Error occurred during the POST request:', error);
+                onFinishFailed();
+            });
 
         api.destroy();
         setUsername("");
@@ -152,44 +152,44 @@ function RoleTable(props) {
     const openNotificationOwner = () => {
         const key = `open${Date.now()}`;
         const btn = (
-        <Space>
-            <Button type="link" size="small" onClick={() => {api.destroy(key);close()}}>
-            Close
-            </Button>
-            <Button type="primary" size="small" onClick={onFinishOwner}>
-            Confirm
-            </Button>
-        </Space>
+            <Space>
+                <Button type="link" size="small" onClick={() => { api.destroy(key); close() }}>
+                    Close
+                </Button>
+                <Button type="primary" size="small" onClick={onFinishOwner}>
+                    Confirm
+                </Button>
+            </Space>
         );
         api.open({
-        message: 'Adding a new member?',
-        description:
-            'You are adding a new member to your project.',
-        btn,
-        key,
-        duration: 0,
+            message: 'Adding a new member?',
+            description:
+                'You are adding a new member to your project.',
+            btn,
+            key,
+            duration: 0,
         });
     };
 
     const openNotificationApply = () => {
         const key = `open${Date.now()}`;
         const btn = (
-        <Space>
-            <Button type="link" size="small" onClick={() => {api.destroy(key);close()}}>
-            Close
-            </Button>
-            <Button type="primary" size="small" onClick={onFinishApply}>
-            Confirm
-            </Button>
-        </Space>
+            <Space>
+                <Button type="link" size="small" onClick={() => { api.destroy(key); close() }}>
+                    Close
+                </Button>
+                <Button type="primary" size="small" onClick={onFinishApply}>
+                    Confirm
+                </Button>
+            </Space>
         );
         api.open({
-        message: 'Applying to this role?',
-        description:
-            'You are applying to a new project!',
-        btn,
-        key,
-        duration: 0,
+            message: 'Applying to this role?',
+            description:
+                'You are applying to a new project!',
+            btn,
+            key,
+            duration: 0,
         });
     };
 

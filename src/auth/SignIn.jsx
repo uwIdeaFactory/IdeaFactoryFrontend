@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
-import { Button, message, Form, Input } from 'antd';
+import { Breadcrumb, Button, Form, Input, Layout, theme } from 'antd';
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
+import Navigation from '../components/Navigation';
 
+const { Content, Footer } = Layout;
 
 const SignIn = () => {
     const [email, setEmail] = useState('')
@@ -13,98 +15,120 @@ const SignIn = () => {
         googleLogin();
     }
 
+    const {
+        token: { colorBgContainer },
+    } = theme.useToken();
 
-    const handleSignIn = (e) => {
+    const handleSignIn = () => {
         login(email, password)
     }
 
     return (
-        <div className='sign-in-container'>
-
-            <h1>Log In</h1>
-
-            <Form
-                name="basic"
-                labelCol={{
-                    span: 8,
-                }}
-                wrapperCol={{
-                    span: 16,
-                }}
+        <Layout className="layout">
+            <Navigation></Navigation>
+            <Content
                 style={{
-                    maxWidth: 600,
+                    padding: '0 50px',
                 }}
-                initialValues={{
-                    remember: true,
-                }}
-                onFinish={() => handleSignIn()}
-                autoComplete="off"
             >
-                <Form.Item
-                    label="Email"
-                    name="email"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your email!',
-                        },
+                <Breadcrumb
+                    style={{
+                        margin: '16px 0',
+                    }}
+                    items={[
+                        { title: "Home" },
+                        { title: "Sign In" },
                     ]}
-                    onChange={(e) => setEmail(e.target.value)}
                 >
-                    <Input />
-                </Form.Item>
-
-                <Form.Item
-                    label="Password"
-                    name="password"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your password!',
-                        },
-                    ]}
-                    onChange={(e) => setPassword(e.target.value)}
-                >
-                    <Input.Password />
-                </Form.Item>
-
-                {/* <Form.Item
-                    name="remember"
-                    valuePropName="checked"
-                    wrapperCol={{
-                        offset: 8,
-                        span: 16,
+                </Breadcrumb>
+                <div
+                    style={{
+                        padding: 30,
+                        textAlign: 'center',
+                        background: colorBgContainer,
                     }}
                 >
-                    <Checkbox>Remember me</Checkbox>
-                </Form.Item> */}
+                    <Form
+                        name="basic"
+                        labelCol={{
+                            span: 6,
+                        }}
+                        wrapperCol={{
+                            span: 16,
+                        }}
+                        style={{
+                            maxWidth: 600,
+                            // padding: '0 30px'
+                            // textAlign: 'center',
+                        }}
+                        initialValues={{
+                            remember: true,
+                        }}
+                        onFinish={() => handleSignIn()}
+                        autoComplete="off"
+                    >
+                        <Form.Item
+                            label="Email"
+                            name="email"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your email!',
+                                },
+                            ]}
+                            onChange={(e) => setEmail(e.target.value)}
+                        >
+                            <Input />
+                        </Form.Item>
 
-                <Form.Item
-                    wrapperCol={{
-                        offset: 8,
-                        span: 16,
-                    }}
-                >
-                    <Button type="primary" htmlType="submit" disabled={loginDisable}>
-                        Submit
-                    </Button>
+                        <Form.Item
+                            label="Password"
+                            name="password"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your password!',
+                                },
+                            ]}
+                            onChange={(e) => setPassword(e.target.value)}
+                        >
+                            <Input.Password />
+                        </Form.Item>
+                        <Form.Item
+                            wrapperCol={{
+                                offset: 8,
+                                span: 16,
+                            }}
+                        >
+                            <Button type="primary" htmlType="submit" disabled={loginDisable}>
+                                Submit
+                            </Button>
 
-                </Form.Item>
-            </Form>
-            {/* <button onClick={handleGoogleSignIn}>Log In with Google</button> */}
-            <Button onClick={() => handleGoogleSignIn()}>
-                Log In with Google
-            </Button>
+                        </Form.Item>
+                    </Form>
+                    <div style={{ padding: '10px 0' }}>
+                        <Button onClick={() => handleGoogleSignIn()}>
+                            Log In with Google
+                        </Button>
+                    </div>
+                    <div>
+                        Don't have an account?
+                        <NavLink to="/signUp">
+                            <Button borderRadiusLG='80'>
+                                Sign Up
+                            </Button>
+                        </NavLink>
+                    </div>
+                </div>
+            </Content>
+            <Footer 
+                style={{
+                    textAlign: 'center',
+            }}>
+                IDEA FACTORY ©2023
+            </Footer>
+        </Layout>
 
-            <div className="w-100 text-center mt-2">
-                Don't have an account?
-                <NavLink to="/signUp">
-                    <Button borderRadiusLG='80'>
-                        Sign Up
-                    </Button>
-                </NavLink>
-            </div>
-        </div>
 
 
     )

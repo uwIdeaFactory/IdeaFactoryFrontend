@@ -1,4 +1,4 @@
-import { HomeOutlined, LoginOutlined, ProfileOutlined } from '@ant-design/icons';
+import { HomeOutlined, LoginOutlined, ProfileOutlined, SearchOutlined } from '@ant-design/icons';
 import { Breadcrumb, Button, Input, Layout, Menu, Pagination, Row, Spin, theme } from 'antd';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -91,11 +91,16 @@ const MainPage = () => {
           <Menu.Item key="home" icon={<HomeOutlined />}>
             <NavLink to={"/"}> Home </NavLink>
           </Menu.Item>
-          <Menu.Item key="search" style={{ left: 100 }}>
-            <Search
+          <Menu.Item 
+            key="search" 
+            style={{ position: 'absolute', right: 100 }}
+          >
+            <Input
               placeholder='Search'
-              allowClear
-              onSearch={value => { fetchProjects(currentPage, pageSize, value) }}
+              allowClear={true}
+              prefix={<SearchOutlined />}
+              
+              onPressEnter={ value => { fetchProjects(currentPage, pageSize, value) }}
             />
           </Menu.Item>
           <Menu.Item 

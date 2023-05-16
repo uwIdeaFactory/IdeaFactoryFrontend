@@ -1,15 +1,10 @@
-import { Button } from 'antd';
-import { ProfileOutlined, HomeOutlined } from '@ant-design/icons';
-import { NavLink } from 'react-router-dom'
-import { Breadcrumb, Layout, Menu } from 'antd';
-import UserProfileUpdateForm from './components/UserProfileUpdateForm';
-import { useState } from 'react';
-import Navigation from './components/Navigation';
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { Breadcrumb, Layout } from 'antd';
+import React, { useState } from 'react';
 import { useAuth } from './AuthContext';
+import Navigation from './components/Navigation';
+import UserProfileUpdateForm from './components/UserProfileUpdateForm';
 
-const { Header, Content, Footer } = Layout;
+const { Content, Footer } = Layout;
 
 const UserProfileUpdatePage = () => {
   const [value, setValue] = useState('');
