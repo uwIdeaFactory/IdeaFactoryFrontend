@@ -21,7 +21,13 @@ function BasicInformation(props) {
           <Card title="Location">{props.location}</Card>
         </Col>
         <Col span={6}>
-          <Card title="Resume">{props.resume}</Card>
+          <Card title="Resume">
+            {!props.resume || props.resume === "" ? (
+              <p>You have not uploaded your resume.</p>
+            ) : (
+              <a href={props.resume}>Resume</a>
+            )}
+          </Card>
         </Col>
       </Row>
       <Row span={20}>

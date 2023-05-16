@@ -3,19 +3,12 @@ import { Button, Divider, Dropdown, Space, theme } from 'antd';
 import React from 'react';
 import { useAuth } from '../AuthContext';
 import { Link, useNavigate } from "react-router-dom";
+import { NavLink } from 'react-router-dom'
 
 const { useToken } = theme;
 const items = [
-  // {
-  //   key: '1',
-  //   label: (
-  //     <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-  //       1st menu item
-  //     </a>
-  //   ),
-  // },
   {
-    key: '2',
+    key: '1',
     label: (
       <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
         My Profile (disabled)
@@ -66,23 +59,26 @@ const NewUserDropdown = () => {
           items
         }}
         dropdownRender={(menu) => (
-          <div style={contentStyle}>
-            {React.cloneElement(menu, {
-              style: menuStyle,
-            })}
-            <Divider
-              style={{
-                margin: 0,
-              }}
-            />
-            <Space
-              style={{
-                padding: 8,
-              }}
-            >
-              <Button type="primary" href= "http://127.0.0.1:5173/signup">Sign in / Sign Up</Button>
-            </Space>
-          </div>
+          <NavLink to={"/signin"}>
+            <div style={contentStyle}>
+              {React.cloneElement(menu, {
+                style: menuStyle,
+              })}
+              <Divider
+                style={{
+                  margin: 0,
+                }}
+              />
+              <Space
+                style={{
+                  padding: 8,
+                }}
+              >
+                <Button type="primary">Sign in / Sign Up</Button>
+              </Space>
+            </div>
+                      
+          </NavLink>
         )}
       >
         <a onClick={(e) => e.preventDefault()}>
