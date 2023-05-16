@@ -6,34 +6,52 @@ import { Link, useNavigate } from "react-router-dom";
 import { NavLink } from 'react-router-dom'
 
 const { useToken } = theme;
+// const items = [
+//   {
+//     key: '1',
+//     label: (
+//       <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
+//         My Profile (disabled)
+//       </a>
+//     ),
+//     disabled: true,
+//   },
+//   {
+//     key: '2',
+//     type: 'group',
+//     label: 'My Projects',
+//     disabled: true,
+//     children: [
+//       {
+//         key: '1-1',
+//         label: 'Hosting Projects',
+//         disabled: true,
+//       },
+//       {
+//         key: '1-2',
+//         label: 'Joined Projects',
+//         disabled: true,
+//       },
+//     ],
+// },
+// ];
 const items = [
   {
-    key: '1',
+    key: 'login',
     label: (
-      <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
-        My Profile (disabled)
-      </a>
-    ),
-    disabled: true,
+      <NavLink to={"/signin"}>
+        <a>Login</a>
+      </NavLink>
+    )
   },
   {
-    key: '2',
-    type: 'group',
-    label: 'My Projects',
-    disabled: true,
-    children: [
-      {
-        key: '1-1',
-        label: 'Hosting Projects',
-        disabled: true,
-      },
-      {
-        key: '1-2',
-        label: 'Joined Projects',
-        disabled: true,
-      },
-    ],
-},
+    key: 'sign up',
+    label: (
+      <NavLink to={"/signup"}>
+        <a>Sign up</a>
+      </NavLink>
+    )
+  },
 ];
 
 
@@ -58,32 +76,34 @@ const NewUserDropdown = () => {
         menu={{
           items
         }}
-        dropdownRender={(menu) => (
-          <NavLink to={"/signin"}>
-            <div style={contentStyle}>
-              {React.cloneElement(menu, {
-                style: menuStyle,
-              })}
-              <Divider
-                style={{
-                  margin: 0,
-                }}
-              />
-              <Space
-                style={{
-                  padding: 8,
-                }}
-              >
-                <Button type="primary">Sign in / Sign Up</Button>
-              </Space>
-            </div>
+        // dropdownRender={(menu) => (
+        //   <NavLink to={"/signin"}>
+        //     <div style={contentStyle}>
+        //       {React.cloneElement(menu, {
+        //         style: menuStyle,
+        //       })}
+        //       <Divider
+        //         style={{
+        //           margin: 0,
+        //         }}
+        //       />
+        //       <Space
+        //         style={{
+        //           padding: 8,
+        //         }}
+        //       >
+        //         <Button type="primary">Sign in / Sign Up</Button>
+        //       </Space>
+        //     </div>
                       
-          </NavLink>
-        )}
+        //   </NavLink>
+          
+          
+        // )}
       >
         <a onClick={(e) => e.preventDefault()}>
           <Space>
-            New User
+            New User ?
             <DownOutlined />
           </Space>
         </a>

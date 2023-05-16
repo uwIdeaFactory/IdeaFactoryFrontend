@@ -5,6 +5,8 @@ import { useAuth } from '../AuthContext';
 import { NavLink } from 'react-router-dom'
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { auth } from '../firebase'
+import { signOut } from 'firebase/auth'
 
 const { useToken } = theme;
 const OldUserDropdown = () => {
@@ -17,7 +19,6 @@ const OldUserDropdown = () => {
   useEffect(() => {
     axios.get("http://localhost:3000/user/" + user.uid)
       .then(res => res.data)
-      .then(console.log);
   }, []);
 
   const contentStyle = {
@@ -25,6 +26,18 @@ const OldUserDropdown = () => {
     borderRadius: token.borderRadiusLG,
     boxShadow: token.boxShadowSecondary,
   };
+
+  const handleSignOut = () => {
+    signOut(auth).then(() => {
+        // Sign-out successful.
+        console.log("Sign out successful")
+        // Redirect to the sign in page
+        window.location.href = "/"
+    }).catch(() => {
+        // An error happened.
+        console.log("Sign out failed")
+    });
+  }
 
   const items = [
     {
@@ -78,7 +91,7 @@ const OldUserDropdown = () => {
               padding: 8,
             }}
           >
-            <Button type="primary" danger>Sign Out</Button>
+            <button onClick={handleSignOut}>Sign Out</button>
           </Space>
         </div>
       )}

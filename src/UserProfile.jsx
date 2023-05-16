@@ -21,7 +21,6 @@ const UserProfile = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    // axios.get("http://localhost:3000/user/J2lhMMs3P9UISWlzfhKIYj9xOIA3")
     axios.get("http://localhost:3000/user/" + uid)
       // .then(res => res.data)
       .then(res => res.data)
@@ -38,7 +37,7 @@ const UserProfile = () => {
         // An error happened.
         console.log("Sign out failed")
     });
-}
+  }
 
   const {
     token: { colorBgContainer },
@@ -66,15 +65,13 @@ const UserProfile = () => {
         {user_info.uid == user.uid &&
         <div>
             {user_info ? <><h1>Logged in as {user.email}
-              <button onClick={handleSignOut}>SignOut</button>
+              {/* <button onClick={handleSignOut}>Sign Out</button> */}
             </h1></> : <><h1>Not logged in</h1></>}
         </div>}
         <BasicInformation
           {...user_info}
         >
         </BasicInformation>
-        {/* <Experience></Experience>
-        <Skill></Skill> */}
         <UserRelatedProjects user={user_info}></UserRelatedProjects>
       </Content>
 
