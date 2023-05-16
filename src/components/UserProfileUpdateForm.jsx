@@ -19,6 +19,23 @@ const ProjectUploadForm = (props) => {
 
   // console.log(user.username);
 
+  const uploadResume = async() => {
+    let src = user.uid + '_resume';
+    let input = document.getElementById('select-file');
+    console.log(input.files[0]);
+
+    let reqUrl = 'api url here!'
+    const { url } = await fetch(reqUrl).then(res => res.json());
+
+    await fetch(url, {
+      method: 'PUT',
+      headers: {
+        "Content-Type": "multipart/form-data"
+      },
+      body: input.files[0]
+    });
+  }
+
   const onFinishFailed = () => {
     message.error('Submit failed!');
   };
@@ -35,11 +52,12 @@ const ProjectUploadForm = (props) => {
     }
     )
       .then(() => {
+        uploadResume();
         message.success('Submit success!');
         // Wait for 1 second
         setTimeout(() => {
           window.location.href = "/userprofile/" + props.uid
-        }, 1000);
+        }, 5000);
         setDisable(true);
       })
       .catch(() => {
@@ -185,6 +203,9 @@ const ProjectUploadForm = (props) => {
           span: 16,
         }}
       >
+
+      <input type='file' id='select-file'/>
+
         <Button type="primary" htmlType="submit" disabled={disable}
           style={{
             textAlign: 'center',
