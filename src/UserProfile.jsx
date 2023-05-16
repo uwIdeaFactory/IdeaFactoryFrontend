@@ -11,12 +11,14 @@ import Skill from './components/Skill';
 import Experience from './components/Experience';
 import BasicInformation from './components/BasicInformation';
 import Navigation from './components/Navigation';
+import { useAuth } from './AuthContext';
 
 const { Content, Footer } = Layout;
 
 const UserProfile = () => {
   const { uid } = useParams();
-  const [user, setUser] = useState({});
+  const [user_info, setUser] = useState({});
+  const { user } = useAuth();
 
   useEffect(() => {
     // axios.get("http://localhost:3000/user/J2lhMMs3P9UISWlzfhKIYj9xOIA3")
@@ -57,22 +59,23 @@ const UserProfile = () => {
           }}
           items={[
             {title: "Home"},
-            {title: user.username + "'s Profile"}
+            {title: user_info.username + "'s Profile"}
           ]}
         >
         </Breadcrumb>
+        {user_info.uid == user.uid &&
         <div>
-            {user ? <><h1>Logged in as {user.email}
+            {user_info ? <><h1>Logged in as {user.email}
               <button onClick={handleSignOut}>SignOut</button>
             </h1></> : <><h1>Not logged in</h1></>}
-        </div>
+        </div>}
         <BasicInformation
-          {...user}
+          {...user_info}
         >
         </BasicInformation>
         {/* <Experience></Experience>
         <Skill></Skill> */}
-        <UserRelatedProjects user={user}></UserRelatedProjects>
+        <UserRelatedProjects user={user_info}></UserRelatedProjects>
       </Content>
 
       <Footer

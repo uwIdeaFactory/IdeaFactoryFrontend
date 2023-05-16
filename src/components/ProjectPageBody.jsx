@@ -3,11 +3,20 @@ import { Descriptions, Table, Divider, Tag, message } from "antd";
 import { useAuth } from '../AuthContext';
 import { Button, notification, Space } from 'antd';
 import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom'
 import axios from 'axios';
 
 const { Column } = Table;
 
 function ProjectPageBody(props) {
+    // let owner_username;
+    // axios.get("http://localhost:3000/user/" + props.owner)
+    //     .then(res => res.data)
+    //     // .then((res) => { console.log(project.owner + ' ' + res.username) })
+    //     // .then((res) => { project.owner = (res && res.username) ? res.username : 'anonymous user' }));
+    //     .then(() => owner_username = 'anonymous user')
+    //     .then(() => console.log(owner_username));
+
     return (
         <div className="projectPageBody">
             <h1>{props.pname}</h1>
@@ -16,7 +25,10 @@ function ProjectPageBody(props) {
             <Divider></Divider>
 
             <Descriptions bordered>
-            <Descriptions.Item label="Owner">{props.owner}</Descriptions.Item>
+            {/* <Descriptions.Item label="Owner">{props.owner_username}</Descriptions.Item> */}
+            <Descriptions.Item label="Owner">
+                <NavLink to={`/userProfile/${props.owner}`}>{props.owner_username}</NavLink>
+            </Descriptions.Item>
             <Descriptions.Item label="Email">{props.contact ? props.contact[0] : ""}</Descriptions.Item>
             <Descriptions.Item label="Phone">{props.contact ? props.contact[1] : ""}</Descriptions.Item>
             <Descriptions.Item label="Website"><a href={props.contact ? props.contact[2] : ""}>{props.contact ? props.contact[2] : ""}</a></Descriptions.Item>
@@ -48,7 +60,7 @@ function RoleTable(props) {
             } else {
                 openNotificationOwner();
             }
-        } 
+        }
       }, [username]);
 
     // add a new role to the project and update the database
@@ -172,7 +184,7 @@ function RoleTable(props) {
         return {
             role: value[0],
             accepted: value[2],
-            applied: value[3], 
+            applied: value[3],
             portion: value[2].length + "/" + value[1],
             full: value[2].length == value[1],
             options: value[3].map((item) => {
@@ -184,16 +196,16 @@ function RoleTable(props) {
         <Table dataSource={data}>
             <Column title="Role" dataIndex="role" key="role" />
             <Column title="Accepted" dataIndex="portion" key="accepted" />
-            <Column 
-                title="Status" 
+            <Column
+                title="Status"
                 key="status"
                 render={(record) => (
-                    <>  
+                    <>
                         {contextHolder}
                         {/* if the role is full */}
                         {record.full && !record.accepted.includes(user.uid) && <span>Full</span>}
                         {/* if the role is not full and user is owner */}
-                        {!record.full && props.owner == user.uid && 
+                        {!record.full && props.owner == user.uid &&
                             <>
                                 <select
                                 value={username}
@@ -214,7 +226,7 @@ function RoleTable(props) {
                         {/* if the role is not full and user accepted */}
                         {record.accepted.includes(user.uid) && <span>Accepted</span>}
                         {/* if the role is not full and user is not applied yet */}
-                        {!record.full && !record.applied.includes(user.uid) && !record.accepted.includes(user.uid) && props.owner != user.uid && 
+                        {!record.full && !record.applied.includes(user.uid) && !record.accepted.includes(user.uid) && props.owner != user.uid &&
                             <Button type="primary" onClick={() => {
                                 setUsername(user.uid);
                                 setRole(record.role);

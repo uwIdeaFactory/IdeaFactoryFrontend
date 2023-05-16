@@ -14,7 +14,12 @@ const ProjectPage = () => {
   useEffect(() => {
     axios.get("http://localhost:3000/project/" + pid)
       .then(res => res.data)
-      .then(setProject);
+      .then(res_ => {
+              axios.get("http://localhost:3000/user/" + res_.owner)
+                .then(res => res.data)
+                .then((res) => { res_.owner_username = res ? res.username : 'anonymous user'; return res_; })
+                .then(setProject);
+              });
   }, []);
 
   const {
@@ -50,7 +55,8 @@ const ProjectPage = () => {
             </Button>
           </NavLink>
           {
-            <ProjectPageBody {...project} />
+            project.owner_username && <ProjectPageBody {...project} />
+            // <ProjectPageBody {...project} />
           }
         </div>
       </Content>
