@@ -1,11 +1,10 @@
-import { Layout, Menu, Input, Button } from 'antd';
-import { ProfileOutlined } from '@ant-design/icons';
-import { NavLink } from 'react-router-dom'
-import { HomeOutlined, AppstoreOutlined, SearchOutlined } from '@ant-design/icons';
+import { HomeOutlined } from '@ant-design/icons';
+import { Layout, Menu } from 'antd';
+import { NavLink } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 import IconDropdown from './IconDropdown';
+
 const { Header } = Layout;
-const { SubMenu } = Menu;
 
 const Navigation = () => {
   const { user, login } = useAuth()

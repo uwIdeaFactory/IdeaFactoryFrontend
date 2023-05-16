@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Row, Col, Card } from 'antd';
+import { Card, Col, Row } from 'antd';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
 const ProjectRow = (props) => {
 
@@ -27,8 +27,8 @@ const ProjectRow = (props) => {
   }
   const projectCards = project.map((projectItem) => (
     <Col span={8} key={projectItem.pname}>
-      <Card 
-        title={projectItem.pname} 
+      <Card
+        title={projectItem.pname}
         bordered={false}
         extra={<a href={`/projects/${projectItem._id}`}>More</a>}>
         {projectItem.preview}

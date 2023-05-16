@@ -1,5 +1,6 @@
 import { Card, Col, Row } from 'antd';
 import React from "react";
+// import PropTypes from "prop-types";
 
 function BasicInformation(props) {
   return (
@@ -43,5 +44,13 @@ function BasicInformation(props) {
     </Card>
   )
 }
+
+// BasicInformation.propTypes = {
+//   username: PropTypes.string.isRequired,
+//   contact: PropTypes.arrayOf(PropTypes.string),
+//   location: PropTypes.string.isRequired,
+//   resume: PropTypes.string,
+//   bio: PropTypes.string.isRequired,
+// };
 
 export default BasicInformation;

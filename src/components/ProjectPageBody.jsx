@@ -1,11 +1,10 @@
 /* eslint-disable react/prop-types */
-import { Descriptions, Table, Divider, Tag, message } from "antd";
 import { DownOutlined, UserOutlined } from '@ant-design/icons';
-import { useAuth } from '../AuthContext';
-import { Button, notification, Space, Dropdown } from 'antd';
-import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom'
+import { Button, Descriptions, Divider, Dropdown, Space, Table, Tag, message, notification } from "antd";
 import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { useAuth } from '../AuthContext';
 
 const { Column } = Table;
 
@@ -19,16 +18,16 @@ function ProjectPageBody(props) {
             <Divider></Divider>
 
             <Descriptions bordered>
-            {/* <Descriptions.Item label="Owner">{props.owner_username}</Descriptions.Item> */}
-            <Descriptions.Item label="Owner">
-                <NavLink to={`/userProfile/${props.owner}`}>{props.owner_username}</NavLink>
-            </Descriptions.Item>
-            <Descriptions.Item label="Email">{props.contact ? props.contact[0] : ""}</Descriptions.Item>
-            <Descriptions.Item label="Phone">{props.contact ? props.contact[1] : ""}</Descriptions.Item>
-            <Descriptions.Item label="Website"><a href={props.contact ? props.contact[2] : ""}>{props.contact ? props.contact[2] : ""}</a></Descriptions.Item>
-            <Descriptions.Item label="Location">{props.location}</Descriptions.Item>
-            <Descriptions.Item label="Preview" span={3}>{props.preview}</Descriptions.Item>
-            <Descriptions.Item label="Roles" span={3}>{RoleTable(props)}</Descriptions.Item>
+                {/* <Descriptions.Item label="Owner">{props.owner_username}</Descriptions.Item> */}
+                <Descriptions.Item label="Owner">
+                    <NavLink to={`/userProfile/${props.owner}`}>{props.owner_username}</NavLink>
+                </Descriptions.Item>
+                <Descriptions.Item label="Email">{props.contact ? props.contact[0] : ""}</Descriptions.Item>
+                <Descriptions.Item label="Phone">{props.contact ? props.contact[1] : ""}</Descriptions.Item>
+                <Descriptions.Item label="Website"><a href={props.contact ? props.contact[2] : ""}>{props.contact ? props.contact[2] : ""}</a></Descriptions.Item>
+                <Descriptions.Item label="Location">{props.location}</Descriptions.Item>
+                <Descriptions.Item label="Preview" span={3}>{props.preview}</Descriptions.Item>
+                <Descriptions.Item label="Roles" span={3}>{RoleTable(props)}</Descriptions.Item>
             </Descriptions>
 
             <Divider></Divider>
@@ -51,7 +50,7 @@ function RoleTable(props) {
         let role = e.key.substring(temp + 1);
         setUsername(username);
         setRole(role);
-      };
+    };
     // the notification component api
     const [api, contextHolder] = notification.useNotification();
     // rolename to help find which role is being added
@@ -91,10 +90,10 @@ function RoleTable(props) {
             uid: username,
             attend: props._id
         })
-        .catch((error) => {
-            console.error('Error occurred during the POST request:', error);
-            onFinishFailed();
-        });
+            .catch((error) => {
+                console.error('Error occurred during the POST request:', error);
+                onFinishFailed();
+            });
         axios.post('http://localhost:3000/update/project', {
             id: props._id,
             pname: props.pname,
@@ -104,13 +103,13 @@ function RoleTable(props) {
             location: props.location,
             roles: props.roles,
         })
-        .then(() => {
-            message.success('Submit success!');
-        })
-        .catch((error) => {
-            console.error('Error occurred during the POST request:', error);
-            onFinishFailed();
-        });
+            .then(() => {
+                message.success('Submit success!');
+            })
+            .catch((error) => {
+                console.error('Error occurred during the POST request:', error);
+                onFinishFailed();
+            });
 
         api.destroy();
         setUsername("");
@@ -133,13 +132,13 @@ function RoleTable(props) {
             location: props.location,
             roles: props.roles,
         })
-        .then(() => {
-            message.success('Submit success!');
-        })
-        .catch((error) => {
-            console.error('Error occurred during the POST request:', error);
-            onFinishFailed();
-        });
+            .then(() => {
+                message.success('Submit success!');
+            })
+            .catch((error) => {
+                console.error('Error occurred during the POST request:', error);
+                onFinishFailed();
+            });
 
         api.destroy();
         setUsername("");
@@ -149,44 +148,44 @@ function RoleTable(props) {
     const openNotificationOwner = () => {
         const key = `open${Date.now()}`;
         const btn = (
-        <Space>
-            <Button type="link" size="small" onClick={() => {api.destroy(key);close()}}>
-            Close
-            </Button>
-            <Button type="primary" size="small" onClick={onFinishOwner}>
-            Confirm
-            </Button>
-        </Space>
+            <Space>
+                <Button type="link" size="small" onClick={() => { api.destroy(key); close() }}>
+                    Close
+                </Button>
+                <Button type="primary" size="small" onClick={onFinishOwner}>
+                    Confirm
+                </Button>
+            </Space>
         );
         api.open({
-        message: 'Adding a new member?',
-        description:
-            'You are adding a new member to your project.',
-        btn,
-        key,
-        duration: 0,
+            message: 'Adding a new member?',
+            description:
+                'You are adding a new member to your project.',
+            btn,
+            key,
+            duration: 0,
         });
     };
 
     const openNotificationApply = () => {
         const key = `open${Date.now()}`;
         const btn = (
-        <Space>
-            <Button type="link" size="small" onClick={() => {api.destroy(key);close()}}>
-            Close
-            </Button>
-            <Button type="primary" size="small" onClick={onFinishApply}>
-            Confirm
-            </Button>
-        </Space>
+            <Space>
+                <Button type="link" size="small" onClick={() => { api.destroy(key); close() }}>
+                    Close
+                </Button>
+                <Button type="primary" size="small" onClick={onFinishApply}>
+                    Confirm
+                </Button>
+            </Space>
         );
         api.open({
-        message: 'Applying to this role?',
-        description:
-            'You are applying to a new project!',
-        btn,
-        key,
-        duration: 0,
+            message: 'Applying to this role?',
+            description:
+                'You are applying to a new project!',
+            btn,
+            key,
+            duration: 0,
         });
     };
 
@@ -199,16 +198,18 @@ function RoleTable(props) {
             applied: value[3].map(value => value.split("$-$")[0]),  // applied id
             portion: value[2].length + "/" + value[1],
             full: value[2].length == value[1],
-            options: {items: value[3].map((item) => {
-                console.log(item);
-                // separate item by "$-$"
-                const temp = item.split("$-$");
-                return {
-                    label: temp[1],
-                    key: temp[0] + " " + value[0],
-                    icon: <UserOutlined />,
-                }
-            }), onClick: handleMenuClick,}
+            options: {
+                items: value[3].map((item) => {
+                    console.log(item);
+                    // separate item by "$-$"
+                    const temp = item.split("$-$");
+                    return {
+                        label: temp[1],
+                        key: temp[0] + " " + value[0],
+                        icon: <UserOutlined />,
+                    }
+                }), onClick: handleMenuClick,
+            }
         }
     }) : [];
     return (
@@ -225,16 +226,16 @@ function RoleTable(props) {
                         {record.full && !record.accepted.includes(user.uid) && <span>Full</span>}
                         {/* if the role is not full and user is owner */}
                         {!record.full && props.owner == user.uid &&
-                        <>
-                            <Dropdown menu={record.options}>
-                            <Button>
-                                <Space>
-                                Pick an Applicant
-                                <DownOutlined />
-                                </Space>
-                            </Button>
-                            </Dropdown>
-                        </>}
+                            <>
+                                <Dropdown menu={record.options}>
+                                    <Button>
+                                        <Space>
+                                            Pick an Applicant
+                                            <DownOutlined />
+                                        </Space>
+                                    </Button>
+                                </Dropdown>
+                            </>}
                         {/* if the role is not full and user applied */}
                         {!record.full && record.applied.includes(user.uid) && <span>Applied</span>}
                         {/* if the role is not full and user accepted */}

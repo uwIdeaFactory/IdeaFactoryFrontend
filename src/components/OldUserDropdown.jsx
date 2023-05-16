@@ -1,12 +1,11 @@
 import { DownOutlined } from '@ant-design/icons';
-import { Button, Divider, Dropdown, Space, theme } from 'antd';
-import React from 'react';
-import { useAuth } from '../AuthContext';
-import { NavLink } from 'react-router-dom'
+import { Divider, Dropdown, Space, theme } from 'antd';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { auth } from '../firebase'
-import { signOut } from 'firebase/auth'
+import { signOut } from 'firebase/auth';
+import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { useAuth } from '../AuthContext';
+import { auth } from '../firebase';
 
 const { useToken } = theme;
 const OldUserDropdown = () => {

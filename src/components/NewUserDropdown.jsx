@@ -1,40 +1,11 @@
 import { DownOutlined } from '@ant-design/icons';
-import { Button, Divider, Dropdown, Space, theme } from 'antd';
+import { Dropdown, Space, theme } from 'antd';
 import React from 'react';
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from '../AuthContext';
-import { Link, useNavigate } from "react-router-dom";
-import { NavLink } from 'react-router-dom'
 
 const { useToken } = theme;
-// const items = [
-//   {
-//     key: '1',
-//     label: (
-//       <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
-//         My Profile (disabled)
-//       </a>
-//     ),
-//     disabled: true,
-//   },
-//   {
-//     key: '2',
-//     type: 'group',
-//     label: 'My Projects',
-//     disabled: true,
-//     children: [
-//       {
-//         key: '1-1',
-//         label: 'Hosting Projects',
-//         disabled: true,
-//       },
-//       {
-//         key: '1-2',
-//         label: 'Joined Projects',
-//         disabled: true,
-//       },
-//     ],
-// },
-// ];
+
 const items = [
   {
     key: 'login',

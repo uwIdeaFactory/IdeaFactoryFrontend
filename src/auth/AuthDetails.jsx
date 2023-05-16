@@ -1,6 +1,6 @@
-import React from 'react'
-import { auth } from '../firebase'
-import { signOut } from 'firebase/auth'
+import { signOut } from 'firebase/auth';
+import React from 'react';
+import { auth } from '../firebase';
 // import { getAuth, getRedirectResult, GoogleAuthProvider } from "firebase/auth";
 import { useAuth } from '../AuthContext';
 

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import { Card, Col, Button } from "antd";
+import { Button, Card, Col } from "antd";
 import { NavLink } from "react-router-dom";
-import { useAuth} from "../AuthContext";
+import { useAuth } from "../AuthContext";
 
 function Project(props) {
   const { user, login } = useAuth()
