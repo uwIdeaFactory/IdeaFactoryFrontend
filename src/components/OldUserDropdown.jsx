@@ -15,7 +15,7 @@ const OldUserDropdown = () => {
   const [username, setUsername] = useState("");
 
   useEffect(() => {
-    axios.get("http://35.165.101.117/user/" + user.uid)
+    axios.get("https://api.ideafactoryuw.com/user/" + user.uid)
       .then(res => res.data)
       // set the username
       .then(res_ => setUsername(res_.username));
