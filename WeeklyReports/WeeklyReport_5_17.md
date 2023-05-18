@@ -41,8 +41,10 @@
 * Dicheng Wu: implement navigation bar
 * Allan Ji: Fixed the frontend tests, implemented the role setting in project upload page and role visibility in project description page, and adjust database and backend API so that it contains owner information. Also wrote up the user manual
 * Bohan Wu: enabled modification of more detailed fields of user profile and project page (eg. contact info) and implemented functionality to view other users' profiles
+* Zhengrui Sun: UI for the submit and modify project
 
 ### Plans and goals for the next week
 * Yansong Liu, Dicheng Wu: refine backend api, checking whether user input is valid.
 * Allan Ji: Optimize the user Signup procedure and adjust the UI
 * Bohan Wu: refine user profile and project page, test functionalities in different settings (logged-in user, accepted user, etc)
+* Zhengrui Sun: refine UI
