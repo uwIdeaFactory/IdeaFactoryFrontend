@@ -28,7 +28,7 @@ const ProjectUploadForm = () => {
 
   const onFinish = async () => {
     await axios.post(
-      'http://localhost:3000/post', {
+      'http://35.165.101.117/post', {
       pname: form.getFieldValue('pname'),
       preview: form.getFieldValue('preview'),
       detail: form.getFieldValue('detail'),

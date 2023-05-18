@@ -12,17 +12,17 @@ const ProjectPage = () => {
   const [project, setProject] = useState([]);
 
   // useEffect(() => {
-  //   axios.get("http://localhost:3000/project/" + pid)
+  //   axios.get("http://35.165.101.117/project/" + pid)
   //     .then(res => res.data)
   //     .then(res_ => {
-  //       axios.get("http://localhost:3000/user/" + res_.owner)
+  //       axios.get("http://35.165.101.117/user/" + res_.owner)
   //         .then(res => res.data)
   //         .then(owner => {
   //           res_.owner_username = owner ? owner.username : 'anonymous user';
 
   //           const fetchApplicantsPromises = res_.roles.map(role => {
   //             const applicantsPromises = role[3].map(uid => {
-  //               return axios.get("http://localhost:3000/user/" + uid)
+  //               return axios.get("http://35.165.101.117/user/" + uid)
   //                 .then(res => res.data)
   //                 .then(applicant => {
   //                   return applicant ? applicant.username : 'anonymous user';
@@ -51,17 +51,17 @@ const ProjectPage = () => {
   // }, []);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/project/" + pid)
+    axios.get("http://35.165.101.117/project/" + pid)
       .then(res => res.data)
       .then(res_ => {
-        axios.get("http://localhost:3000/user/" + res_.owner)
+        axios.get("http://35.165.101.117/user/" + res_.owner)
           .then(res => res.data)
           .then(owner => {
             res_.owner_username = owner ? owner.username : 'anonymous user';
   
             const fetchApplicantsPromises = res_.roles.map(role => {
               const applicantsPromises = role[3].map(uid => {
-                return axios.get("http://localhost:3000/user/" + uid)
+                return axios.get("http://35.165.101.117/user/" + uid)
                   .then(res => res.data)
                   .then(applicant => {
                     return applicant ? applicant.username : 'anonymous user';
@@ -82,7 +82,7 @@ const ProjectPage = () => {
                 });
                 const fetchRole2UsernamesPromises = res_.roles.map(role => {
                   const applicantsPromises = role[2].map(uid => {
-                    return axios.get("http://localhost:3000/user/" + uid)
+                    return axios.get("http://35.165.101.117/user/" + uid)
                       .then(res => res.data)
                       .then(applicant => {
                         return applicant ? applicant.username : 'anonymous user';
