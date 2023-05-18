@@ -13,7 +13,7 @@ const ProjectUploadForm = (props) => {
   const [file, setFile] = useState(null);
 
   useEffect(() => {
-    axios.get("http://35.165.101.117/user/" + props.uid)
+    axios.get("https://api.ideafactoryuw.com/user/" + props.uid)
       .then(res => res.data)
       .then(setUser)
   }, []);
@@ -45,7 +45,7 @@ const ProjectUploadForm = (props) => {
 
     let contact = [form.getFieldValue('email'), form.getFieldValue('mobile'), form.getFieldValue('website')]
     axios.post(
-      'http://35.165.101.117/patchBasicInfo/' + props.uid, {
+      'https://api.ideafactoryuw.com/patchBasicInfo/' + props.uid, {
       username: form.getFieldValue('username'),
       contact: contact,
       location: form.getFieldValue('location'),

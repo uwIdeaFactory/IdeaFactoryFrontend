@@ -23,7 +23,7 @@ const MainPage = () => {
   const fetchProjects = async (page, pageSize, text) => {
     setIsLoading(true);
     try {
-      const res = await axios.get("http://35.165.101.117/projects/" + text, {
+      const res = await axios.get("https://api.ideafactoryuw.com/projects/" + text, {
         params: {
           page: page,
           limit: pageSize
@@ -40,7 +40,7 @@ const MainPage = () => {
   useEffect(() => {
     fetchProjects(currentPage, pageSize, "");
 
-    axios.get("http://35.165.101.117/projects/count")
+    axios.get("https://api.ideafactoryuw.com/projects/count")
       .then(res => res.data)
       .then(setNumProjects);
   }, [currentPage, pageSize]);
