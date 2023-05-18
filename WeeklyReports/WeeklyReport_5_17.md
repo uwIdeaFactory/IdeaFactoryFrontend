@@ -30,7 +30,9 @@
 ### Progress and Issues
 * Yansong Liu: set up aws server, help to implement navigation
 * Dicheng Wu: implement navigation bar
+* Bohan Wu: enabled modification of more detailed fields of user profile and project page (eg. contact info) and implemented functionality to view other users' profiles
 
 
 ### Plans and goals for the next week
 * Yansong Liu, Dicheng Wu: refine backend api, checking whether user input is valid.
+* Bohan Wu: refine user profile and project page, test functionalities in different settings (logged-in user, accepted user, etc)
