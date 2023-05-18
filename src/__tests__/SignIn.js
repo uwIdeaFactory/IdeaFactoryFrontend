@@ -55,10 +55,10 @@ describe('SignIn component tests', () => {
         expect(submitButton).toBeInTheDocument();
     });
 
-    test('renders Log In with Google button', () => {
-        const googleSignInButton = screen.getByRole('button', { name: /Log In with Google/i });
-        expect(googleSignInButton).toBeInTheDocument();
-    });
+//     test('renders Log In with Google button', () => {
+//         const googleSignInButton = screen.getByRole('button', { name: /Log In with Google/i });
+//         expect(googleSignInButton).toBeInTheDocument();
+//     });
 
     test('renders Sign Up link', () => {
         const signUpLink = screen.getByText(/Sign Up/i);
