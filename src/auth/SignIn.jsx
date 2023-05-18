@@ -101,16 +101,16 @@ const SignIn = () => {
                             }}
                         >
                             <Button type="primary" htmlType="submit" disabled={loginDisable}>
-                                Submit
+                                Log In
                             </Button>
 
                         </Form.Item>
                     </Form>
-                    <div style={{ padding: '10px 0' }}>
+                    {/* <div style={{ padding: '10px 0' }}>
                         <Button onClick={() => handleGoogleSignIn()}>
                             Log In with Google
                         </Button>
-                    </div>
+                    </div> */}
                     <div>
                         Don't have an account?
                         <NavLink to="/signUp">
@@ -121,10 +121,10 @@ const SignIn = () => {
                     </div>
                 </div>
             </Content>
-            <Footer 
+            <Footer
                 style={{
                     textAlign: 'center',
-            }}>
+                }}>
                 IDEA FACTORY ©2023
             </Footer>
         </Layout>
