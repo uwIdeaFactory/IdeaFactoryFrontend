@@ -51,7 +51,7 @@ describe('SignIn component tests', () => {
     });
 
     test('renders submit button', () => {
-        const submitButton = screen.getByRole('button', { name: /submit/i });
+        const submitButton = screen.getByRole('button', { name: /Log In/i });
         expect(submitButton).toBeInTheDocument();
     });
 
