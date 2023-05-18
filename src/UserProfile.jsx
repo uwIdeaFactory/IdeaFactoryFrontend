@@ -18,7 +18,7 @@ const UserProfile = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    axios.get("http://localhost:3000/user/" + uid)
+    axios.get("http://35.165.101.117/user/" + uid)
       // .then(res => res.data)
       .then(res => res.data)
       .then(setUser)
