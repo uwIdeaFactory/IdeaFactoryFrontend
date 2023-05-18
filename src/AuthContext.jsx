@@ -64,7 +64,7 @@ export function AuthProvider({ children }) {
                 // Signed in
                 console.log(userCredential)
 
-                axios.post('http://35.165.101.117/user/create', {
+                axios.post('https://api.ideafactoryuw.com/user/create', {
                     email: userCredential.user.email,
                     uid: userCredential.user.uid,
                 })

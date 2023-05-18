@@ -90,7 +90,7 @@ function RoleTable(props) {
                 break;
             }
         }
-        axios.post('http://35.165.101.117/update/attend', {
+        axios.post('https://api.ideafactoryuw.com/update/attend', {
             uid: username,
             attend: props._id
         })
@@ -98,7 +98,7 @@ function RoleTable(props) {
                 console.error('Error occurred during the POST request:', error);
                 onFinishFailed();
             });
-        axios.post('http://35.165.101.117/update/project', {
+        axios.post('https://api.ideafactoryuw.com/update/project', {
             id: props._id,
             pname: props.pname,
             preview: props.preview,
@@ -127,7 +127,7 @@ function RoleTable(props) {
                 break;
             }
         }
-        axios.post('http://35.165.101.117/update/project', {
+        axios.post('https://api.ideafactoryuw.com/update/project', {
             id: props._id,
             pname: props.pname,
             preview: props.preview,

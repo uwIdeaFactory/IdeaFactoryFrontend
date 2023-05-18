@@ -12,7 +12,7 @@ const ProjectRow = (props) => {
   const [project, setProject] = useState([]);
   const fetchProjects = async () => {
     try {
-      const res = await axios.get("http://35.165.101.117/projects/")
+      const res = await axios.get("https://api.ideafactoryuw.com/projects/")
       // filter res.data so that it only contains the project with pid
       for (let i = 0; i < res.data.length; i++) {
         if (!props.pid.includes(res.data[i]._id)) {
