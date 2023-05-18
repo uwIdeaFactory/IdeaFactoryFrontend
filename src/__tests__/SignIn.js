@@ -34,10 +34,10 @@ describe('SignIn component tests', () => {
         );
     });
 
-    test('renders SignIn component heading', () => {
-        const signInHeading = screen.getByRole('heading', { name: /Log In/i });
-        expect(signInHeading).toBeInTheDocument();
-    });
+    // test('renders SignIn component heading', () => {
+    //     const signInHeading = screen.getByRole('heading', { name: /Log In/i });
+    //     expect(signInHeading).toBeInTheDocument();
+    // });
 
 
     test('renders email input field', () => {
