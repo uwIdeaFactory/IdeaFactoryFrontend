@@ -1,4 +1,4 @@
-# What is Idea Factory
+# What is Idea Factory[https://www.ideafactoryuw.com/]
 Idea Factory is a web app that allows users to publish and host new project or join others' projects. As the project hosts, The webapp provides functionality that allow users find collaborators by sharing their project ideas and selecting applicants. As the project joiners, the webapp provides functionality that allow users to upload personal information and apply others' projects.
 
 # Install and Run the app
