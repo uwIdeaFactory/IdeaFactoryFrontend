@@ -29,7 +29,9 @@ const ProjectUploadForm = () => {
   const onFinish = async () => {
     await axios.post(
       'https://api.ideafactoryuw.com/post', {
+      // 'http://localhost:3000/post', {
       pname: form.getFieldValue('pname'),
+      contact: [form.getFieldValue('email'), form.getFieldValue('mobile'), form.getFieldValue('url')],
       preview: form.getFieldValue('preview'),
       detail: form.getFieldValue('detail'),
       owner: user.uid,
@@ -83,6 +85,32 @@ const ProjectUploadForm = () => {
         ]}
       >
         <Input placeholder="MyProject" />
+      </Form.Item>
+
+      <Form.Item
+        label="Email"
+        name="email"
+        rules={[
+          {
+            required: true,
+            message: 'Please input an email!',
+          },
+        ]}
+      >
+        <Input placeholder="sample@email.com" />
+      </Form.Item>
+
+      <Form.Item
+        label="Mobile"
+        name="mobile"
+        rules={[
+          {
+            required: true,
+            message: 'Please input a mobile number!',
+          },
+        ]}
+      >
+        <Input placeholder="+1 000-000-0000" />
       </Form.Item>
 
       <Form.Item
