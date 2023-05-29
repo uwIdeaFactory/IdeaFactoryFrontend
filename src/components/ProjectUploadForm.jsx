@@ -183,6 +183,7 @@ const ProjectUploadForm = () => {
                   placeholder="Capacity"
                   required
                   value={space[1]}
+                  min={1}
                   onChange={(value) => {
                     const updatedSpaces = [...spaces];
                     updatedSpaces[index][1] = value;
