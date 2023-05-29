@@ -37,21 +37,22 @@ const ProjectUploadForm = (props) => {
       try {
         await uploadBytes(storageRef, file);
         resume = await getDownloadURL(storageRef);
-        console.log('File available at', resume);
       } catch (error) {
         console.error('Error uploading resume:', error);
       }
+    } else {
+      resume = user.resume;
     }
 
     let contact = [form.getFieldValue('email'), form.getFieldValue('mobile'), form.getFieldValue('website')]
-    axios.post(
-      'https://api.ideafactoryuw.com/patchBasicInfo/' + props.uid, {
-      username: form.getFieldValue('username'),
-      contact: contact,
-      location: form.getFieldValue('location'),
-      summary: form.getFieldValue('summary'),
-      resume: resume,
-    }
+      axios.post(
+        'https://api.ideafactoryuw.com/patchBasicInfo/' + props.uid, {
+        username: form.getFieldValue('username'),
+        contact: contact,
+        location: form.getFieldValue('location'),
+        summary: form.getFieldValue('summary'),
+        resume: resume,
+      }
     )
       .then(() => {
         uploadResume();

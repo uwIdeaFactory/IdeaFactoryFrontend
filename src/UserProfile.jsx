@@ -62,7 +62,6 @@ const UserProfile = () => {
         {user_info.uid == user.uid &&
         <div>
             {user_info ? <><h1>Logged in as {user.email}
-              {/* <button onClick={handleSignOut}>Sign Out</button> */}
             </h1></> : <><h1>Not logged in</h1></>}
         </div>}
         <BasicInformation

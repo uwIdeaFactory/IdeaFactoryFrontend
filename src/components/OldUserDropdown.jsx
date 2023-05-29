@@ -43,11 +43,9 @@ const OldUserDropdown = () => {
     {
         key: 'profile',
         label: (
-        <NavLink to={"/userProfile/" + user.uid}>
-          <a>
-              My Profile
-          </a>
-        </NavLink>
+        <a onClick={() => (window.location.href = "/userprofile/" + user.uid)}>
+            My Profile
+        </a>
 
         ),
     }, 
