@@ -21,6 +21,7 @@ const MainPage = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchProjects = async (page, pageSize, text) => {
+
     setIsLoading(true);
     try {
       const res = await axios.get("https://api.ideafactoryuw.com/projects/" + text, {
@@ -100,7 +101,7 @@ const MainPage = () => {
               allowClear={true}
               prefix={<SearchOutlined />}
               
-              onPressEnter={ value => { fetchProjects(currentPage, pageSize, value) }}
+              onPressEnter={event => { fetchProjects(currentPage, pageSize, event.target.value) }}
             />
           </Menu.Item>
           <Menu.Item 
@@ -131,11 +132,6 @@ const MainPage = () => {
             background: colorBgContainer,
           }}
         >
-          {/* <NavLink to={"/projectUpload"}>
-            <Button type="primary" icon={<UploadOutlined />} size={20}>
-              Upload
-            </Button>
-          </NavLink> */}
           {isLoading ? (
             <div>
               <Spin
